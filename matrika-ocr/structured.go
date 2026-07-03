@@ -32,19 +32,34 @@ type StructuredRecord struct {
 const strictSuffix = "\n\nDŮLEŽITÉ: Vrať POUZE validní JSON objekt " +
 	"{\"folio\":\"\",\"rok\":\"\",\"rows\":[{…}]} — nic jiného, žádný text ani markdown."
 
-// structuredExtract zpracuje jeden sken: request → JSON → normalizace dle schématu → lint.
+// structuredExtract zpracuje jeden sken (celý, nebo rozpůlený při --split lr).
 func structuredExtract(client *http.Client, opt options, schema *Schema, prompt, path string) StructuredRecord {
-	rec := StructuredRecord{
-		File: relKey(opt.in, path), Typ: schema.Typ,
+	rel := relKey(opt.in, path)
+	if opt.split == "lr" {
+		if rec, ok := splitExtract(client, opt, schema, prompt, path, rel); ok {
+			return rec
+		}
+		// crop selhal → spadni na celý sken
+	}
+	dataURL, err := imageDataURL(path, opt.maxSide)
+	if err != nil {
+		return failStructured(newRec(rel, schema), "načtení obrázku: "+err.Error())
+	}
+	return extractOne(client, opt, schema, prompt, dataURL, rel)
+}
+
+// newRec vytvoří prázdný StructuredRecord.
+func newRec(rel string, schema *Schema) StructuredRecord {
+	return StructuredRecord{
+		File: rel, Typ: schema.Typ,
 		Rows: []map[string]string{}, Lint: LintResult{OK: true, Issues: []string{}},
 		TS: time.Now().UTC().Format(time.RFC3339),
 	}
+}
 
-	dataURL, err := imageDataURL(path, opt.maxSide)
-	if err != nil {
-		return failStructured(rec, "načtení obrázku: "+err.Error())
-	}
-
+// extractOne pošle jeden obrázek (dataURL) do modelu a vrátí strukturovaný záznam.
+func extractOne(client *http.Client, opt options, schema *Schema, prompt, dataURL, rel string) StructuredRecord {
+	rec := newRec(rel, schema)
 	backoff := []time.Duration{5 * time.Second, 15 * time.Second, 45 * time.Second}
 	var lastErr error
 	strict := ""
