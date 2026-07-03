@@ -182,6 +182,38 @@ func TestSurnameNormSpellings(t *testing.T) {
 	}
 }
 
+// TestAnalyticsQueries: všechny analytické dotazy proběhnou nad fixture daty
+// a family-size obsahuje bucket 0 (bezdětné/nedoložené páry — novomanželé
+// z let 1901 a 1905 zatím žádné dítě v datech nemají).
+func TestAnalyticsQueries(t *testing.T) {
+	db := setupPipeline(t)
+	for kind, q := range analyticsQueries {
+		if _, err := queryRows(db, q); err != nil {
+			t.Errorf("analytika %s: %v", kind, err)
+		}
+	}
+	rows, err := queryRows(db, analyticsQueries["family-size"])
+	if err != nil {
+		t.Fatal(err)
+	}
+	var childless int64
+	for _, r := range rows {
+		if n, ok := r["name"].(int64); ok && n == 0 {
+			childless, _ = r["value"].(int64)
+		}
+	}
+	if childless < 2 {
+		t.Errorf("bezdětných párů = %d, chci aspoň 2 (novomanželé 1901 a 1905)", childless)
+	}
+	rows, err = queryRows(db, analyticsQueries["marriages-per-person"])
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rows) == 0 {
+		t.Error("marriages-per-person je prázdné")
+	}
+}
+
 // dumpMatch sesbírá obsah persons/person_mentions/relations pro porovnání běhů.
 func dumpMatch(t *testing.T, db *sql.DB) string {
 	t.Helper()

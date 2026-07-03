@@ -45,17 +45,66 @@ var analyticsQueries = map[string]string{
 		WHERE m.role IN ('zenich','nevesta') AND m.place_text <> '' AND e.place_text <> ''
 		  AND m.place_text <> e.place_text
 		GROUP BY name, target ORDER BY value DESC LIMIT 40`,
-	// počet dětí na pár rodičů (hrany parent_child sdílené otcem+matkou)
+	// počet dětí na pár: páry = manželé (spouse) ∪ rodiče společných dětí;
+	// bucket 0 = páry bez jediného zaznamenaného dítěte (bezdětné/neúplná data)
 	"family-size": `WITH kids AS (
 		SELECT ra.person_a AS otec, rb.person_a AS matka, ra.person_b AS dite
 		FROM relations ra
 		JOIN relations rb ON rb.person_b = ra.person_b AND rb.type='parent_child' AND rb.person_a <> ra.person_a
 		JOIN persons pa ON pa.id = ra.person_a AND pa.sex='m'
 		JOIN persons pb ON pb.id = rb.person_a AND pb.sex='f'
+		WHERE ra.type='parent_child'),
+	couples AS (
+		SELECT DISTINCT CASE WHEN pa.sex='m' THEN r.person_a ELSE r.person_b END AS otec,
+			CASE WHEN pa.sex='m' THEN r.person_b ELSE r.person_a END AS matka
+		FROM relations r
+		JOIN persons pa ON pa.id = r.person_a
+		JOIN persons pb ON pb.id = r.person_b
+		WHERE r.type='spouse' AND pa.sex IN ('m','f') AND pb.sex IN ('m','f') AND pa.sex <> pb.sex
+		UNION SELECT DISTINCT otec, matka FROM kids)
+	SELECT n AS name, COUNT(*) AS value FROM (
+		SELECT c.otec, c.matka,
+			(SELECT COUNT(DISTINCT k.dite) FROM kids k WHERE k.otec=c.otec AND k.matka=c.matka) AS n
+		FROM couples c)
+	GROUP BY n ORDER BY n`,
+	// největší rodiny (jmenovitě, pro proklik do stromu)
+	"top-families": `WITH kids AS (
+		SELECT ra.person_a AS otec, rb.person_a AS matka, ra.person_b AS dite
+		FROM relations ra
+		JOIN relations rb ON rb.person_b = ra.person_b AND rb.type='parent_child' AND rb.person_a <> ra.person_a
+		JOIN persons pa ON pa.id = ra.person_a AND pa.sex='m'
+		JOIN persons pb ON pb.id = rb.person_a AND pb.sex='f'
 		WHERE ra.type='parent_child')
-		SELECT n AS name, COUNT(*) AS value FROM (
-			SELECT COUNT(DISTINCT dite) AS n FROM kids GROUP BY otec, matka)
-		GROUP BY n ORDER BY n`,
+	SELECT pa.display_name AS otec, pb.display_name AS matka,
+		kids.otec AS otec_id, kids.matka AS matka_id,
+		COUNT(DISTINCT dite) AS value
+	FROM kids
+	JOIN persons pa ON pa.id = kids.otec
+	JOIN persons pb ON pb.id = kids.matka
+	GROUP BY kids.otec, kids.matka
+	ORDER BY value DESC, otec LIMIT 15`,
+	// kolikrát se kdo ženil/vdávala (jen osoby s aspoň jedním sňatkem)
+	"marriages-per-person": `WITH mar AS (
+		SELECT pm.person_id AS pid, p.sex AS sex, COUNT(DISTINCT m.record_id) AS n
+		FROM mentions m
+		JOIN events e ON e.record_id = m.record_id AND e.type='marriage'
+		JOIN person_mentions pm ON pm.mention_id = m.id
+		JOIN persons p ON p.id = pm.person_id
+		WHERE m.role IN ('zenich','nevesta')
+		GROUP BY pm.person_id)
+	SELECT n AS name,
+		SUM(CASE WHEN sex='m' THEN 1 ELSE 0 END) AS muzi,
+		SUM(CASE WHEN sex='f' THEN 1 ELSE 0 END) AS zeny
+	FROM mar GROUP BY n ORDER BY n`,
+	// znovusňatky: kolik ženichů/nevěst bylo ovdovělých, po dekádách
+	"remarriages": `SELECT e.year/10*10 AS name,
+		SUM(CASE WHEN m.role='zenich' THEN 1 ELSE 0 END) AS snatky,
+		SUM(CASE WHEN m.role='zenich' AND m.marital_status='vdovec' THEN 1 ELSE 0 END) AS vdovci,
+		SUM(CASE WHEN m.role='nevesta' AND m.marital_status='vdova' THEN 1 ELSE 0 END) AS vdovy
+		FROM mentions m
+		JOIN events e ON e.record_id = m.record_id AND e.type='marriage' AND e.year IS NOT NULL
+		WHERE m.role IN ('zenich','nevesta')
+		GROUP BY name ORDER BY name`,
 	// počty událostí po letech a typech (přehledový graf)
 	"timeline": `SELECT year AS name,
 		SUM(CASE WHEN type='birth' THEN 1 ELSE 0 END) AS birth,

@@ -261,7 +261,12 @@ export default function App() {
           )}
         </div>
       ) : (
-        <AnalyticsPage />
+        <AnalyticsPage
+          onOpenPerson={(id) => {
+            setTab('tree')
+            loadPerson(id)
+          }}
+        />
       )}
 
       {scan && (
