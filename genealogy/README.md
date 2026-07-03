@@ -100,6 +100,23 @@ ingestu, extrakci rolí, správné sloučení (ženich↔křest přes rodiče, n
 přes DOB), determinismus, persistenci constraints a oprav buněk, stabilitu
 person id.
 
+## Statický export a GitHub Pages (`export`)
+
+```sh
+./genealogy export --db data/genealogy.db --out ../web/public/data
+```
+
+vygeneruje JSON snapshot (persons/graph/details/analytics/stats), který web UI
+umí číst **bez backendu** — build s `VITE_STATIC=true` počítá vyhledávání, BFS
+okolí i rodový strom v prohlížeči. Workflow `.github/workflows/pages.yml`
+nasazuje statickou verzi na **GitHub Pages** při pushi do main (v repu zapni
+Settings → Pages → Source: *GitHub Actions*).
+
+Omezení statické verze: jen ke čtení (merge/split/opravy vyžadují lokální
+`serve`), skeny se otevírají odkazem přímo v ebadatelně. **Pozor:** commitnutý
+snapshot v `web/public/data/` je na Pages veřejný — exportuj jen data, která
+chceš zveřejnit.
+
 ## Rodové zobrazení
 
 `GET /api/tree?surname=Vořechovský` vrátí strom celého rodu: všechny osoby

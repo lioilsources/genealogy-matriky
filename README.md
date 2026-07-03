@@ -18,6 +18,11 @@ až po interaktivní rodokmen:
 Pipeline: `ebadatelna-dl` → `matrika-ocr` → `genealogy ingest/extract/match`
 → `genealogy serve` + web.
 
+Read-only verze webu se dá nasadit na **GitHub Pages**: `genealogy export`
+vygeneruje JSON snapshot do `web/public/data/` a workflow
+`.github/workflows/pages.yml` ho s buildem webu publikuje (viz
+[`genealogy/README.md`](genealogy/README.md)).
+
 Data (stažené skeny, `meta.json`, OCR výstupy, databáze) nejsou verzována —
 viz `.gitignore`.
 

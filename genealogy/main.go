@@ -12,6 +12,7 @@ Použití:
   genealogy extract --db data/genealogy.db [--book ID]
   genealogy match   --db data/genealogy.db [--auto 0.90] [--flag 0.72] [--suggest 0.50]
   genealogy serve   --db data/genealogy.db [--addr :8090] [--web web/dist]
+  genealogy export  --db data/genealogy.db [--out ../web/public/data]
 
 Pipeline: ingest (JSONL → raw záznamy) → extract (záznamy → osoby-zmínky a
 události) → match (zmínky → osoby a vazby) → serve (API + web UI).
@@ -33,6 +34,8 @@ func main() {
 		err = cmdMatch(os.Args[2:])
 	case "serve":
 		err = cmdServe(os.Args[2:])
+	case "export":
+		err = cmdExport(os.Args[2:])
 	case "-h", "--help", "help":
 		fmt.Println(usage)
 	default:

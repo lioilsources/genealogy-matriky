@@ -176,10 +176,11 @@ type mentionDetail struct {
 	EventDate  string            `json:"event_date,omitempty"`
 	Confidence float64           `json:"confidence"`
 	Cells      map[string]string `json:"cells,omitempty"`
+	ScanURL    string            `json:"scan_url,omitempty"` // jen ve statickém exportu — odkaz na ebadatelnu
 }
 
-func (s *server) queryMentions(whereSQL string, params ...any) ([]mentionDetail, error) {
-	rows, err := s.db.Query(`SELECT m.id, m.role, m.raw_text, COALESCE(m.given_name,''), COALESCE(m.surname,''),
+func queryMentions(db *sql.DB, whereSQL string, params ...any) ([]mentionDetail, error) {
+	rows, err := db.Query(`SELECT m.id, m.role, m.raw_text, COALESCE(m.given_name,''), COALESCE(m.surname,''),
 		COALESCE(m.place_text,''), COALESCE(m.occupation,''), COALESCE(m.birth_year,0), COALESCE(m.age_text,''),
 		r.id, r.row_idx, COALESCE(r.cislo,''), sc.id, sc.file, COALESCE(sc.folio,''), b.id, b.name,
 		COALESCE(e.type,''), COALESCE(e.year,0), COALESCE(e.date,''), COALESCE(pm.confidence, 1.0)
@@ -229,7 +230,7 @@ func (s *server) handlePerson(w http.ResponseWriter, r *http.Request) {
 		httpErr(w, 500, err)
 		return
 	}
-	p.Mentions, err = s.queryMentions(`JOIN person_mentions pm2 ON pm2.mention_id = m.id AND pm2.person_id = ?
+	p.Mentions, err = queryMentions(s.db, `JOIN person_mentions pm2 ON pm2.mention_id = m.id AND pm2.person_id = ?
 		ORDER BY COALESCE(e.year, 0), m.id`, id)
 	if err != nil {
 		httpErr(w, 500, err)
@@ -246,6 +247,12 @@ func (s *server) handlePerson(w http.ResponseWriter, r *http.Request) {
 		WHERE mc.accepted = 0 AND (pma.person_id = ? OR pmb.person_id = ?)
 		ORDER BY mc.score DESC LIMIT 20`, id, id)
 	if err == nil {
+		// SetMaxOpenConns(1): kurzor nejdřív dočíst, jména dotáhnout až po zavření
+		type cand struct {
+			other, ma, mb int64
+			score         float64
+		}
+		var cands []cand
 		for crows.Next() {
 			var ma, mb int64
 			var score float64
@@ -255,14 +262,19 @@ func (s *server) handlePerson(w http.ResponseWriter, r *http.Request) {
 			if pa == id {
 				other = pb
 			}
-			var otherName string
-			s.db.QueryRow(`SELECT display_name FROM persons WHERE id=?`, other).Scan(&otherName)
-			p.Candidates = append(p.Candidates, map[string]any{
-				"person_id": other, "person_name": otherName,
-				"mention_a": ma, "mention_b": mb, "score": score,
-			})
+			if other != id {
+				cands = append(cands, cand{other, ma, mb, score})
+			}
 		}
 		crows.Close()
+		for _, c := range cands {
+			var otherName string
+			s.db.QueryRow(`SELECT display_name FROM persons WHERE id=?`, c.other).Scan(&otherName)
+			p.Candidates = append(p.Candidates, map[string]any{
+				"person_id": c.other, "person_name": otherName,
+				"mention_a": c.ma, "mention_b": c.mb, "score": c.score,
+			})
+		}
 	}
 	writeJSON(w, p)
 }
@@ -295,31 +307,31 @@ func (s *server) loadRelations() ([]grel, map[int64][]grel, error) {
 	return rels, adj, nil
 }
 
+// edgeLayers vrátí vrstvy hrany = typy událostí jejích evidenčních záznamů.
+func edgeLayers(db *sql.DB, evid string) []string {
+	var v struct {
+		Records []int64 `json:"records"`
+	}
+	json.Unmarshal([]byte(evid), &v)
+	set := map[string]bool{}
+	for _, rid := range v.Records {
+		var t string
+		if err := db.QueryRow(`SELECT type FROM events WHERE record_id=?`, rid).Scan(&t); err == nil {
+			set[t] = true
+		}
+	}
+	out := []string{}
+	for _, t := range []string{"birth", "marriage", "death"} {
+		if set[t] {
+			out = append(out, t)
+		}
+	}
+	return out
+}
+
 // writeGraph serializuje podgraf (osoby z dist + hrany mezi nimi) pro Cytoscape.
 // focus označuje uzly, kvůli kterým graf vznikl (rodové jméno) — UI ostatní ztlumí.
 func (s *server) writeGraph(w http.ResponseWriter, root int64, dist map[int64]int, focus map[int64]bool, rels []grel) {
-	// vrstvy hrany = typy událostí jejích evidenčních záznamů
-	evidenceLayers := func(evid string) []string {
-		var v struct {
-			Records []int64 `json:"records"`
-		}
-		json.Unmarshal([]byte(evid), &v)
-		set := map[string]bool{}
-		for _, rid := range v.Records {
-			var t string
-			if err := s.db.QueryRow(`SELECT type FROM events WHERE record_id=?`, rid).Scan(&t); err == nil {
-				set[t] = true
-			}
-		}
-		out := []string{}
-		for _, t := range []string{"birth", "marriage", "death"} {
-			if set[t] {
-				out = append(out, t)
-			}
-		}
-		return out
-	}
-
 	type node struct {
 		ID         int64   `json:"id"`
 		Name       string  `json:"name"`
@@ -360,7 +372,7 @@ func (s *server) writeGraph(w http.ResponseWriter, root int64, dist map[int64]in
 		if _, okB := dist[e.B]; !okB {
 			continue
 		}
-		edgesOut = append(edgesOut, edgeOut{e.ID, e.Type, e.A, e.B, e.Conf, evidenceLayers(e.Evid)})
+		edgesOut = append(edgesOut, edgeOut{e.ID, e.Type, e.A, e.B, e.Conf, edgeLayers(s.db, e.Evid)})
 	}
 	writeJSON(w, map[string]any{"root": root, "nodes": nodes, "edges": edgesOut})
 }

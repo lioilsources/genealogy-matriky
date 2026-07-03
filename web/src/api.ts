@@ -10,6 +10,9 @@ export interface SearchHit {
   mention_count: number
 }
 
+// Statický režim (GitHub Pages): žádné /api, data z JSON snapshotu, jen ke čtení.
+export const IS_STATIC = import.meta.env.VITE_STATIC === 'true'
+
 export interface Mention {
   id: number
   role: string
@@ -32,6 +35,7 @@ export interface Mention {
   event_year?: number
   event_date?: string
   confidence: number
+  scan_url?: string // statický export: odkaz na sken v ebadatelně
 }
 
 export interface Candidate {
@@ -102,7 +106,7 @@ async function j<T>(res: Response): Promise<T> {
   return res.json()
 }
 
-export const api = {
+const httpApi = {
   search: (params: Record<string, string>) =>
     fetch('/api/search?' + new URLSearchParams(params)).then((r) => j<SearchHit[]>(r)),
   person: (id: number) => fetch(`/api/persons/${id}`).then((r) => j<Person>(r)),
@@ -129,3 +133,8 @@ export const api = {
   analytics: (kind: string) => fetch(`/api/analytics/${kind}`).then((r) => j<any[]>(r)),
   stats: () => fetch('/api/stats').then((r) => j<Record<string, number>>(r)),
 }
+
+// ve statické verzi se všechna čtení obsluhují z JSON snapshotu; mutace hlásí chybu
+import { staticApi } from './staticApi'
+
+export const api: typeof httpApi = IS_STATIC ? (staticApi as unknown as typeof httpApi) : httpApi

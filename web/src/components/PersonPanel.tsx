@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Person, Mention, api } from '../api'
+import { Person, Mention, api, IS_STATIC } from '../api'
 
 const ROLE_LABELS: Record<string, string> = {
   dite: 'dítě', otec: 'otec', matka: 'matka', kmotr: 'kmotr', babka: 'porodní bába',
@@ -77,7 +77,7 @@ export default function PersonPanel({ person, onOpenScan, onNavigate, onChanged 
       <div className="panel-section">
         <h3>
           Zmínky v matrikách ({person.mentions.length})
-          {person.mentions.length > 1 && (
+          {!IS_STATIC && person.mentions.length > 1 && (
             <>
               {' · '}
               <button className="action" style={{ padding: '2px 8px' }} onClick={() => setSplitMode(!splitMode)}>
@@ -141,9 +141,11 @@ export default function PersonPanel({ person, onOpenScan, onNavigate, onChanged 
                 </button>{' '}
                 <span style={{ color: '#898781' }}>skóre {Math.round(c.score * 100)} %</span>
               </span>
-              <button className="action" disabled={busy} onClick={() => doMerge(c.person_id)}>
-                Je to táž osoba
-              </button>
+              {!IS_STATIC && (
+                <button className="action" disabled={busy} onClick={() => doMerge(c.person_id)}>
+                  Je to táž osoba
+                </button>
+              )}
             </div>
           ))}
         </div>

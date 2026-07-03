@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { api, Graph, Person, Mention, SearchHit } from './api'
+import { api, Graph, Person, Mention, SearchHit, IS_STATIC } from './api'
 import TreeView from './components/TreeView'
 import PersonPanel from './components/PersonPanel'
 import ScanViewer from './components/ScanViewer'
@@ -111,6 +111,12 @@ export default function App() {
   }
 
   const openScan = (m: Mention) => {
+    if (IS_STATIC) {
+      // bez backendu nejsou skeny — otevřít stránku knihy přímo v ebadatelně
+      if (m.scan_url) window.open(m.scan_url, '_blank')
+      else showToast('Sken není ve statické verzi dostupný.')
+      return
+    }
     setScan({
       scanId: m.scan_id,
       recordId: m.record_id,
