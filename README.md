@@ -1,14 +1,25 @@
-# Matriky: stahovač + strukturovaná OCR extrakce
+# Matriky: stahovač + OCR extrakce + rodokmen
 
-Dva Go nástroje (jen standardní knihovna) pro práci s matrikami ze čtenárny
-Státního oblastního archivu v Praze ([ebadatelna.soapraha.cz](https://ebadatelna.soapraha.cz)):
+Nástroje pro práci s matrikami ze čtenárny Státního oblastního archivu v Praze
+([ebadatelna.soapraha.cz](https://ebadatelna.soapraha.cz)) — od stažení skenů
+až po interaktivní rodokmen:
 
 - **`ebadatelna-dl`** (tento adresář) — stahuje snímky knihy v plném rozlišení
   a zapisuje `meta.json` (typ knihy, datace, lokality…).
 - **[`matrika-ocr/`](matrika-ocr/)** — posílá skeny do OCR modelu (Qwen) a dělá
   strukturovanou extrakci do JSONL podle schématu sloupců + lint.
+- **[`genealogy/`](genealogy/)** — z JSONL staví SQLite databázi osob a vazeb
+  (extrakce zmínek, automatické propojování osob s mírou jistoty) a servíruje
+  API + webové UI.
+- **[`web/`](web/)** — React aplikace: interaktivní strom (vrstvy
+  narození/svatby/úmrtí, filtry, proklik na sken matriky, merge/split oprav)
+  a analytika rodinných vazeb.
 
-Data (stažené skeny, `meta.json`, OCR výstupy) nejsou verzována — viz `.gitignore`.
+Pipeline: `ebadatelna-dl` → `matrika-ocr` → `genealogy ingest/extract/match`
+→ `genealogy serve` + web.
+
+Data (stažené skeny, `meta.json`, OCR výstupy, databáze) nejsou verzována —
+viz `.gitignore`.
 
 ---
 

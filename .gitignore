@@ -1,6 +1,7 @@
 # Přeložené binárky
 /ebadatelna-dl
 /matrika-ocr/matrika-ocr
+/genealogy/genealogy
 
 # Stažené skeny matrik (archivní data, nejsou zdrojový kód)
 *.jpg
@@ -15,6 +16,16 @@ meta.json
 *.report.json
 *.report.txt
 /matrika-ocr/ocr-out/
+
+# Genealogická databáze a web build
+/genealogy/data/
+/web/node_modules/
+/web/dist/
+/web/tsconfig.tsbuildinfo
+
+# Testovací fixture knihy genealogy modulu (výjimka z datových pravidel výše)
+!/genealogy/testdata/*.jsonl
+!/genealogy/testdata/books/*/meta.json
 
 # OS
 .DS_Store
