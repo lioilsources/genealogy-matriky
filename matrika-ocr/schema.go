@@ -146,6 +146,7 @@ func buildStructuredPrompt(s *Schema) string {
 	for _, c := range s.Columns {
 		fmt.Fprintf(&b, "- %s: %s\n", c.Key, c.Label)
 	}
+	b.WriteString("Každou hodnotu vrať jako STRUČNÝ prostý řetězec (ne pole, ne vnořený objekt). ")
 	b.WriteString("Prázdnou buňku vrať jako \"\". Zachovej pořadí záznamů shora dolů. ")
 	b.WriteString("Neopakuj řádky a nevymýšlej data. ")
 	b.WriteString("Vrať POUZE validní JSON tvaru: {\"folio\":\"\",\"rok\":\"\",\"rows\":[{…}]} — nic dalšího, bez komentářů a bez markdown fence.")

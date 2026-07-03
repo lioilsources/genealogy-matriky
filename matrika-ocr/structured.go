@@ -125,28 +125,45 @@ func failStructured(rec StructuredRecord, msg string) StructuredRecord {
 // normalizeRows nechá jen klíče ze schématu, doplní chybějící "", neznámé klíče
 // zaznamená do lintu. Hodnoty (i čísla/null) převede na řetězec.
 func normalizeRows(schema *Schema, raw []map[string]interface{}, lint *LintResult) []map[string]string {
-	keys := map[string]bool{}
+	// Qwen občas vkládá mezery do názvů klíčů ("ne vest a _ datum") → porovnávej
+	// klíče bez mezer a malými písmeny.
+	canon := map[string]string{}
 	for _, c := range schema.Columns {
-		keys[c.Key] = true
+		canon[normKey(c.Key)] = c.Key
 	}
 	unknown := map[string]bool{}
 	out := make([]map[string]string, 0, len(raw))
 	for _, r := range raw {
 		row := map[string]string{}
 		for _, c := range schema.Columns {
-			row[c.Key] = anyToString(r[c.Key])
+			row[c.Key] = ""
 		}
-		for k := range r {
-			if !keys[k] {
+		nonEmpty := false
+		for k, v := range r {
+			if sk, ok := canon[normKey(k)]; ok {
+				if s := anyToString(v); s != "" || row[sk] == "" {
+					row[sk] = s
+					if s != "" {
+						nonEmpty = true
+					}
+				}
+			} else {
 				unknown[k] = true
 			}
 		}
-		out = append(out, row)
+		if nonEmpty { // zahoď zcela prázdné řádky ({} od modelu)
+			out = append(out, row)
+		}
 	}
 	for k := range unknown {
-		lint.Issues = append(lint.Issues, "neznámý klíč od modelu: "+k)
+		lint.Issues = append(lint.Issues, "neznámý klíč od modelu: "+strings.TrimSpace(k))
 	}
 	return out
+}
+
+// normKey normalizuje klíč pro porovnání: odstraní veškeré mezery a malá písmena.
+func normKey(s string) string {
+	return strings.ToLower(strings.Join(strings.Fields(s), ""))
 }
 
 func anyToString(v interface{}) string {
@@ -166,6 +183,15 @@ func anyToString(v interface{}) string {
 			return "ano"
 		}
 		return "ne"
+	case []interface{}:
+		// Qwen občas vrátí hodnotu jako pole → spoj do jednoho řetězce
+		parts := make([]string, 0, len(t))
+		for _, e := range t {
+			if s := anyToString(e); s != "" {
+				parts = append(parts, s)
+			}
+		}
+		return strings.Join(parts, "; ")
 	default:
 		b, _ := json.Marshal(v)
 		return string(b)

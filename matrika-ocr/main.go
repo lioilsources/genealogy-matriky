@@ -98,7 +98,7 @@ func parseFlags() options {
 	fs.DurationVar(&opt.delay, "delay", 1500*time.Millisecond, "pauza mezi requesty")
 	fs.DurationVar(&opt.timeout, "timeout", 180*time.Second, "HTTP timeout na request")
 	fs.IntVar(&opt.retries, "retries", 3, "max pokusů na stránku (backoff 5/15/45 s)")
-	fs.IntVar(&opt.maxTokens, "max-tokens", 2048, "max_tokens odpovědi")
+	fs.IntVar(&opt.maxTokens, "max-tokens", 8192, "max_tokens odpovědi (structured JSON může být dlouhý)")
 	fs.StringVar(&opt.prompt, "prompt", "", "OCR prompt (prázdné = výchozí)")
 	fs.StringVar(&opt.promptFile, "prompt-file", "", "soubor s promptem (přebíjí --prompt)")
 	fs.StringVar(&opt.exts, "exts", "jpg,jpeg,png", "přípony obrázků (čárkou)")
