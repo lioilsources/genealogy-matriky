@@ -1,15 +1,19 @@
 # Parametry (přepiš na řádce: make ocr IN="../Kladno-ev 01 [8386]" START=1 END=20)
-IN       ?= ../Kladno-ev 01 [8386]   # adresář matriky/složka se skeny
-MODE     ?= structured               # structured | transcribe | report
-START    ?= 1                        # první stránka rozsahu (1-based)
-END      ?= 0                        # poslední stránka včetně (0 = do konce)
-LIMIT    ?= 0                        # zpracuj max N (0 = bez limitu; pro rychlý test)
+# POZOR: žádné inline komentáře za hodnotami — přidaly by koncové mezery.
+# IN: složka se skeny | MODE: structured|transcribe|report
+# START/END: rozsah stran (1-based, včetně) | LIMIT: max N (0 = vše; pro test)
+IN       ?= ../Kladno-ev 01 [8386]
+MODE     ?= structured
+START    ?= 1
+END      ?= 0
+LIMIT    ?= 0
 
 # OUT prázdné = auto: structured → ocr-out/<typ>/<kniha>.jsonl (dle meta.json).
+# SCHEMA prázdné = dle meta.typ.
 OUT      ?=
-SCHEMA   ?=                          # override schématu (jinak dle meta.typ)
-OUTFLAG    := $(if $(OUT),--out "$(OUT)",)
-SCHEMAFLAG := $(if $(SCHEMA),--schema "$(SCHEMA)",)
+SCHEMA   ?=
+OUTFLAG    := $(if $(strip $(OUT)),--out "$(strip $(OUT))",)
+SCHEMAFLAG := $(if $(strip $(SCHEMA)),--schema "$(strip $(SCHEMA))",)
 
 BASEURL  ?= http://192.168.88.66:8080
 MODEL    ?= ocr
@@ -18,8 +22,9 @@ TIMEOUT  ?= 180s
 RETRIES  ?= 3
 MAXTOK   ?= 2048
 MAXSIDE  ?= 0
-FORCE    ?=                           # FORCE=1 obejde kontrolu modelu (ne-Qwen)
-FORCEFLAG := $(if $(FORCE),--force,)
+# FORCE=1 obejde pre-flight kontrolu modelu (ne-Qwen)
+FORCE    ?=
+FORCEFLAG := $(if $(strip $(FORCE)),--force,)
 
 BIN := matrika-ocr
 
@@ -38,9 +43,12 @@ ocr: build ## OCR na IN (MODE, rozsah START..END); structured → ocr-out/<typ>/
 		--base-url $(BASEURL) --model $(MODEL) --delay $(DELAY) --timeout $(TIMEOUT) \
 		--retries $(RETRIES) --max-tokens $(MAXTOK) --max-side $(MAXSIDE) $(FORCEFLAG)
 
-test: build ## Rychlý test: první 2 stránky z IN
-	./$(BIN) --in "$(IN)" --mode $(MODE) $(OUTFLAG) $(SCHEMAFLAG) --limit 2 \
-		--base-url $(BASEURL) --model $(MODEL) $(FORCEFLAG)
+# TESTSTART: od které strany testovat (přeskoč obálku/titul; u 8386 data ~str. 6)
+TESTSTART ?= 6
+test: build ## Rychlý test: 2 strany od TESTSTART (výchozí 6 = reálná data, ne obálka)
+	./$(BIN) --in "$(IN)" --mode $(MODE) $(OUTFLAG) $(SCHEMAFLAG) --start $(TESTSTART) --limit 2 \
+		--base-url $(BASEURL) --model $(MODEL) --delay $(DELAY) --timeout $(TIMEOUT) \
+		--retries $(RETRIES) $(FORCEFLAG)
 
 report: build ## Přepočítat report nad existujícím JSONL (zadej OUT=cesta.jsonl)
 	@test -n "$(OUT)" || { echo "chyba: zadej OUT=ocr-out/<typ>/<kniha>.jsonl"; exit 2; }

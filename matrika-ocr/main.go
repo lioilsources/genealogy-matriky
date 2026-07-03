@@ -109,6 +109,7 @@ func parseFlags() options {
 	fs.BoolVar(&opt.force, "force", false, "ignoruj varování, že aktivní model není Qwen")
 	fs.IntVar(&opt.maxSide, "max-side", 0, "downscale delší stranu na N px (0 = vypnuto)")
 	_ = fs.Parse(os.Args[1:])
+	opt.in = strings.TrimSpace(opt.in)
 
 	if opt.mode != "report" && opt.in == "" {
 		fmt.Fprintln(os.Stderr, "chyba: --in je povinné")

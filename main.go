@@ -68,6 +68,7 @@ func main() {
 	flag.BoolVar(&cfg.metaOnly, "meta-only", false, "jen zapsat meta.json (bez stahování obrázků)")
 	flag.BoolVar(&cfg.forceMeta, "force-meta", false, "přepsat existující meta.json")
 	flag.Parse()
+	cfg.in = strings.TrimSpace(cfg.in)
 
 	if cfg.id == "" && cfg.in != "" {
 		cfg.id = idFromFolder(cfg.in)
