@@ -495,17 +495,23 @@ func preflight(client *http.Client, opt options) {
 			break
 		}
 	}
-	if strings.Contains(strings.ToLower(root+id), "qwen") {
+	low := strings.ToLower(root + " " + id)
+	switch {
+	case strings.Contains(low, "qwen"):
 		fmt.Fprintf(os.Stderr, "pre-flight: aktivní model %q (root %q) — OK.\n", id, root)
-		return
+	case strings.Contains(low, "trocr"):
+		// prokazatelně špatný model → tvrdě zastav (kvůli ochraně proti stovkám stran)
+		msg := fmt.Sprintf("pre-flight: aktivní model %q (root %q) je TrOCR, ne Qwen", id, root)
+		if opt.force {
+			fmt.Fprintf(os.Stderr, "%s — pokračuji (--force).\n", msg)
+			return
+		}
+		fmt.Fprintf(os.Stderr, "%s.\nSpusť na Sparku Qwen OCR, nebo přidej --force.\n", msg)
+		os.Exit(3)
+	default:
+		// root prázdné/neznámé (gateway ho nemusí prozradit) → nelze potvrdit ani vyvrátit; jen upozorni
+		fmt.Fprintf(os.Stderr, "pre-flight: model %q (root %q) nelze ověřit jako Qwen — pokračuji. Ujisti se, že na Sparku běží OCR (Qwen).\n", id, root)
 	}
-	msg := fmt.Sprintf("pre-flight: aktivní model %q (root %q) NEvypadá jako Qwen", id, root)
-	if opt.force {
-		fmt.Fprintf(os.Stderr, "%s — pokračuji (--force).\n", msg)
-		return
-	}
-	fmt.Fprintf(os.Stderr, "%s.\nZkontroluj, že na Sparku běží OCR (Qwen), nebo přidej --force.\n", msg)
-	os.Exit(3)
 }
 
 // --- Obrázek → data URL ---
