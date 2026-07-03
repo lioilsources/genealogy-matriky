@@ -38,6 +38,7 @@ func cmdServe(args []string) error {
 	mux.HandleFunc("GET /api/search", s.handleSearch)
 	mux.HandleFunc("GET /api/persons/{id}", s.handlePerson)
 	mux.HandleFunc("GET /api/persons/{id}/neighborhood", s.handleNeighborhood)
+	mux.HandleFunc("GET /api/tree", s.handleSurnameTree)
 	mux.HandleFunc("GET /api/records/{id}", s.handleRecord)
 	mux.HandleFunc("GET /api/scans/{id}/image", s.handleScanImage)
 	mux.HandleFunc("GET /api/scans/{id}/full", s.handleScanFull)
@@ -266,59 +267,37 @@ func (s *server) handlePerson(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, p)
 }
 
-// handleNeighborhood vrátí podgraf kolem osoby do dané hloubky pro Cytoscape.
-func (s *server) handleNeighborhood(w http.ResponseWriter, r *http.Request) {
-	id, _ := strconv.ParseInt(r.PathValue("id"), 10, 64)
-	depth, _ := strconv.Atoi(r.URL.Query().Get("depth"))
-	if depth <= 0 || depth > 6 {
-		depth = 2
-	}
+// grel je hrana grafu v paměti (sdílené pro neighborhood i rodový strom).
+type grel struct {
+	ID   int64
+	Type string
+	A, B int64
+	Conf float64
+	Evid string
+}
 
-	// všechny hrany do paměti (u vesnice jde o tisíce řádků)
-	type rel struct {
-		ID     int64
-		Type   string
-		A, B   int64
-		Conf   float64
-		Evid   string
-	}
-	var rels []rel
+// loadRelations načte všechny hrany a adjacency mapu.
+func (s *server) loadRelations() ([]grel, map[int64][]grel, error) {
+	var rels []grel
 	rows, err := s.db.Query(`SELECT id, type, person_a, person_b, confidence, COALESCE(evidence_json,'') FROM relations`)
 	if err != nil {
-		httpErr(w, 500, err)
-		return
+		return nil, nil, err
 	}
-	adj := map[int64][]rel{}
+	defer rows.Close()
+	adj := map[int64][]grel{}
 	for rows.Next() {
-		var e rel
+		var e grel
 		rows.Scan(&e.ID, &e.Type, &e.A, &e.B, &e.Conf, &e.Evid)
 		rels = append(rels, e)
 		adj[e.A] = append(adj[e.A], e)
 		adj[e.B] = append(adj[e.B], e)
 	}
-	rows.Close()
+	return rels, adj, nil
+}
 
-	// BFS
-	dist := map[int64]int{id: 0}
-	queue := []int64{id}
-	for len(queue) > 0 {
-		cur := queue[0]
-		queue = queue[1:]
-		if dist[cur] >= depth {
-			continue
-		}
-		for _, e := range adj[cur] {
-			next := e.A
-			if next == cur {
-				next = e.B
-			}
-			if _, ok := dist[next]; !ok {
-				dist[next] = dist[cur] + 1
-				queue = append(queue, next)
-			}
-		}
-	}
-
+// writeGraph serializuje podgraf (osoby z dist + hrany mezi nimi) pro Cytoscape.
+// focus označuje uzly, kvůli kterým graf vznikl (rodové jméno) — UI ostatní ztlumí.
+func (s *server) writeGraph(w http.ResponseWriter, root int64, dist map[int64]int, focus map[int64]bool, rels []grel) {
 	// vrstvy hrany = typy událostí jejích evidenčních záznamů
 	evidenceLayers := func(evid string) []string {
 		var v struct {
@@ -350,6 +329,7 @@ func (s *server) handleNeighborhood(w http.ResponseWriter, r *http.Request) {
 		Confidence float64 `json:"confidence"`
 		Depth      int     `json:"depth"`
 		HasDeath   bool    `json:"has_death"`
+		Focus      bool    `json:"focus"`
 	}
 	nodes := []node{}
 	for pid, d := range dist {
@@ -361,6 +341,7 @@ func (s *server) handleNeighborhood(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 		n.HasDeath = n.DeathYear > 0
+		n.Focus = focus == nil || focus[pid]
 		nodes = append(nodes, n)
 	}
 	type edgeOut struct {
@@ -381,7 +362,103 @@ func (s *server) handleNeighborhood(w http.ResponseWriter, r *http.Request) {
 		}
 		edgesOut = append(edgesOut, edgeOut{e.ID, e.Type, e.A, e.B, e.Conf, evidenceLayers(e.Evid)})
 	}
-	writeJSON(w, map[string]any{"root": id, "nodes": nodes, "edges": edgesOut})
+	writeJSON(w, map[string]any{"root": root, "nodes": nodes, "edges": edgesOut})
+}
+
+// handleNeighborhood vrátí podgraf kolem osoby do dané hloubky pro Cytoscape.
+func (s *server) handleNeighborhood(w http.ResponseWriter, r *http.Request) {
+	id, _ := strconv.ParseInt(r.PathValue("id"), 10, 64)
+	depth, _ := strconv.Atoi(r.URL.Query().Get("depth"))
+	if depth <= 0 || depth > 6 {
+		depth = 2
+	}
+	rels, adj, err := s.loadRelations()
+	if err != nil {
+		httpErr(w, 500, err)
+		return
+	}
+	// BFS
+	dist := map[int64]int{id: 0}
+	queue := []int64{id}
+	for len(queue) > 0 {
+		cur := queue[0]
+		queue = queue[1:]
+		if dist[cur] >= depth {
+			continue
+		}
+		for _, e := range adj[cur] {
+			next := e.A
+			if next == cur {
+				next = e.B
+			}
+			if _, ok := dist[next]; !ok {
+				dist[next] = dist[cur] + 1
+				queue = append(queue, next)
+			}
+		}
+	}
+	s.writeGraph(w, id, dist, nil, rels)
+}
+
+// handleSurnameTree vrátí strom celého rodu: všechny osoby s daným příjmením
+// (vč. rozených, historických pravopisů Worechowsky→Vořechovský a ženských
+// tvarů -ská) + jejich přímé okolí do vzdálenosti hops (default 1).
+func (s *server) handleSurnameTree(w http.ResponseWriter, r *http.Request) {
+	q := strings.TrimSpace(r.URL.Query().Get("surname"))
+	if q == "" {
+		httpErr(w, 400, fmt.Errorf("chybí parametr surname"))
+		return
+	}
+	hops, _ := strconv.Atoi(r.URL.Query().Get("hops"))
+	if hops <= 0 || hops > 3 {
+		hops = 1
+	}
+	norm := surnameNorm(q, false)
+
+	rows, err := s.db.Query(`SELECT DISTINCT pm.person_id FROM mentions m
+		JOIN person_mentions pm ON pm.mention_id = m.id
+		WHERE m.surname_norm = ? OR m.maiden_norm = ?`, norm, norm)
+	if err != nil {
+		httpErr(w, 500, err)
+		return
+	}
+	focus := map[int64]bool{}
+	dist := map[int64]int{}
+	var queue []int64
+	for rows.Next() {
+		var pid int64
+		rows.Scan(&pid)
+		focus[pid] = true
+		dist[pid] = 0
+		queue = append(queue, pid)
+	}
+	rows.Close()
+
+	rels, adj, err := s.loadRelations()
+	if err != nil {
+		httpErr(w, 500, err)
+		return
+	}
+	// BFS od všech nositelů jména najednou (přivěsí manžele/rodiče/děti)
+	for len(queue) > 0 {
+		cur := queue[0]
+		queue = queue[1:]
+		if dist[cur] >= hops {
+			continue
+		}
+		for _, e := range adj[cur] {
+			next := e.A
+			if next == cur {
+				next = e.B
+			}
+			if _, ok := dist[next]; !ok {
+				dist[next] = dist[cur] + 1
+				queue = append(queue, next)
+			}
+		}
+	}
+	var root int64 = -1 // rodový strom nemá jednu kořenovou osobu
+	s.writeGraph(w, root, dist, focus, rels)
 }
 
 // ---- záznamy a skeny ----

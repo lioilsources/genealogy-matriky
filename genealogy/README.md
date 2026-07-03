@@ -100,12 +100,22 @@ ingestu, extrakci rolí, správné sloučení (ženich↔křest přes rodiče, n
 přes DOB), determinismus, persistenci constraints a oprav buněk, stabilitu
 person id.
 
+## Rodové zobrazení
+
+`GET /api/tree?surname=Vořechovský` vrátí strom celého rodu: všechny osoby
+nesoucí příjmení (vč. rozených a historických pravopisů — **Worechowsky,
+Worechowski i ženská Vořechovská se normalizují na totéž**) plus jejich přímé
+okolí (manželé, rodiče, děti). V UI je vstup „rod (příjmení)" — výchozí
+**Vořechovský** — a nositelé jména jsou zvýrazněni, okolí ztlumené.
+
+Normalizace pravopisu: w→v, adjektivní tvary -ská/-ské/-ského/-ski → -ský
+(s ochranou proti jménům jako Růžička), ženské -ová/-ové → kmen.
+
 ## Poznámky
 
-- Schéma `oddani` knihy 8386 nemá sloupec se jménem nevěsty — extraktor
-  podporuje `nevesta_jmeno_stav_rodice`/`nevesta_jmeno`, pokud ve schématu
-  přibudou; jinak nevěsta vznikne beze jména (jen DOB + místo narození) a
-  spojí se s křtem až po ručním merge. **Doporučuji sloupec do schématu
-  doplnit a knihu znovu vytěžit.**
+- Schéma `oddani` má nově sloupec `nevesta_jmeno_stav_rodice` — knihy
+  vytěžené starším schématem (bez jména nevěsty) je potřeba **znovu vytěžit**
+  (`matrika-ocr` resume přeskakuje hotové stránky, takže starý JSONL smaž
+  nebo zvol jiný `--out`).
 - LLM normalizační pass (Qwen) je připraven v datovém modelu (`llm_cache`),
   ale zatím se nepoužívá — rule-based parser pokrývá běžné zápisy.

@@ -62,6 +62,7 @@ export interface GraphNode {
   confidence: number
   depth: number
   has_death: boolean
+  focus: boolean // nositel hledaného rodového jména (ostatní UI ztlumí)
 }
 
 export interface GraphEdge {
@@ -107,6 +108,8 @@ export const api = {
   person: (id: number) => fetch(`/api/persons/${id}`).then((r) => j<Person>(r)),
   neighborhood: (id: number, depth = 2) =>
     fetch(`/api/persons/${id}/neighborhood?depth=${depth}`).then((r) => j<Graph>(r)),
+  tree: (surname: string, hops = 1) =>
+    fetch(`/api/tree?surname=${encodeURIComponent(surname)}&hops=${hops}`).then((r) => j<Graph>(r)),
   record: (id: number) => fetch(`/api/records/${id}`).then((r) => j<RecordDetail>(r)),
   patchCell: (recordId: number, key: string, value: string) =>
     fetch(`/api/records/${recordId}/cells`, {

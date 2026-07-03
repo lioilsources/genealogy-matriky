@@ -43,28 +43,28 @@ func TestPipelineIngest(t *testing.T) {
 	if n := count(t, db, `SELECT COUNT(*) FROM books`); n != 3 {
 		t.Errorf("books = %d, chci 3", n)
 	}
-	if n := count(t, db, `SELECT COUNT(*) FROM scans`); n != 4 {
-		t.Errorf("scans = %d, chci 4", n)
+	if n := count(t, db, `SELECT COUNT(*) FROM scans`); n != 6 {
+		t.Errorf("scans = %d, chci 6", n)
 	}
-	// rows_count: 2+1 narozeni, 1 oddani, 2 umrti = 6
-	if n := count(t, db, `SELECT COUNT(*) FROM records`); n != 6 {
-		t.Errorf("records = %d, chci 6", n)
+	// rows_count: 2+1+1 narozeni, 1+1 oddani, 2 umrti = 8
+	if n := count(t, db, `SELECT COUNT(*) FROM records`); n != 8 {
+		t.Errorf("records = %d, chci 8", n)
 	}
 }
 
 func TestPipelineExtract(t *testing.T) {
 	db := setupPipeline(t)
-	if n := count(t, db, `SELECT COUNT(*) FROM events WHERE type='birth' AND date_precision='day'`); n != 3 {
-		t.Errorf("birth events s denní přesností = %d, chci 3", n)
+	if n := count(t, db, `SELECT COUNT(*) FROM events WHERE type='birth' AND date_precision='day'`); n != 4 {
+		t.Errorf("birth events s denní přesností = %d, chci 4", n)
 	}
-	// oddací záznam: zenich + jeho rodiče + nevesta + její rodiče + 2 svědci = 8
+	// oddací záznamy: (zenich+rodiče + nevesta+rodiče + 2 svědci = 8) + (…+ 1 svědek = 7)
 	if n := count(t, db, `SELECT COUNT(*) FROM mentions m JOIN records r ON r.id=m.record_id
-		WHERE r.record_type='oddani'`); n != 8 {
-		t.Errorf("mentions z oddacího záznamu = %d, chci 8", n)
+		WHERE r.record_type='oddani'`); n != 15 {
+		t.Errorf("mentions z oddacích záznamů = %d, chci 15", n)
 	}
 	// nevěsta má explicitní rok narození z DOB
 	var by int
-	db.QueryRow(`SELECT birth_year FROM mentions WHERE role='nevesta'`).Scan(&by)
+	db.QueryRow(`SELECT birth_year FROM mentions WHERE role='nevesta' AND surname_norm='dvorak'`).Scan(&by)
 	if by != 1878 {
 		t.Errorf("nevesta birth_year = %d, chci 1878", by)
 	}
@@ -133,6 +133,52 @@ func TestPipelineMatch(t *testing.T) {
 	if n := count(t, db, `SELECT COUNT(DISTINCT pm.person_id) FROM mentions m
 		JOIN person_mentions pm ON pm.mention_id=m.id WHERE m.role='zemrely'`); n != 2 {
 		t.Errorf("zemřelí clusterů = %d, chci 2", n)
+	}
+}
+
+// TestVorechovskySpellings: historické pravopisy téhož rodu se musí potkat —
+// otec "Worechowsky Jan" (křest 1880), ženich "Vořechovský Oldřich" se "synem
+// Jana Vořechovského" (oddavky 1905) a kmotra "Marie Vořechovská".
+func TestVorechovskySpellings(t *testing.T) {
+	db := setupPipeline(t)
+
+	// všechny tvary normalizované na 'vorechovsky' (otec, otec_otec, dite,
+	// matka — zdědila příjmení po manželovi, kmotr, zenich, zenich_otec)
+	if n := count(t, db, `SELECT COUNT(*) FROM mentions WHERE surname_norm='vorechovsky'`); n != 7 {
+		t.Errorf("zmínek s norm vorechovsky = %d, chci 7", n)
+	}
+
+	// ženich Oldřich (1905) = dítě Oldřich (1880): jména + rodiče + místo
+	roles := clusterRoles(t, db, "zenich", "vorechovsky")
+	if !roles["dite"] {
+		t.Errorf("Vořechovský Oldřich se nespojil s křestním záznamem Worechowsky; role: %v", roles)
+	}
+	// otec Jan Worechowsky (1880) = ženichův otec Jan Vořechovský (1905)
+	roles = clusterRoles(t, db, "otec", "vorechovsky")
+	if !roles["zenich_otec"] {
+		t.Errorf("Jan Worechowsky se nespojil s Janem Vořechovským; role: %v", roles)
+	}
+	// nevěsta Marie Nováková (1905) = dítě Marie (1876): DOB + rodiče
+	roles = clusterRoles(t, db, "nevesta", "novak")
+	if !roles["dite"] {
+		t.Errorf("nevěsta Nováková se nespojila s křestním záznamem; role: %v", roles)
+	}
+}
+
+func TestSurnameNormSpellings(t *testing.T) {
+	for _, c := range [][2]string{
+		{"Vořechovský", "vorechovsky"},
+		{"Vořechovská", "vorechovsky"},
+		{"Worechowsky", "vorechovsky"},
+		{"Worechowski", "vorechovsky"},
+		{"Růžička", "ruzicka"}, // guard: -čka není adjektivní přípona
+	} {
+		if got := surnameNorm(c[0], false); got != c[1] {
+			t.Errorf("surnameNorm(%q) = %q, chci %q", c[0], got, c[1])
+		}
+	}
+	if got := surnameNorm("Vořechovského", true); got != "vorechovsky" {
+		t.Errorf("genitiv Vořechovského = %q", got)
 	}
 }
 

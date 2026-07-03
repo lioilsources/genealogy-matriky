@@ -26,6 +26,30 @@ export default function App() {
   const [hits, setHits] = useState<SearchHit[] | null>(null)
   const searchTimer = useRef<number>()
 
+  // rodové zobrazení — výchozí zaměření na Vořechovské (vč. Worechowsky/-ski)
+  const [clan, setClan] = useState('Vořechovský')
+
+  const loadClan = useCallback(
+    async (surname: string) => {
+      if (!surname.trim()) return
+      try {
+        const g = await api.tree(surname.trim(), 1)
+        setPerson(null)
+        setGraph(g.nodes.length ? g : null)
+        if (!g.nodes.length) showToast(`Rod „${surname}" zatím v datech není.`)
+      } catch (e) {
+        showToast(String(e))
+      }
+    },
+    [],
+  )
+
+  // při startu rovnou ukázat rodový strom
+  useEffect(() => {
+    loadClan('Vořechovský')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   useEffect(() => {
     if (!q && !filters.place && !filters.year_from && !filters.year_to) {
       setHits(null)
@@ -144,6 +168,15 @@ export default function App() {
               )}
             </div>
             <div className="filters">
+              <input
+                placeholder="rod (příjmení)"
+                value={clan}
+                onChange={(e) => setClan(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && loadClan(clan)}
+              />
+              <button className="action" onClick={() => loadClan(clan)}>
+                Zobrazit rod
+              </button>
               <input
                 placeholder="obec"
                 value={filters.place}

@@ -97,6 +97,7 @@ var maleGenitive = map[string]string{
 	"vavrince": "vavrinec", "stepana": "stepan", "ignace": "ignac", "aloise": "alois",
 	"rudolfa": "rudolf", "emanuela": "emanuel", "bohumila": "bohumil",
 	"jindricha": "jindrich", "bedricha": "bedrich", "vilema": "vilem", "ludvika": "ludvik",
+	"oldricha": "oldrich",
 }
 
 // displayGiven: kanonické jméno → hezký nominativ s diakritikou (pro display_name).
@@ -108,6 +109,7 @@ var displayGiven = map[string]string{
 	"vavrinec": "Vavřinec", "stepan": "Štěpán", "ignac": "Ignác", "alois": "Alois",
 	"rudolf": "Rudolf", "emanuel": "Emanuel", "bohumil": "Bohumil",
 	"jindrich": "Jindřich", "bedrich": "Bedřich", "vilem": "Vilém", "ludvik": "Ludvík",
+	"oldrich": "Oldřich",
 	"marie": "Marie", "anna": "Anna", "katerina": "Kateřina", "barbora": "Barbora",
 	"alzbeta": "Alžběta", "frantiska": "Františka", "josefa": "Josefa",
 	"terezie": "Terezie", "antonie": "Antonie", "veronika": "Veronika",
@@ -138,6 +140,8 @@ func nominativeSurname(raw string, genitive bool) string {
 		return string(r[:n-3]) + "ová"
 	case n > 3 && string(r[n-3:]) == "ého":
 		return string(r[:n-3]) + "ý"
+	case n > 3 && string(r[n-3:]) == "eho": // historický zápis bez diakritiky
+		return string(r[:n-3]) + "y"
 	case n > 4 && r[n-1] == 'a':
 		return string(r[:n-1])
 	case n > 4 && r[n-1] == 'y':
@@ -158,6 +162,8 @@ func feminizeSurname(s string) string {
 	switch {
 	case n > 2 && r[n-1] == 'ý':
 		return string(r[:n-1]) + "á"
+	case n > 3 && (strings.HasSuffix(f, "sky") || strings.HasSuffix(f, "cky")):
+		return string(r[:n-1]) + "á" // Worechowsky → Worechowská
 	case n > 2 && r[n-1] == 'a':
 		return string(r[:n-1]) + "ová"
 	default:
@@ -165,9 +171,14 @@ func feminizeSurname(s string) string {
 	}
 }
 
-// givenNorm vrátí kanonizované křestní jméno (fold + tabulka variant).
+// givenNorm vrátí kanonizované křestní jméno (fold + varianty; historický
+// pravopis w→v se zkouší až po slovníku — Wenzel je varianta, ne pravopis).
 func givenNorm(given string) string {
 	f := foldASCII(strings.TrimSpace(given))
+	if can, ok := variantToCanonical[f]; ok {
+		return can
+	}
+	f = oldOrthography(f)
 	if can, ok := variantToCanonical[f]; ok {
 		return can
 	}
@@ -178,26 +189,58 @@ func givenNorm(given string) string {
 // nejdřív mužské genitivy (Josefa→josef), jinak běžnou tabulku.
 func givenNormCtx(given string, genitive bool, sex string) string {
 	f := foldASCII(strings.TrimSpace(given))
-	if genitive && sex == "m" {
-		if can, ok := maleGenitive[f]; ok {
+	for _, form := range []string{f, oldOrthography(f)} {
+		if genitive && sex == "m" {
+			if can, ok := maleGenitive[form]; ok {
+				return can
+			}
+		}
+		if can, ok := variantToCanonical[form]; ok {
 			return can
 		}
 	}
-	if can, ok := variantToCanonical[f]; ok {
-		return can
+	return oldOrthography(f)
+}
+
+// oldOrthography převádí historický pravopis matrik: w→v (Worechowsky→Vorechovsky),
+// koncové -ii→-i. Používá se jen na jména a místa, ne na volný text.
+func oldOrthography(f string) string {
+	f = strings.ReplaceAll(f, "w", "v")
+	return f
+}
+
+// adjSurnameSuffix sjednotí tvary adjektivních příjmení na mužský nominativ:
+// Vořechovská/-ské/-ského/-ski → vorechovsky (analogicky -cký). Aby se
+// nerozbila jména jako Růžička/Matouška, musí kmen před -sk/-ck končit
+// souhláskou (vorechov-ská ano, ruzi-čka ne).
+func adjSurnameSuffix(f string) string {
+	for _, grp := range []string{"sk", "ck"} {
+		for _, suf := range []string{grp + "eho", grp + "emu", grp + "a", grp + "e", grp + "i", grp + "ym", grp + "ou"} {
+			if !strings.HasSuffix(f, suf) {
+				continue
+			}
+			stem := f[:len(f)-len(suf)]
+			if len(stem) >= 4 && !strings.ContainsRune("aeiouy", rune(stem[len(stem)-1])) {
+				return stem + grp + "y"
+			}
+		}
 	}
 	return f
 }
 
-// surnameNorm normalizuje příjmení: fold, strip ženských přípon -ová/-ové
-// a (v genitivním kontextu "syn Josefa Slavíka") koncového -a/-y.
+// surnameNorm normalizuje příjmení: fold, historický pravopis (w→v), sjednocení
+// adjektivních tvarů (-ská/-ski→-sky), strip ženských přípon -ová/-ové a
+// (v genitivním kontextu "syn Josefa Slavíka") koncového -a/-y.
 func surnameNorm(surname string, genitive bool) string {
-	f := foldASCII(strings.TrimSpace(surname))
+	f := oldOrthography(foldASCII(strings.TrimSpace(surname)))
+	f = adjSurnameSuffix(f)
 	switch {
 	case strings.HasSuffix(f, "ova"):
 		f = strings.TrimSuffix(f, "ova")
 	case strings.HasSuffix(f, "ove"):
 		f = strings.TrimSuffix(f, "ove")
+	case strings.HasSuffix(f, "sky") || strings.HasSuffix(f, "cky"):
+		// adjektivní příjmení už je v kanonickém tvaru — genitiv neřezat
 	case genitive && strings.HasSuffix(f, "a") && len(f) > 4:
 		f = strings.TrimSuffix(f, "a")
 	case genitive && strings.HasSuffix(f, "y") && len(f) > 4:
@@ -221,7 +264,7 @@ func sexFromGiven(given string) string {
 // placeNorm normalizuje místní jméno přes pádové tvary: fold + odtržení jedné
 // koncové samohlásky ("Testov" / "z Testova" / "v Testově" → "testov").
 func placeNorm(s string) string {
-	f := foldASCII(strings.TrimSpace(s))
+	f := oldOrthography(foldASCII(strings.TrimSpace(s)))
 	if len(f) > 3 && strings.ContainsRune("aeiouy", rune(f[len(f)-1])) {
 		f = f[:len(f)-1]
 	}

@@ -25,7 +25,7 @@ func requiredByType(typ string) []string {
 	case "narozeni":
 		return []string{"dite_jmeno", "otec_jmeno_stav", "matka_jmeno_rodice"}
 	case "oddani":
-		return []string{"zenich_jmeno_stav_rodice", "nevesta_datum_narozeni"}
+		return []string{"zenich_jmeno_stav_rodice", "nevesta_jmeno_stav_rodice"}
 	case "umrti":
 		return []string{"zemrely_jmeno_stav", "datum_umrti"}
 	default:

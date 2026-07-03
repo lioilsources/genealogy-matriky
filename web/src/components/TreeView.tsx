@@ -61,6 +61,8 @@ export default function TreeView({ graph, layers, selected, onSelect, onExpand }
           selector: 'node[?lowConf]',
           style: { 'border-style': 'dashed', 'border-color': COLORS.warn, 'border-width': 3 },
         },
+        // v rodovém zobrazení: osoby mimo hledané příjmení ztlumit
+        { selector: 'node[?dimmed]', style: { opacity: 0.4 } },
         {
           selector: 'node[?hasDeath]',
           style: { 'background-image': deathBadge, 'background-width': '55%', 'background-height': '55%' },
@@ -126,6 +128,7 @@ export default function TreeView({ graph, layers, selected, onSelect, onExpand }
           sex: n.sex,
           lowConf: n.confidence < 0.85,
           hasDeath: n.has_death,
+          dimmed: !n.focus,
         },
       })),
     )
