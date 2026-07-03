@@ -108,6 +108,10 @@ jsou přesnější. `--split lr` (rozpůlení dvojstrany pro Qwen) se neosvědč
 - Schémata `narozeni`/`umrti` jsou zatím **drafty** (`"status":"draft-k-potvrzeni"`)
   podle standardního formuláře — doladit labely proti reálné knize daného typu;
   `oddani` je ověřené z knihy 8386.
+- Do `oddani` přibyl sloupec **`nevesta_jmeno_stav_rodice`** (jméno, stav a
+  rodiče nevěsty) — bez něj nejde nevěsta automaticky spárovat s křestním
+  záznamem při stavbě stromu. Knihy vytěžené starším schématem znovu vytěž
+  (resume přeskakuje `ok:true`, takže starý JSONL smaž nebo změň `--out`).
 - **TIFF**: stdlib Go umí jen JPEG/PNG; TIFF převeď předem na JPEG.
 - Model vrací volný text (u structured JSON objekt); nástroj z něj vytáhne první
   vyvážený `{…}` (umí i ```` ```json ```` fence), při chybě zkusí content-retry

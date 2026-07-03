@@ -1,0 +1,55 @@
+# Nasazení statické read-only verze rodokmenu na GitHub Pages.
+#
+# Data bere z commitnutého snapshotu web/public/data/ (vygeneruj lokálně:
+#   cd genealogy && ./genealogy export --db data/genealogy.db --out ../web/public/data
+# a commitni). Ve statické verzi nejsou mutace ani skeny — zmínky odkazují
+# přímo do ebadatelny.
+#
+# Před prvním nasazením zapni v repu Settings → Pages → Source: GitHub Actions.
+name: Deploy na GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Build statické verze
+        working-directory: web
+        env:
+          VITE_STATIC: 'true'
+          VITE_BASE: /${{ github.event.repository.name }}/
+        run: |
+          npm ci
+          npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
