@@ -1,0 +1,24 @@
+{
+  "typ": "narozeni",
+  "status": "draft-k-potvrzeni",
+  "unit": "dvojstrana",
+  "page_meta": ["folio", "rok"],
+  "columns": [
+    {"key": "cislo", "label": "Číslo řádové", "group": "", "required": true},
+    {"key": "datum_narozeni", "label": "Rok, měsíc a den narození", "group": "datum"},
+    {"key": "datum_krtu", "label": "Rok, měsíc a den křtu", "group": "datum"},
+    {"key": "misto_dum", "label": "Místo (obec) a číslo domu", "group": ""},
+    {"key": "dite_jmeno", "label": "Jméno dítěte", "group": "dite"},
+    {"key": "dite_pohlavi", "label": "Pohlaví (chlapec/děvče)", "group": "dite"},
+    {"key": "dite_manzelske", "label": "Manželské / nemanželské", "group": "dite"},
+    {"key": "nabozenstvi", "label": "Náboženství", "group": ""},
+    {"key": "otec_jmeno_stav", "label": "Otec: jméno, stav a povolání, jeho rodiče", "group": "otec"},
+    {"key": "otec_bydliste", "label": "Otec: bydliště", "group": "otec"},
+    {"key": "matka_jmeno_rodice", "label": "Matka: jméno, její rodiče (otec a jeho stav)", "group": "matka"},
+    {"key": "matka_bydliste", "label": "Matka: bydliště, náboženství", "group": "matka"},
+    {"key": "kmotri", "label": "Kmotři (svědci): jméno, stav a bydliště", "group": ""},
+    {"key": "babka", "label": "Porodní bába", "group": ""},
+    {"key": "krtitel", "label": "Pokřtil (kdo)", "group": ""},
+    {"key": "poznamenani", "label": "Poznamenání", "group": ""}
+  ]
+}

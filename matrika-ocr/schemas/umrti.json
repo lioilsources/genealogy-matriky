@@ -1,0 +1,20 @@
+{
+  "typ": "umrti",
+  "status": "draft-k-potvrzeni",
+  "unit": "dvojstrana",
+  "page_meta": ["folio", "rok"],
+  "columns": [
+    {"key": "cislo", "label": "Číslo řádové", "group": "", "required": true},
+    {"key": "datum_umrti", "label": "Rok, měsíc a den úmrtí", "group": "datum"},
+    {"key": "datum_pohrbu", "label": "Rok, měsíc a den pohřbu", "group": "datum"},
+    {"key": "misto_dum", "label": "Místo (obec) a číslo domu", "group": ""},
+    {"key": "zemrely_jmeno_stav", "label": "Jméno zemřelého, stav a povolání", "group": "zemrely"},
+    {"key": "pohlavi", "label": "Pohlaví (muž/žena)", "group": "zemrely"},
+    {"key": "nabozenstvi", "label": "Náboženství", "group": "zemrely"},
+    {"key": "vek", "label": "Stáří (věk)", "group": ""},
+    {"key": "pricina_smrti", "label": "Nemoc a příčina smrti", "group": ""},
+    {"key": "kdo_pohrbil", "label": "Pohřbil (kdo) / opatřen svátostmi", "group": ""},
+    {"key": "misto_pohrbu", "label": "Místo pohřbu", "group": ""},
+    {"key": "poznamenani", "label": "Poznamenání", "group": ""}
+  ]
+}

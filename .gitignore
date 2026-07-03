@@ -1,0 +1,20 @@
+# Přeložené binárky
+/ebadatelna-dl
+/matrika-ocr/matrika-ocr
+
+# Stažené skeny matrik (archivní data, nejsou zdrojový kód)
+*.jpg
+*.jpeg
+*.png
+*.tif
+*.tiff
+
+# Generovaná data (meta, OCR výstupy, reporty)
+meta.json
+*.jsonl
+*.report.json
+*.report.txt
+/matrika-ocr/ocr-out/
+
+# OS
+.DS_Store
