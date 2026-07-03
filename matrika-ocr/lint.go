@@ -110,6 +110,67 @@ type bookReport struct {
 	PageIssues  []string          `json:"page_issues"`
 }
 
+// runRelint načte JSONL, dopočítá per-page lint dle schématu (lintPage), přepíše
+// soubor a spustí report. Slouží pro ručně psaný (např. Claude/Max) JSONL.
+func runRelint(opt options) error {
+	var schema *Schema
+	var err error
+	if opt.schemaPath != "" {
+		schema, err = resolveSchema(opt.schemaPath, "")
+	} else if opt.in != "" {
+		meta, e := loadBookMeta(opt.in)
+		if e != nil {
+			return fmt.Errorf("relint potřebuje --schema nebo --in s meta.json: %w", e)
+		}
+		schema, err = resolveSchema("", meta.Typ)
+	} else {
+		return fmt.Errorf("relint: zadej --in (složka s meta.json) nebo --schema")
+	}
+	if err != nil {
+		return err
+	}
+
+	f, err := os.Open(opt.out)
+	if err != nil {
+		return fmt.Errorf("otevření %s: %w", opt.out, err)
+	}
+	var lines [][]byte
+	sc := bufio.NewScanner(f)
+	sc.Buffer(make([]byte, 0, 1<<20), 64<<20)
+	for sc.Scan() {
+		raw := bytes.TrimSpace(sc.Bytes())
+		if len(raw) == 0 {
+			continue
+		}
+		var rec StructuredRecord
+		if json.Unmarshal(raw, &rec) != nil {
+			lines = append(lines, append([]byte{}, raw...))
+			continue
+		}
+		if rec.OK {
+			rec.RowsCount = len(rec.Rows)
+			rec.Lint = LintResult{OK: true, Issues: []string{}}
+			lintPage(schema, &rec)
+		}
+		nb, _ := json.Marshal(rec)
+		lines = append(lines, nb)
+	}
+	f.Close()
+	if err := sc.Err(); err != nil {
+		return err
+	}
+
+	out := bytes.Join(lines, []byte("\n"))
+	if len(out) > 0 {
+		out = append(out, '\n')
+	}
+	if err := os.WriteFile(opt.out, out, 0o644); err != nil {
+		return err
+	}
+	fmt.Fprintf(os.Stderr, "relint: přepočítáno %d řádků dle schématu %q.\n", len(lines), schema.Typ)
+	return runReport(opt.out)
+}
+
 // runReport přečte JSONL a vytvoří report.json + report.txt vedle něj.
 func runReport(jsonlPath string) error {
 	f, err := os.Open(jsonlPath)

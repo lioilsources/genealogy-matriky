@@ -258,7 +258,7 @@ func extractMarriage(c map[string]string) (eventRow, []mentionRow) {
 		p, gf, gm := parsePersonCell(brideCell)
 		p.Sex = "f"
 		if p.Place == "" {
-			p.Place, _ = splitPlaceHouse(c["nevesta_misto_zrozeni"])
+			p.Place, _ = splitPlaceHouse(firstNonEmpty(c["nevesta_misto_narozeni"], c["nevesta_misto_zrozeni"]))
 		}
 		if st, ok := maritalWords[foldASCII(strings.TrimSpace(c["nevesta_stav"]))]; ok && p.MaritalStatus == "" {
 			p.MaritalStatus = st
@@ -269,7 +269,7 @@ func extractMarriage(c map[string]string) (eventRow, []mentionRow) {
 			m.Extra = map[string]string{"birth_date": d.ISO, "birth_date_precision": d.Precision}
 		}
 		if m.Raw == "" {
-			m.Raw = strings.TrimSpace(strings.Join([]string{c["nevesta_misto_zrozeni"], c["nevesta_datum_narozeni"], c["nevesta_stav"]}, " | "))
+			m.Raw = strings.TrimSpace(strings.Join([]string{firstNonEmpty(c["nevesta_misto_narozeni"], c["nevesta_misto_zrozeni"]), c["nevesta_datum_narozeni"], c["nevesta_stav"]}, " | "))
 		}
 		out = append(out, m)
 		out = appendParents(out, "nevesta", gf, gm)

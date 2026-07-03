@@ -12,8 +12,10 @@ LIMIT    ?= 0
 # SCHEMA prázdné = dle meta.typ.
 OUT      ?=
 SCHEMA   ?=
+SPLIT    ?=
 OUTFLAG    := $(if $(strip $(OUT)),--out "$(strip $(OUT))",)
 SCHEMAFLAG := $(if $(strip $(SCHEMA)),--schema "$(strip $(SCHEMA))",)
+SPLITFLAG  := $(if $(strip $(SPLIT)),--split $(strip $(SPLIT)),)
 
 BASEURL  ?= http://192.168.88.66:8080
 MODEL    ?= ocr
@@ -39,7 +41,7 @@ build: ## Přeložit nástroj
 
 ocr: build ## OCR na IN (MODE, rozsah START..END); structured → ocr-out/<typ>/<kniha>.jsonl
 	./$(BIN) --in "$(IN)" --mode $(MODE) $(OUTFLAG) $(SCHEMAFLAG) \
-		--start $(START) --end $(END) --limit $(LIMIT) \
+		--start $(START) --end $(END) --limit $(LIMIT) $(SPLITFLAG) \
 		--base-url $(BASEURL) --model $(MODEL) --delay $(DELAY) --timeout $(TIMEOUT) \
 		--retries $(RETRIES) --max-tokens $(MAXTOK) --max-side $(MAXSIDE) $(FORCEFLAG)
 

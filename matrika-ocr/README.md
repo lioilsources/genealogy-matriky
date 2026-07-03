@@ -9,6 +9,8 @@ sbírá výstup do **JSONL** (řádek na sken). Dva režimy:
   **lintem** a uloží do `ocr-out/<typ>/<kniha>.jsonl`.
 - **`transcribe`** — prostý přepis celé stránky do pole `text`.
 - **`report`** — jen přepočítá report nad hotovým JSONL.
+- **`relint`** — přepočítá per-page lint dle schématu nad hotovým JSONL a spustí
+  report. Užitečné pro ručně/externě psaný JSONL (viz OCR přes Claude/Max níže).
 
 Navrženo tak, aby backend (1 GPU / 1 request) nepřetěžovalo: sekvenčně
 (`--concurrency 1`), pauza mezi requesty, retry s backoffem, resume.
@@ -85,6 +87,21 @@ ručně — OCR ručně psané češtiny (kurent) není 100%.
 | `--delay` / `--timeout` / `--retries` | 1500ms / 180s / 3 | tempo a odolnost |
 | `--max-side` | 0 | volitelný downscale delší strany (0 = vypnuto) |
 | `--force` | false | obejít pre-flight kontrolu ne-Qwen modelu |
+
+## OCR přes Claude/Max (varianta bez Qwenu)
+
+Qwen na hustém ručně psaném kurentu chybuje (mele sloupce, vynechává nevěstu,
+komolí jména/data). Alternativa: skeny přepíše **Claude** (v rámci Max
+subscription přes Claude Code) přímo do JSONL ve stejném schématu — kvalita je
+výrazně vyšší (zachytí ženicha i nevěstu, rodiče, čísla domů, data). Postup:
+
+1. Claude přečte skeny a zapíše `rows[]` do `ocr-out/<typ>/<kniha>.jsonl`.
+2. `matrika-ocr --mode relint --in "<kniha>" --out <jsonl>` dopočítá lint dle
+   schématu a vytvoří report.
+
+Není to headless dávka — jede po částech (limity Max, velikost skenů), ale data
+jsou přesnější. `--split lr` (rozpůlení dvojstrany pro Qwen) se neosvědčilo
+(pravá půlka bez čísel/jmen vrací prázdno), je vypnuté.
 
 ## Poznámky
 

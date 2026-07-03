@@ -9,13 +9,21 @@
     {"key": "misto_oddavek", "label": "Místo oddávek", "group": ""},
     {"key": "datum_ohlasek", "label": "Rok, měsíc a den – ohlášek", "group": "datum"},
     {"key": "datum_oddavek", "label": "Rok, měsíc a den – oddavek", "group": "datum"},
+
     {"key": "zenich_jmeno_stav_rodice", "label": "Ženich: jméno, stav a rodiče", "group": "zenich"},
     {"key": "zenich_misto_prebyvani", "label": "Ženich: místo přebývání, číslo domu", "group": "zenich"},
     {"key": "zenich_nabozenstvi", "label": "Ženich: náboženství (evang./katol.)", "group": "zenich"},
+    {"key": "zenich_misto_narozeni", "label": "Ženich: místo zrození", "group": "zenich"},
+    {"key": "zenich_datum_narozeni", "label": "Ženich: rok, měsíc a den narození", "group": "zenich"},
+    {"key": "zenich_stav", "label": "Ženich: stav (svobodný/ovdovělý/rozvedený)", "group": "zenich"},
+
     {"key": "nevesta_jmeno_stav_rodice", "label": "Nevěsta: jméno, stav a rodiče", "group": "nevesta"},
-    {"key": "nevesta_misto_zrozeni", "label": "Nevěsta: místo zrození", "group": "nevesta"},
+    {"key": "nevesta_misto_prebyvani", "label": "Nevěsta: místo přebývání, číslo domu", "group": "nevesta"},
+    {"key": "nevesta_nabozenstvi", "label": "Nevěsta: náboženství (evang./katol.)", "group": "nevesta"},
+    {"key": "nevesta_misto_narozeni", "label": "Nevěsta: místo zrození", "group": "nevesta"},
     {"key": "nevesta_datum_narozeni", "label": "Nevěsta: rok, měsíc a den narození", "group": "nevesta"},
     {"key": "nevesta_stav", "label": "Nevěsta: stav (svobodná/ovdovělá/rozvedená)", "group": "nevesta"},
+
     {"key": "svedkove", "label": "Svědkové: jméno, stav a místo přebývání", "group": ""},
     {"key": "poznamenani", "label": "Poznamenání", "group": ""}
   ]

@@ -40,6 +40,7 @@ type options struct {
 	mode        string // transcribe | structured | report
 	schemaPath  string
 	keepRaw     bool
+	split       string // "" = celý sken | "lr" = levá+pravá půlka zvlášť
 	baseURL     string
 	model       string
 	apiKey      string
@@ -88,9 +89,10 @@ func parseFlags() options {
 	fs := flag.NewFlagSet("matrika-ocr", flag.ExitOnError)
 	fs.StringVar(&opt.in, "in", "", "vstupní adresář se skeny (rekurzivně) [povinné]")
 	fs.StringVar(&opt.out, "out", "out.jsonl", "výstupní JSONL soubor (structured: auto ocr-out/<typ>/<kniha>.jsonl)")
-	fs.StringVar(&opt.mode, "mode", "transcribe", "režim: transcribe | structured | report")
+	fs.StringVar(&opt.mode, "mode", "transcribe", "režim: transcribe | structured | report | relint")
 	fs.StringVar(&opt.schemaPath, "schema", "", "cesta ke schématu (structured; jinak dle meta.typ)")
 	fs.BoolVar(&opt.keepRaw, "keep-raw", true, "ukládat surovou odpověď modelu (structured)")
+	fs.StringVar(&opt.split, "split", "", "rozdělení skenu: \"\" = celý | lr = levá+pravá půlka zvlášť (dvojstrana)")
 	fs.StringVar(&opt.baseURL, "base-url", "http://192.168.88.66:8080", "base URL OCR gateway")
 	fs.StringVar(&opt.model, "model", "ocr", "název modelu")
 	fs.StringVar(&opt.apiKey, "api-key", "", "volitelný Bearer token (když gateway vyžaduje)")
@@ -111,7 +113,7 @@ func parseFlags() options {
 	_ = fs.Parse(os.Args[1:])
 	opt.in = strings.TrimSpace(opt.in)
 
-	if opt.mode != "report" && opt.in == "" {
+	if opt.mode != "report" && opt.mode != "relint" && opt.in == "" {
 		fmt.Fprintln(os.Stderr, "chyba: --in je povinné")
 		fs.Usage()
 		os.Exit(2)
@@ -122,6 +124,9 @@ func parseFlags() options {
 func run(opt options) error {
 	if opt.mode == "report" {
 		return runReport(opt.out)
+	}
+	if opt.mode == "relint" {
+		return runRelint(opt)
 	}
 
 	// Structured: načti meta (typ) + schéma, odvoď výstupní cestu, postav prompt.
