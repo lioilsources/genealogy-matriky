@@ -23,8 +23,8 @@ export default function AnalyticsPage({ onOpenPerson }: AnalyticsPageProps) {
 
   useEffect(() => {
     const kinds = [
-      'timeline', 'surnames', 'lifespan', 'marriage-age', 'seasonality', 'migration',
-      'family-size', 'top-families', 'marriages-per-person', 'remarriages',
+      'summary', 'timeline', 'surnames', 'lifespan', 'marriage-age', 'seasonality', 'migration',
+      'family-size', 'top-families', 'marriages-per-person', 'remarriages', 'legitimacy',
     ]
     kinds.forEach((k) => api.analytics(k).then((rows) => setData((d) => ({ ...d, [k]: rows }))))
   }, [])
@@ -34,6 +34,33 @@ export default function AnalyticsPage({ onOpenPerson }: AnalyticsPageProps) {
   return (
     <div className="analytics">
       <div className="grid">
+        <Card title="Souhrn (celý přepsaný soubor)" rows={data['summary']}>
+          {(() => {
+            const s = (data['summary'] ?? [])[0] ?? {}
+            const legit = Number(s.manzelske_deti ?? 0)
+            const illeg = Number(s.nemanzelske_deti ?? 0)
+            const tot = legit + illeg
+            const pct = tot ? ((illeg / tot) * 100).toFixed(1) : '0'
+            const items: [string, React.ReactNode][] = [
+              ['osob ve stromu', s.osoby],
+              ['narození', s.narozeni],
+              ['sňatků', s.snatky],
+              ['úmrtí', s.umrti],
+              ['vazeb rodič–dítě', s.vazby_rodic_dite],
+              ['manželské děti', legit],
+              ['nemanželské děti', illeg],
+              ['% nemanželských', `${pct} %`],
+            ]
+            return (
+              <div className="statgrid">
+                {items.map(([k, v]) => (
+                  <div key={k} className="stat"><b>{v ?? '—'}</b><span>{k}</span></div>
+                ))}
+              </div>
+            )
+          })()}
+        </Card>
+
         <Card title="Události v čase" rows={data['timeline']}>
           <ResponsiveContainer width="100%" height={220}>
             <LineChart data={data['timeline']}>
@@ -139,6 +166,20 @@ export default function AnalyticsPage({ onOpenPerson }: AnalyticsPageProps) {
               <Bar dataKey="snatky" name="sňatků celkem" fill="#898781" radius={[4, 4, 0, 0]} />
               <Bar dataKey="vdovci" name="ženich vdovec" fill={C.male} radius={[4, 4, 0, 0]} />
               <Bar dataKey="vdovy" name="nevěsta vdova" fill={C.female} radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </Card>
+
+        <Card title="Manželské vs. nemanželské děti (po dekádách)" rows={data['legitimacy']}>
+          <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={data['legitimacy']}>
+              <CartesianGrid stroke={GRID} vertical={false} />
+              <XAxis dataKey="name" tick={{ fontSize: 11, fill: INK2 }} />
+              <YAxis tick={{ fontSize: 11, fill: INK2 }} width={32} allowDecimals={false} />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="manzelske" name="manželské" stackId="a" fill={C.marriage} radius={[0, 0, 0, 0]} />
+              <Bar dataKey="nemanzelske" name="nemanželské" stackId="a" fill={C.death} radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </Card>

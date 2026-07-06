@@ -111,6 +111,25 @@ var analyticsQueries = map[string]string{
 		SUM(CASE WHEN type='marriage' THEN 1 ELSE 0 END) AS marriage,
 		SUM(CASE WHEN type='death' THEN 1 ELSE 0 END) AS death
 		FROM events WHERE year IS NOT NULL GROUP BY year ORDER BY year`,
+
+	// manželské vs. nemanželské děti po dekádách (dle sloupce dite_manzelske)
+	"legitimacy": `SELECT e.year/10*10 AS name,
+		SUM(CASE WHEN m.marital_status='manzelsky' THEN 1 ELSE 0 END) AS manzelske,
+		SUM(CASE WHEN m.marital_status='nemanzelsky' THEN 1 ELSE 0 END) AS nemanzelske
+		FROM mentions m
+		JOIN events e ON e.record_id = m.record_id AND e.type='birth' AND e.year IS NOT NULL
+		WHERE m.role='dite' AND m.marital_status IN ('manzelsky','nemanzelsky')
+		GROUP BY name ORDER BY name`,
+
+	// souhrnná statistika (jediný řádek s celkovými počty)
+	"summary": `SELECT
+		(SELECT COUNT(*) FROM persons) AS osoby,
+		(SELECT COUNT(*) FROM events WHERE type='birth') AS narozeni,
+		(SELECT COUNT(*) FROM events WHERE type='marriage') AS snatky,
+		(SELECT COUNT(*) FROM events WHERE type='death') AS umrti,
+		(SELECT COUNT(*) FROM relations WHERE type='parent_child') AS vazby_rodic_dite,
+		(SELECT COUNT(*) FROM mentions WHERE role='dite' AND marital_status='manzelsky') AS manzelske_deti,
+		(SELECT COUNT(*) FROM mentions WHERE role='dite' AND marital_status='nemanzelsky') AS nemanzelske_deti`,
 }
 
 // handleAnalytics vrací data pro grafy.

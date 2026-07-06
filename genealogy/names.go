@@ -288,6 +288,9 @@ var maritalWords = map[string]string{
 	"vdovec": "vdovec", "vdova": "vdova", "ovdovela": "vdova", "ovdovely": "vdovec",
 	"rozvedeny": "rozvedeny", "rozvedena": "rozvedena",
 	"manzelsky": "manzelsky", "nemanzelsky": "nemanzelsky",
+	// neutrum/femininum (u dětí: „manželské dítě")
+	"manzelske": "manzelsky", "nemanzelske": "nemanzelsky",
+	"manzelska": "manzelsky", "nemanzelska": "nemanzelsky",
 }
 
 var (
