@@ -41,14 +41,27 @@
 
 ### PŮVOD RODU: **KŘIVČICE** (Křiwčicz) — odtud Václav přišel do Olšan 1763.
 
-### Mezera Václav (∞1763) → Matěj (~1810) — částečně doplněno
-Václav Vořechovský se po sňatku 1763 usadil v **Olšanech** a měl tam děti (doloženo
-v Pchery 05, oddíl „Wolschan"): **Josephus ~1772** (index str.97), **Maria ~1788**
-(sken 0269, otec „Wenzl Worzechowsky, Salinger"), **Franciscus ~1789** (index str.530),
-Rozina. → **Matějův otec je některý z Václavových synů** (Josephus 1772 / Franciscus 1789).
-Mezera je tak už jen ~1 generace. **Zbývá:** najít Matějův křest (~1810–1815, oddíl
-Olšany v Pchery 05, pozdější blok — číslování obcí je nemonotónní, hledat cíleně)
-→ uvede přesně Matějova otce. Pozn.: pokud Matěj *1824+, je v Pchery 06 [11335].
+### Olšany č.7 = rodný GRUNT Vořechovských (od 1763 do 20. stol.)
+Rod seděl souvisle na statku **Olšany (Wolschan) č.7**, poddaní panství **Buštěhrad**.
+Postup od chalupníka k sedlákovi k horníkovi:
+- **Václav** (∞1763, „inquilinus/Häusler" = chalupník) — syn **Josef *1771** (Pchery 05,
+  sken 0008, Olšany č.7), dcery Maria *1785 (otec Jan/Johann, krejčí — bratr?), Maria *1788.
+- **Řídké zápisy 1789–1826** v Olšanech (rod přítomen, jen málo křtů — Pchery 05 celá
+  prohledána flotilou agentů: rod JEN v olšanském bloku, nikde jinde).
+- **Matěj Wořechowský STARŠÍ** — sedlák Olšany č.7, ∞ **Rozina roz. Nová** (z Hnidous č.4);
+  † před 1827. *(Zdroj: 1827/1830 zápisy jeho vnuků, Pchery 06 [11335] sken 0139/0143.)*
+- **Matěj Wořechowský MLADŠÍ** — sedlák (později havíř) Olšany č.7, syn Matěje st.,
+  ∞ **Marya roz. Jeřábková** (č.17) — děti Maří Magdalena *26.12.1827, Anna *19.1.1830.
+  → nejspíš **OTEC Josefa** (Karlova děda). Pozn.: dřívější čtení z Pchery 38 uvádělo
+  Matějovu ženu „Marie roz. Kyliešová ze Studňovsi č.17" — patrně TÁŽ žena (obojí č.17),
+  jen dvojí čtení příjmení (Jeřábková vs Kyliešová) — OVĚŘIT.
+
+### Souhrn linie (Olšany č.7)
+Jakub (Křivčice) → **Václav** (∞1763) → [řídké 1789–1826] → **Matěj st.** (∞ Rozina Nová)
+→ **Matěj ml.** (∞ Jeřábková/Kyliešová) → **Josef** (~1843) → **Karel *1867** → **Karel *1903** → dnes.
+Přímé generační propojení Václav↔Matěj st. není přes křest doloženo (řídké olšanské
+zápisy 1789–1826) — spojnicí je **kontinuita gruntu č.7**; ověřit lze z oddací knihy
+(sňatek Matěje st. ~1795–1805) nebo úmrtní (Matěj st. †<1827).
 
 ### Gen 1
 - **Matěj Vořechovský** — havíř, **Olšany (Volšany) č.7** ∞ **Marie roz. Kyliešová**
