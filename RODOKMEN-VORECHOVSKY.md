@@ -26,10 +26,20 @@
 
 ## 2. Doložený rodokmen
 
-### Gen 0 — nejstarší stopa (~1760–1771, přistěhovalec)
-- **Wenceslaus (Václav) Wořechovský** — sňatek ve farnosti Pchery ~1760–70
-  (index Pchery 26, oddaní, str. 53). Přiženil se → pochází z **jiné farnosti**
-  (proto tu nemá křest). Spojení s Matějem níže zatím neověřeno.
+### Gen -1 — nejstarší doložený (†před 1763)
+- **Jakub (Jacobus) Vořechovský** — inquilinus (chalupník), **Křivčice (Křiwčicz)**.
+  Zemřel před 1763. *(Zdroj: sňatek jeho syna Václava 1763, viz níže.)*
+
+### Gen 0 — příchod rodu do Olšan (1763)
+- **Václav (Wenceslaus) Vořechovský** — **pocházel z Křivčic (Křiwčicz)**, syn †Jakuba
+  V. — ∞ **6.11.1763** v pcherském kostele **Anna Podratzká** (dcera Jakuba Podratzkého,
+  sedláka z **Olšan**, panství Buštěhrad). → rod se **přiženil do Olšan**.
+  *(Zdroj: Pchery 04 [11333], oddaní, str. 53, sken 0172; příjmení psáno „Worzechowsky"
+  = Vořechovský, rz=ř.)* Poté olšanské křty Vořechovských od 1771 (Josephus).
+  Spojení Václava s Matějem (Gen 1) přes olšanské usazení; přímé generační propojení
+  ověřit z křtů 1771–1810 (Pchery 05).
+
+### PŮVOD RODU: **KŘIVČICE** (Křiwčicz) — odtud Václav přišel do Olšan 1763.
 
 ### Gen 1
 - **Matěj Vořechovský** — havíř, **Olšany (Volšany) č.7** ∞ **Marie roz. Kyliešová**

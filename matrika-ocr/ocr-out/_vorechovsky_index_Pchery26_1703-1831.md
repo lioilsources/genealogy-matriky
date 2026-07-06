@@ -79,6 +79,19 @@ Mapa O-indexu: 0114=R, 0120=T, 0121=U, **0122–0123=W/V**.
   „rodem z [obec]" = PŮVOD rodu před Pcherami. Str.53 (Wenceslaus) je nejnadějnější
   na odhalení mateřské farnosti.
 
+## ⭐⭐⭐ PŮVOD NALEZEN — sňatek Václava 1763 (Pchery 04, str.53, sken 0172)
+Index-odkaz „Worzedhofský/Worzechowsky Wenceslaus, Liber V str.53" = kniha
+**Pchery 04 [11333]** (kombin. 1752–1770), oddací oddíl (skeny ~0150–0190;
+str.53 = **sken 0172**, dole vpravo, „Ex pago Wolschan", 6.11.1763):
+> Wenceslaus, syn †**Jacoba Worzechowsky** (inquilinus), **oriundus ex pago Křiwčicz**
+> (Křivčice), ∞ Anna, dcera Jacoba Podratzkého, sedláka **ex pago Wolschan** (Olšany),
+> panství Buštěhrad. Pcherský kostel, 6.11.1763.
+→ **ROD PŘIŠEL Z KŘIVČIC.** Nová generace: **Jakub Vořechovský z Křivčic** (†<1763).
+(Ověřovací mapa oddílů Pchery 04: sken 0175=str.58–59 /1764/, 0185=str.78–79 /1769/,
+0200=zemřelí str.18 /1767/. Křty=přední část, oddaní ~0150–0190, zemřelí ~0191+.)
+→ DÁL: hledat Vořechovské v **Křivčicích** (jiná farnost — zjistit která) pro generace
+  před Jakubem; a v Pchery 05 (křty 1771+) ověřit děti Václava a spojení s Matějem.
+
 ## SHRNUTÍ LINIE (stav po indexu Pchery 26)
 - **Do 1703 rod v Pcherách NENÍ.** Nejstarší stopa: sňatek Worzedhofský Wenceslaus
   (~1760–70) + křty od Liber VI (1771: Josephus). → rod přišel do Olšan ~1760–1771.
