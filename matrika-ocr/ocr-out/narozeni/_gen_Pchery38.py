@@ -14,7 +14,7 @@ row = {
   "cislo": "", "datum_narozeni": "", "datum_krtu": "", "misto_dum": "Volšany č.7",
   "dite_jmeno": "Josef", "dite_pohlavi": "chlapec", "dite_manzelske": "manželské",
   "nabozenstvi": "katol.",
-  "otec_jmeno_stav": "Vořechovský Matěj, havíř z Volšan č.7",
+  "otec_jmeno_stav": "Vořechovský Matěj, havíř z Volšan č.7, syn Matěje Vořechovského, sedláka z Volšan č.7, a Roziny Nové z Hnidous č.4",
   "otec_bydliste": "Volšany č.7",
   "matka_jmeno_rodice": "Marie Vořechovská roz. Kyliešová ze Studňovsi č.17",
   "matka_bydliste": "Volšany č.7",

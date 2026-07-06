@@ -7,9 +7,9 @@ TS = "2026-07-04T12:00:00Z"
 
 # KANONICKÉ popisy prarodičů — byte-identické ve všech záznamech, aby je matcher
 # spároval do jednoho uzlu (jinak vzniká duplicitní děda/bába na každý záznam).
-DED_JOSEF   = "Josefa Vořechovského, domkáře z Volšan č.44, a Josefy Vořechovské roz. Kašíkové ze Zaječova"
-DED_BILEK   = "Františka Bílka, domkáře v Pcherách č.58, a Marie Bílkové roz. Landové ze Svinařova č.21"
-DED_ZELENKA = "Františka Zelenky, horníka z Pcher č.27, a Karly Zelenkové roz. Anýžové z Brandýska č.22"
+DED_JOSEF   = "Josefa Vořechovského, domkáře z Volšan č.44, a Josefy Kašíkové ze Zaječova č.36"
+DED_BILEK   = "Františka Bílka, domkáře v Pcherách č.58, a Marie Landové ze Svinařova č.21"
+DED_ZELENKA = "Františka Zelenky, horníka z Pcher č.27, a Karly Anýžové z Brandýska č.22"
 
 # rodiče (bohatá próza -> extract vytáhne i prarodiče); prarodičovská část identická
 OTEC_KAREL   = "Vořechovský Karel, horník v Pcherách, narozen 30.10.1867, syn " + DED_JOSEF
