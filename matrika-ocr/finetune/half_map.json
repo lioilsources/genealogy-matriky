@@ -1,0 +1,49 @@
+{
+  "_comment": "Mapa sloupec→půlka dvojstrany pro export trénovacích dat (L/R split). Klíč = typ, override per kniha (prefix názvu složky). Ověřeno vizuálně proti skenům: Kladno-ev 01 0006.jpg (oddani), Pchery 12 0003.jpg (narozeni). page_meta říká, na které půlce je v hlavičce rok/folio.",
+
+  "exclude_jsonl": [
+    "Pchery 38 [11367].jsonl",
+    "Pchery 52 [11476].jsonl",
+    "Pchery_predci.jsonl",
+    "Pchery_dcery_oddani.jsonl"
+  ],
+  "_exclude_reason": "Generované/ruční JSONL (_gen_*.py, ruční přepisy z okrajových poznámek) — nemají věrný vztah obrázek↔buňka, do tréninku nepatří.",
+
+  "val_books": ["Pchery 12 [11341]"],
+  "val_folio_tail": {"Kladno-ev 01 [8386]": 10},
+  "_val_comment": "val = celé Pchery 12 + posledních N folií Kladno-ev 01 (split po blocích, ne náhodně po stránkách — leakage).",
+
+  "typy": {
+    "oddani": {
+      "left": [
+        "cislo", "jmeno_oddavajiciho", "misto_oddavek", "datum_ohlasek", "datum_oddavek",
+        "zenich_jmeno_stav_rodice", "zenich_misto_prebyvani", "zenich_nabozenstvi",
+        "nevesta_jmeno_stav_rodice", "nevesta_misto_prebyvani", "nevesta_nabozenstvi"
+      ],
+      "right": [
+        "zenich_misto_narozeni", "zenich_datum_narozeni", "zenich_stav",
+        "nevesta_misto_narozeni", "nevesta_datum_narozeni", "nevesta_stav",
+        "svedkove", "poznamenani"
+      ],
+      "rok": "left",
+      "folio": "right",
+      "hint_left": "\n\n(Toto je LEVÁ polovina rozevřené dvojstrany — číslo, oddávající, místo a data oddavek, a jména/stav/rodiče. Pole, která na této polovině nevidíš, nech prázdná.)",
+      "hint_right": "\n\n(Toto je PRAVÁ polovina rozevřené dvojstrany — místo zrození, datum narození, stav (svobodný/ovdovělý/rozvedený), svědkové a poznamenání. Pole, která na této polovině nevidíš, nech prázdná.)"
+    },
+    "narozeni": {
+      "left": [
+        "cislo", "datum_narozeni", "datum_krtu", "krtitel", "dite_jmeno",
+        "nabozenstvi", "dite_pohlavi", "dite_manzelske",
+        "otec_jmeno_stav", "otec_bydliste"
+      ],
+      "right": [
+        "matka_jmeno_rodice", "matka_bydliste", "misto_dum",
+        "kmotri", "babka", "poznamenani"
+      ],
+      "rok": "right",
+      "folio": "right",
+      "hint_left": "\n\n(Toto je LEVÁ polovina rozevřené dvojstrany — datum narození a křtu, křtitel, jméno dítěte, náboženství, pohlaví, manželskost a otec. Pole, která na této polovině nevidíš, nech prázdná.)",
+      "hint_right": "\n\n(Toto je PRAVÁ polovina rozevřené dvojstrany — matka a její rodiče, místo a číslo domu, kmotři, porodní bába a poznamenání. Pole, která na této polovině nevidíš, nech prázdná.)"
+    }
+  }
+}

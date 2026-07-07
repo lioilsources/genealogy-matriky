@@ -29,3 +29,8 @@ meta.json
 
 # OS
 .DS_Store
+
+# fine-tuning dataset (velké, generovatelné z ocr-out) + python venv
+/matrika-ocr/finetune/dataset/
+/matrika-ocr/finetune/.venv/
+__pycache__/
