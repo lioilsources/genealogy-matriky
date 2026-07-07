@@ -9,9 +9,14 @@ Claude (teacher) ─OCR→ ocr-out/*.jsonl ─export→ dataset/ ─Unsloth QLoR
       └──────────── eval_cer.py (CER/field) ◀── vLLM serve ◀───┘
 ```
 
+> **Krok-za-krokem průvodce: [how-to.md](how-to.md).** Všechny kroky mají make cíle
+> (`make help`); níže je referenční popis.
+
 ## Soubory
 | Soubor | Účel |
 |---|---|
+| `Makefile` | make cíle pro celý workflow (venv/dataset/qa/push/train/serve/eval) |
+| `how-to.md` | podrobný průvodce krok za krokem vč. troubleshootingu |
 | `half_map.json` | mapa sloupec→půlka dvojstrany per typ/kniha, exclude, val split |
 | `common.py` | prompt builder (1:1 s `schema.go`), půlení (1:1 se `split.go`), utility |
 | `export_pages.py` | fáze A: JSONL GT → vzorky půlstran `{image, prompt, target}` |
@@ -23,9 +28,8 @@ Claude (teacher) ─OCR→ ocr-out/*.jsonl ─export→ dataset/ ─Unsloth QLoR
 ## 1) Export datasetu (na Macu)
 ```bash
 cd matrika-ocr/finetune
-python3 -m venv .venv && ./.venv/bin/pip install pillow opencv-python-headless numpy
-./.venv/bin/python export_pages.py           # → dataset/pages_{train,val}.jsonl + contact_sheets/
-./.venv/bin/python export_rows.py            # → dataset/rows_{train,val}.jsonl + debug_rows/
+make venv && make dataset      # → dataset/{pages,rows}_{train,val}.jsonl + QA výstupy
+make qa                        # otevřít kontaktní archy + debug detekce
 ```
 **QA:** projít `dataset/contact_sheets/` (target vedle obrázku) a `dataset/debug_rows/`
 (detekce pásů). Splity jsou po knihách/foliích (`splits/*.txt`, žádný page-level leakage).
@@ -39,21 +43,20 @@ Formát vzorku (JSONL řádek):
 
 ## 2) Trénink na Sparku (Unsloth QLoRA)
 ```bash
-rsync -a dataset train_unsloth.py spark:~/matriky-ft/
-# na Sparku (Unsloth playbook container, viz https://build.nvidia.com/spark):
-sync && sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'    # playbook: flush UMA cache
-python3 train_unsloth.py --data dataset --max-steps 20 --output out/dryrun   # dry-run: loss ↓?
-python3 train_unsloth.py --data dataset --epochs 2 --merge --output out/qwen-matriky-lora
+make push                    # [Mac] rsync dataset + skript na Spark
+make dryrun                  # [Spark] 20 kroků — loss musí klesat
+make train                   # [Spark] plný běh + merge bf16 pro vLLM
 ```
+(Unsloth playbook container, viz https://build.nvidia.com/spark; make cíle samy
+flushují UMA buffer cache mezi běhy.)
 7B + QLoRA ≈ 20–30 GB z 128 GB UMA; ~1–2k vzorků × 2 epochy = řádově hodiny.
 Loss se počítá jen na assistant tokenech; ViT zmrazený.
 
 ## 3) Nasazení + eval
 ```bash
-vllm serve out/qwen-matriky-lora-merged --served-model-name qwen-matriky   # na Sparku
-# baseline vs. tuned (z Macu):
-./.venv/bin/python eval_cer.py --url http://spark:8000/v1 --model Qwen/Qwen2.5-VL-7B-Instruct --out report_base.json
-./.venv/bin/python eval_cer.py --url http://spark:8000/v1 --model qwen-matriky --out report_tuned.json
+make serve                                   # [Spark] vLLM s merged modelem
+make eval-base URL=http://spark:8000/v1     # [Mac] baseline → report_base.json
+make eval-tuned URL=http://spark:8000/v1    # [Mac] tuned → report_tuned.json
 ```
 Nasadit jen pokud tuned **porazí base** na val CER/field-exact. Pak v `matrika-ocr`
 přepnout URL/model a jet hromadné OCR žákem.
