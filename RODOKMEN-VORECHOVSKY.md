@@ -76,12 +76,13 @@ zápisy 1789–1826) — spojnicí je **kontinuita gruntu č.7**; ověřit lze z
 - **Karel Vořechovský** *30.10.1867 Olšany, horník ∞ 6./9.9.1890 **Marie roz. Bílková**
   (*4.8.1870 Pchery; dcera Františka Bílka, domkáře v Pcherách, a Marie roz. Landové
   ze Svinařova č.21).
-- **Bedřich Vořechovský** *7.12.1874 Olšany, horník ∞ 7.8.1897 **Marie roz. Zelenková**
-  (*26.11.1876 Pchery; dcera Františka Zelenky, horníka z Pcher č.27, a Karly roz.
-  Anýžové z Brandýska č.22).
+- **Bedřich Vořechovský** *7.12.1874 Olšany, horník ∞ **7.8.1897 Pchery** **Marie roz. Zelenková**
+  (*26.7.1876 Pchery; dcera Františka Zelenky, horníka z Pcher č.27, a Karolíny roz.
+  Anýžové z Brandýska č.22). *(Oddací záznam Pchery 59 sken 0005 č.9 — svědci Karel a Antonín V.)*
 - **Anna Vořechovská** ∞ František Šanda (horník, Pchery č.16).
-- pravděpodobně **Antonín**, **Jan**, **František** Vořechovští — horníci z Olšan/Pcher
-  (vystupují jako kmotři; Jan havíř Pchery č.7 ~1868).
+- **Antonín Vořechovský** — horník z Volšan, **potvrzen jako bratr** (svědek na Bedřichově
+  sňatku 1897, spolu s Karlem). Dále pravděpodobně **Jan**, **František** V. (kmotři; Jan
+  havíř Pchery č.7 ~1868).
 
 ### Gen 4a — děti Karla (*1867) × Marie Bílkové (nar. v Pcherách)
 | Dítě | *nar. | pozn. |
@@ -101,6 +102,16 @@ zápisy 1789–1826) — spojnicí je **kontinuita gruntu č.7**; ověřit lze z
 Josefa 29.8.1897 (†1899), Anna 15.7.1898 (†1898), Anna 10.7.1900 (∞1918 R. Vána),
 Josefa 14.6.1901, Václav 24.9.1902 (†1903), Marie 25.1.1904 (†1904),
 Julie 1.5.1905 (†1905), Františka 2.4.1906, František Josef 29.9.1907.
+
+### Rody manželů dcer (dohledáno v Pchery 59, O 1918)
+- **Václav Šedivý** (∞ Anna dcera Karla, **8.12.1918 Pchery**) — hutník Humny č.26,
+  *26.1.1895 Rozdělov č.139, katol. → syn **†Václava Šedivého st.** (hutník Rozdělov č.159)
+  a **Marie roz. Belšánové z Dubí**. Křest. list děk. úřad Kladno. *(Svědek Oldřich V., bratr.)*
+- **Rudolf Váňa** (∞ Anna dcera Bedřicha, **19.8.1918 Pchery**) — horník Pchery č.16,
+  *6.2.1894 Netovice č.7 (far. Smečno), katol. → syn **†Františka Váni** (horník Pchery č.16)
+  a **Barbory roz. Faktorové**.
+- **Anna Šimková** (∞ Oldřich V., ~1920, Dubí) — *28.12.1902 Dubí. Sňatek NENÍ v Pchery 59
+  (konal se ve farnosti nevěsty); rod Šimků z Dubí zatím nedohledán.
 
 ### Gen 5
 - **Karel Vořechovský** *5.2.1903 ∞ 13.4.1929 (evangelicky, Kladno)
@@ -132,6 +143,7 @@ Formát: `Kniha [matrikaId] — typ, roky — výsledek`. „0" = žádný Voře
 | **Pchery 38 [11367]** | N Olšany 1866–1878 | **Karel *1867, Bedřich *1874, Anna *1871 → Matěj+rodiče** |
 | Pchery 40 [11369] | N 1859–1885 (jen Pchery) | přímo 0; kmotr Jan V. (havíř Pchery č.7, ~1868); Anna roz. V. z Dřínova č.15 (jiná linie) |
 | **Pchery 52 [11476]** | N 1885–1908 (jen Pchery) | **JÁDRO: 20 záznamů, obě větve (Karel, Bedřich) i s rodiči/prarodiči** |
+| **Pchery 59 [11483]** | O 1896–1919 (celé pročteno) | **∞Bedřich 1897 (sken 0005); ∞Anna×Šedivý 8.12.1918 (0065); ∞Anna×Váňa 19.8.1918 (0064) → rody Šedivý+Váňa;** Bedřich svědkem 1908. Sňatky Oldřicha NENÍ (Dubí). |
 
 ### Evangelický sbor Kladno (českobratrský/reformovaný)
 | Kniha | Typ / roky | Výsledek |
