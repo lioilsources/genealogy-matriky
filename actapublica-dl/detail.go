@@ -7,26 +7,30 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
-	"strconv"
 	"strings"
 )
 
 // bookDetail je obsah stránky detailu jedné knihy: jp2 cesty (pořadí skenů)
-// + metadata.
+// + metadata. Pole jsou parsovaná ze dvou ověřených částí stránky (živé
+// měření na obec_id=2787):
+//   - <div id="matrika-header"> — číslo knihy, původce, hlavní i indexové
+//     rozsahy N/O/Z (čistý markup, žádné vnořené tabulky)
+//   - technická tabulka (#pill_data_extra) — vazba/jazyk/poznámka/svazek/
+//     typ původce a seznam obcí s okresem (odkazy na hledani_obec?obec_id=)
 type bookDetail struct {
 	DetailID       string
 	BookNo         string
-	Name           string // krátký název fondu/farnosti (z <title>)
+	Name           string // = Původce, použito i jako název složky
 	Typ            string
 	RecordRanges   map[string]*string // narozeni/oddani/umrti/rejstrik -> "1785-1949" | nil
 	District       string
 	Provenance     string
 	ProvenanceType string
+	ObecID         string // obec_id první lokality (fallback, když uživatel nezadal -obec)
 	Volume         string
 	Binding        string
 	Language       string
 	ProvenanceNote string
-	Sheets         int
 	Localities     []string
 	Note           string
 	JP2Paths       []string // pořadí = pořadí skenů (z CreateSeadragon, NE z čísel v názvu)
@@ -38,15 +42,32 @@ func detailURL(id string) string {
 
 var (
 	// jp2 cesty jsou v Deepzoom=<path>.jp2.dzi uvnitř JS pole CreateSeadragon(...),
-	// s escapovanými lomítky (\/) — ověřeno v návrhu (viz README, sekce "Co je ověřeno").
+	// s escapovanými lomítky (\/).
 	reDeepzoom = regexp.MustCompile(`Deepzoom=([^"']+\.jp2)\.dzi`)
-	reTitleTag = regexp.MustCompile(`(?is)<title[^>]*>(.*?)</title>`)
-	reYearSpan = regexp.MustCompile(`\d{4}\s*[-–]\s*\d{4}`)
+
+	// <span class="small font-italic">LABEL</span><br><span class="font-weight-bolder">VALUE</span>
+	reHeaderField = func(label string) *regexp.Regexp {
+		return regexp.MustCompile(`(?is)small font-italic">\s*` + regexp.QuoteMeta(label) +
+			`\s*</span>\s*<br>\s*<span class="font-weight-bolder">(.*?)</span>`)
+	}
+	// "LABEL:" <span class="d-inline-block" ...>VALUE</span> — hlavní i indexové N/O/Z v hlavičce.
+	reHeaderRange = func(label string) *regexp.Regexp {
+		return regexp.MustCompile(`(?is)` + regexp.QuoteMeta(label) + `:\s*<span class="d-inline-block"[^>]*>\s*(.*?)\s*</span>`)
+	}
+	// jednoduché řádky technické tabulky: <td class="table-item-label">LABEL</td><td class="table-item-value...">VALUE</td>
+	reTableField = func(label string) *regexp.Regexp {
+		return regexp.MustCompile(`(?is)<td class="table-item-label">\s*` + regexp.QuoteMeta(label) +
+			`\s*</td>\s*<td class="table-item-value[^"]*">(.*?)</td>`)
+	}
+	// Typ původce je vedlejší hodnota (<small><em>) v řádku Původce/Typ původce.
+	reProvenanceType = regexp.MustCompile(`(?is)Typ původce.*?</td>\s*<td class="table-item-value[^"]*">.*?<br>\s*<small><em>(.*?)</em></small>`)
+	// obce a jiné lokality: <a href=".../hledani_obec?obec_id=N" ...>Název (aliasy)[, obec: X], okres: Y</a>
+	reLocalityLink = regexp.MustCompile(`(?is)hledani_obec\?obec_id=(\d+)"[^>]*>(.*?)</a>`)
+	reOkresSuffix  = regexp.MustCompile(`(?i)okres:\s*(.+)$`)
 )
 
-// fetchDetail stáhne stránku detailu (http.Client sám následuje 302 —
-// "nutné následovat 302" z návrhu platí pro nástroje jako curl -I, ne pro
-// http.Client s výchozím nastavením) a vrátí jp2 cesty + metadata.
+// fetchDetail stáhne stránku detailu (http.Client sám následuje 302) a vrátí
+// jp2 cesty + metadata.
 func fetchDetail(client *http.Client, id string) (*bookDetail, error) {
 	htmlStr, err := fetchText(client, detailURL(id))
 	if err != nil {
@@ -63,68 +84,91 @@ func fetchDetail(client *http.Client, id string) (*bookDetail, error) {
 		return nil, fmt.Errorf("detail %s: v HTML nenalezen žádný Deepzoom .jp2 odkaz (CreateSeadragon) — "+
 			"stránka možná změnila strukturu, zkontroluj ručně %s", id, detailURL(id))
 	}
-	d.Name = extractTitle(htmlStr)
 	parseDetailMeta(htmlStr, d)
 	d.Typ = detectTyp(d.RecordRanges)
 	return d, nil
 }
 
-func extractTitle(htmlStr string) string {
-	m := reTitleTag.FindStringSubmatch(htmlStr)
-	if m == nil {
-		return ""
+func parseDetailMeta(htmlStr string, d *bookDetail) {
+	d.BookNo = headerField(htmlStr, "Číslo knihy")
+	d.Provenance = headerField(htmlStr, "Původce")
+	d.Name = d.Provenance
+
+	d.RecordRanges["narozeni"] = optionalRange(headerRange(htmlStr, "Narození"))
+	d.RecordRanges["oddani"] = optionalRange(headerRange(htmlStr, "Oddaní"))
+	d.RecordRanges["umrti"] = optionalRange(headerRange(htmlStr, "Zemřelí"))
+	idxNarozeni := headerRange(htmlStr, "Index narození")
+	idxOddani := headerRange(htmlStr, "Index oddaní")
+	idxZemreli := headerRange(htmlStr, "Index zemřelí")
+	if r := optionalRange(idxNarozeni); r != nil {
+		d.RecordRanges["rejstrik"] = r
+	} else if r := optionalRange(idxOddani); r != nil {
+		d.RecordRanges["rejstrik"] = r
+	} else if r := optionalRange(idxZemreli); r != nil {
+		d.RecordRanges["rejstrik"] = r
 	}
-	t := cleanText(m[1])
-	for _, sep := range []string{" | ", " — ", " – ", " - "} {
-		if i := strings.Index(t, sep); i > 0 {
-			t = t[:i]
+
+	d.Volume = tableField(htmlStr, "Číslo svazku")
+	d.Binding = tableField(htmlStr, "Vazba")
+	d.Language = tableField(htmlStr, "Jazyk")
+	d.Note = tableField(htmlStr, "Poznámka")
+	d.ProvenanceNote = tableField(htmlStr, "Poznámka o původci")
+	if mm := reProvenanceType.FindStringSubmatch(htmlStr); mm != nil {
+		d.ProvenanceType = cleanText(mm[1])
+	}
+
+	for _, lm := range reLocalityLink.FindAllStringSubmatch(htmlStr, -1) {
+		if d.ObecID == "" {
+			d.ObecID = lm[1]
 		}
+		text := cleanText(lm[2])
+		name := text
+		if om := reOkresSuffix.FindStringSubmatch(text); om != nil {
+			if d.District == "" {
+				d.District = strings.TrimSpace(om[1])
+			}
+			name = strings.TrimRight(text[:len(text)-len(om[0])], ", ")
+		}
+		d.Localities = append(d.Localities, name)
 	}
-	return strings.TrimSpace(t)
 }
 
-// parseDetailMeta doplní popisná metadata z volného textu stránky.
-//
-// POZOR: přesná struktura stránky Acta Publica nebyla v této relaci ověřena
-// naživo (síť je odsud blokovaná Cloudflare, browser extension nepřipojen).
-// Jde o obecný label/value scraper s vícejazyčnými/pravopisnými aliasy —
-// degraduje na prázdná pole (typ=unknown), nikdy na chybu. Po prvním
-// skutečném běhu (`make list`/`make download`) je potřeba zkontrolovat, jestli
-// labely níže odpovídají realitě, a případně je doplnit/opravit.
-func parseDetailMeta(htmlStr string, d *bookDetail) {
-	d.District = findLabel(htmlStr, "Okres", "District")
-	d.Provenance = findLabel(htmlStr, "Původce", "Provenance", "Fond")
-	d.ProvenanceType = findLabel(htmlStr, "Druh původce", "Typ původce")
-	d.Volume = findLabel(htmlStr, "Svazek", "Volume")
-	d.Binding = findLabel(htmlStr, "Vazba", "Binding")
-	d.Language = findLabel(htmlStr, "Jazyk", "Language")
-	d.ProvenanceNote = findLabel(htmlStr, "Poznámka k původci")
-	d.BookNo = findLabel(htmlStr, "Signatura", "Číslo knihy", "Sign.")
-	d.Note = findLabel(htmlStr, "Obecný popis", "Poznámka", "General description")
-	if s := findLabel(htmlStr, "Počet listů", "Number of sheets"); s != "" {
-		if n, err := strconv.Atoi(strings.TrimSpace(s)); err == nil {
-			d.Sheets = n
-		}
+func headerField(htmlStr, label string) string {
+	if mm := reHeaderField(label).FindStringSubmatch(htmlStr); mm != nil {
+		return cleanText(mm[1])
 	}
-	if loc := findLabel(htmlStr, "Lokality", "Obce", "Localities"); loc != "" {
-		for _, l := range strings.Split(loc, ",") {
-			if l = strings.TrimSpace(l); l != "" {
-				d.Localities = append(d.Localities, l)
-			}
-		}
-	}
+	return ""
+}
 
-	d.RecordRanges["narozeni"] = findYearRangeNear(htmlStr, "Narození", "Narozeni", "Křest", "Baptism", "Birth")
-	d.RecordRanges["oddani"] = findYearRangeNear(htmlStr, "Oddaní", "Oddani", "Sňatky", "Marriage")
-	d.RecordRanges["umrti"] = findYearRangeNear(htmlStr, "Úmrtí", "Umrti", "Zemřelí", "Death")
-	d.RecordRanges["rejstrik"] = findYearRangeNear(htmlStr, "Rejstřík", "Rejstrik", "Index")
+func headerRange(htmlStr, label string) string {
+	if mm := reHeaderRange(label).FindStringSubmatch(htmlStr); mm != nil {
+		return cleanText(mm[1])
+	}
+	return ""
+}
+
+func tableField(htmlStr, label string) string {
+	if mm := reTableField(label).FindStringSubmatch(htmlStr); mm != nil {
+		return cleanText(mm[1])
+	}
+	return ""
+}
+
+// optionalRange vrátí nil pro prázdnou hodnotu nebo "-" (žádný rozsah), jinak
+// ukazatel na normalizovaný rozsah "YYYY-YYYY".
+func optionalRange(s string) *string {
+	s = strings.TrimSpace(s)
+	if s == "" || s == "-" {
+		return nil
+	}
+	v := strings.Join(strings.Fields(s), " ")
+	return &v
 }
 
 // detectTyp určí typ podle vyplněných rozsahů — stejné pravidlo jako
 // detectTyp v root meta.go (počet vyplněných N/O/Z), rozšířené o "rejstrik":
 // když N/O/Z nejsou vyplněné vůbec, ale je vyplněný index-rozsah, typ je
-// "rejstrik" místo "unknown" (viz README — rejstříky patří do transcribe
-// režimu OCR, ne do strukturované extrakce).
+// "rejstrik" místo "unknown" (rejstříky patří do transcribe režimu OCR).
 func detectTyp(ranges map[string]*string) string {
 	var present []string
 	for _, key := range []string{"narozeni", "oddani", "umrti"} {
@@ -143,44 +187,6 @@ func detectTyp(ranges map[string]*string) string {
 	default:
 		return "kombinovana"
 	}
-}
-
-// findLabel hledá v HTML jeden z labelů následovaný hodnotou v nejbližším
-// dalším tagu (toleruje libovolný počet uzavíracích tagů mezi labelem a
-// hodnotou). Vrací první nalezenou neprázdnou shodu.
-func findLabel(htmlStr string, labels ...string) string {
-	for _, label := range labels {
-		re := regexp.MustCompile(`(?is)` + regexp.QuoteMeta(label) + `\s*:?\s*(?:</[a-zA-Z0-9]+>\s*)*<[^>]+>\s*([^<]{1,300}?)\s*<`)
-		if m := re.FindStringSubmatch(htmlStr); m != nil {
-			if v := cleanText(m[1]); v != "" {
-				return v
-			}
-		}
-	}
-	return ""
-}
-
-// findYearRangeNear hledá letopočtový rozsah ("1785-1949") v okolí výskytu
-// některého z labelů — proximity heuristika, odolnější vůči neznámému
-// značkování než přesná pozice tagu.
-func findYearRangeNear(htmlStr string, labels ...string) *string {
-	lower := strings.ToLower(htmlStr)
-	for _, label := range labels {
-		idx := strings.Index(lower, strings.ToLower(label))
-		if idx < 0 {
-			continue
-		}
-		end := idx + 400
-		if end > len(htmlStr) {
-			end = len(htmlStr)
-		}
-		if m := reYearSpan.FindString(cleanText(htmlStr[idx:end])); m != "" {
-			v := strings.Join(strings.Fields(m), "")
-			v = strings.ReplaceAll(v, "–", "-")
-			return &v
-		}
-	}
-	return nil
 }
 
 // --- Meta.json (nadmnožina root Meta — viz meta.go) ---
@@ -219,7 +225,7 @@ type Meta struct {
 	ScanFiles      []scanFileMeta `json:"scan_files,omitempty"`
 }
 
-// bookDisplayName je "<název> <číslo knihy>" — použito pro Meta.Name i pro
+// bookDisplayName je "<Původce> <číslo knihy>" — použito pro Meta.Name i pro
 // bookFolderName (jen s přidaným "[<detail id>]").
 func bookDisplayName(d *bookDetail) string {
 	name := d.Name
@@ -238,6 +244,9 @@ func bookFolderName(d *bookDetail) string {
 }
 
 func buildMeta(d *bookDetail, scans []scanFileMeta, obecID string) *Meta {
+	if obecID == "" {
+		obecID = d.ObecID
+	}
 	return &Meta{
 		ID:   d.DetailID,
 		Name: bookDisplayName(d),
@@ -249,7 +258,6 @@ func buildMeta(d *bookDetail, scans []scanFileMeta, obecID string) *Meta {
 		},
 		District:       d.District,
 		Provenance:     d.Provenance,
-		Sheets:         d.Sheets,
 		Scans:          len(scans),
 		Localities:     d.Localities,
 		Note:           d.Note,

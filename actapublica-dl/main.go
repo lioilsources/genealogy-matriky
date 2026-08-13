@@ -1,5 +1,5 @@
 // Command actapublica-dl stahuje naskenované matriky z Acta Publica
-// (https://actapublica.eu), digitálního archivu MZA Brno, do adresářové
+// (https://www.mza.cz/actapublica/), digitálního archivu MZA Brno, do adresářové
 // struktury "Nazev cislo [detail-id]/0001.jpg" — stejný kontrakt jako
 // ebadatelna-dl (root main.go/meta.go), ale jiný archiv/stack (PHP +
 // OpenSeadragon + IIPImage/IIIF místo Apache Wicket), proto samostatná
@@ -21,7 +21,7 @@ import (
 )
 
 const (
-	baseURL   = "https://actapublica.eu"
+	baseURL   = "https://www.mza.cz"
 	iipsrvURL = baseURL + "/iipsrv/iipsrv.fcgi"
 	userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " +
 		"(KHTML, like Gecko) Chrome/124.0 Safari/537.36"

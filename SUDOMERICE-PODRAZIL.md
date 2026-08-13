@@ -4,9 +4,10 @@
 > přivdané linie. Zatím **bez genealogických dat** — obsahuje inventář knih,
 > badatelskou strategii a roadmap; samotné stahování/OCR ještě neproběhlo.
 > Obdoba [`RODOKMEN-VORECHOVSKY.md`](RODOKMEN-VORECHOVSKY.md), jen v dřívější
-> fázi. Zdroj skenů: [actapublica.eu](https://actapublica.eu) (MZA Brno),
-> viewer `/actapublica/matrika/detail/{ID}`.
-> Stav: 2026-08. Nástroj: [`actapublica-dl/`](actapublica-dl/).
+> fázi. Zdroj skenů: [www.mza.cz/actapublica](https://www.mza.cz/actapublica/matrika)
+> (MZA Brno), viewer `/actapublica/matrika/detail/{ID}`.
+> Stav: 2026-08. Nástroj: [`actapublica-dl/`](actapublica-dl/) —
+> inventář níže ověřen živým `make list OBEC=2787`.
 
 ---
 
@@ -21,8 +22,8 @@
   Claude Max na Sonnetu → destilace do Qwen, přes existující
   `matrika-ocr/finetune/`). Tento dokument pátrání samo nezačíná — je to
   mapa pramenů pro toho, kdo stahování/OCR spustí.
-- `obec_id=2787` = Sudoměřice. **21 knih, ~4 060 skenů, 2 stránky výsledků**
-  hledání na Acta Publica.
+- `obec_id=2787` = Sudoměřice, okres Hodonín. **21 knih, 4 160 skenů, 2
+  stránky výsledků** hledání na Acta Publica (ověřeno `make list OBEC=2787`).
 
 ---
 
@@ -30,8 +31,11 @@
 
 | skupina | knihy (detail id) | skenů | poznámka |
 |---|---|---|---|
-| Jen Sudoměřice (Strážnice — Panny Marie) | 5224, 5225, 5226, 5227, 11495, 5235, 439, 12452, 5241, 5242, 5243, 12451, 5249 | 1 530 | N/O/Z 1785–1949 + rejstříky |
-| Farní, všechny vesnice (Strážnice — sv. Martin) | 5199, 5200, 5201, 5202, 5207, 5210, 9324, 10420 | 2 530 | 1629–1803, latinská próza |
+| Farní, všechny vesnice (Strážnice — sv. Martin) | 5199, 5200, 5201, 5202, 5207, 5210, 11495, 9324, 10420 | 2 628 | 1629–1917, farní zápisy (latina/čeština) |
+| Jen Sudoměřice (Strážnice — Panny Marie) | 5224, 5225, 5226, 5227, 5235, 439, 12452, 5241, 5242, 5243, 12451, 5249 | 1 532 | N/O/Z 1785–1949 + rejstříky (5249 = jen rejstřík) |
+
+Kniha **11495** (5811, N 1903–1917) patří ke **sv. Martin**, ne k Panny Marie
+— oprava proti první verzi tohoto dokumentu, která ji měla ve špatné skupině.
 
 Číslo v hranaté závorce v názvu složky (`Strážnice PM 5809 [5226]`) je
 **detail id** — z něj jde postavit odkaz zpátky do prohlížeče
@@ -87,9 +91,9 @@ OpenSeadragon + IIPImage/IIIF místo Apache Wicket) — proto samostatná
 utilita `actapublica-dl/` se stejným výstupním kontraktem
 (`Nazev [ID]/0001.jpg` + `meta.json`), který `matrika-ocr` a `genealogy`
 konzumují beze změny. Detaily endpointů, IIIF tiling (strop 2000 px/dlaždice)
-a co je v tomto směru ověřené vs. odvozené: viz
+a co je v tomto směru ověřené: viz
 [`actapublica-dl/README`](README.md#actapublica-dl-mza-brno) sekce
-"Co je (a co není) ověřené".
+"Co je ověřené".
 
 `genealogy/export.go` (`ebadatelnaURL`) dnes umí postavit odkaz do
 prohlížeče jen pro SOA Praha — až budou data z této obce v databázi, bude
@@ -105,13 +109,15 @@ sem patří (stejně jako v `RODOKMEN-VORECHOVSKY.md`) i **negativní nálezy**
 
 ## 6. Další kroky
 
-1. `cd actapublica-dl && make build && make list OBEC=2787` — ověřit inventář
-   (21 knih, ~4 060 skenů) proti tabulce v sekci 2.
-2. Stáhnout rejstříkové knihy (5249, a `5809`/`5825`/`5840` jde-li je stáhnout
-   samostatně) — cca 300 skenů, rychlý první průchod.
+1. ~~`cd actapublica-dl && make build && make list OBEC=2787` — ověřit inventář~~
+   — hotovo, inventář v sekci 2 je z živého běhu (21 knih, 4 160 skenů sedí).
+2. Stáhnout rejstříkovou knihu 5249 (81 skenů, `typ=rejstrik`, ověřeno) a
+   vevázané rejstříky v knihách 5809/5825/5840 (index-rozsahy, viz sekce 3) —
+   `make download ID=5249` + `-derive halves` u ostatních, cca 300 skenů,
+   rychlý první průchod.
 3. OCR rejstříků v `transcribe` režimu → seznam folií s výskytem Podrazilů
-   (a variant z bodu 3).
+   (a variant ze sekce 3).
 4. Podle folií cíleně stáhnout/OCR strukturované knihy (N/O/Z), pak farní
-   knihy 1629–1803 s filtrem na Sudoměřice/Strážnici.
-5. Průběžně doplňovat `genealogy/seed/name_variants.csv` a tuto sekci 5
+   knihy 1629–1917 s filtrem na Sudoměřice/Strážnici.
+5. Průběžně doplňovat `genealogy/seed/name_variants.csv` a sekci 5
    (prameny + negativní nálezy).

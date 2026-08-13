@@ -8,9 +8,10 @@ skenů až po interaktivní rodokmen:
   ([ebadatelna.soapraha.cz](https://ebadatelna.soapraha.cz)) v plném rozlišení
   a zapisuje `meta.json` (typ knihy, datace, lokality…).
 - **[`actapublica-dl/`](actapublica-dl/)** — totéž pro Acta Publica
-  ([actapublica.eu](https://actapublica.eu)), digitální archiv MZA Brno —
-  jiný stack (PHP + OpenSeadragon + IIIF/IIPImage), proto samostatná utilita
-  se stejným výstupním kontraktem (`meta.json`, `Nazev [ID]/0001.jpg`).
+  ([www.mza.cz/actapublica](https://www.mza.cz/actapublica/matrika)), digitální
+  archiv MZA Brno — jiný stack (PHP + OpenSeadragon + IIIF/IIPImage), proto
+  samostatná utilita se stejným výstupním kontraktem (`meta.json`,
+  `Nazev [ID]/0001.jpg`).
 - **[`matrika-ocr/`](matrika-ocr/)** — posílá skeny do OCR modelu (Qwen) a dělá
   strukturovanou extrakci do JSONL podle schématu sloupců + lint.
 - **[`genealogy/`](genealogy/)** — z JSONL staví SQLite databázi osob a vazeb
@@ -109,7 +110,8 @@ knihy (N+O+Z v jedné) se rozpoznají a označí `typ=kombinovana`.
 
 ## actapublica-dl (MZA Brno)
 
-Stahovač pro **Acta Publica** ([actapublica.eu](https://actapublica.eu)) —
+Stahovač pro **Acta Publica**
+([www.mza.cz/actapublica](https://www.mza.cz/actapublica/matrika)) —
 digitální archiv Moravského zemského archivu v Brně. Úplně jiný stack než
 `ebadatelna-dl` (PHP + OpenSeadragon + IIPImage/IIIF místo Apache Wicket),
 proto samostatný adresář s vlastním `go.mod`, ale stejný výstupní kontrakt
@@ -150,8 +152,8 @@ Nebo přímo:
 | `DERIVE`  | `-derive`    | `none`\|`halves` — OCR odvozeniny (L/R půlky ≤2576px pro `matrika-ocr`) | `none` |
 
 Kde vzít `obec_id`: v URL výsledků hledání na Acta Publica
-(`?typ=obec&obec_id=<ID>`). Detail id knihy je z výpisu (`make list`) nebo
-z URL `/matrika/detail/<ID>`.
+(`?typ=obec&obec_id=<ID>`, např. `www.mza.cz/actapublica/matrika/hledani?typ=obec&obec_id=2787`).
+Detail id knihy je z výpisu (`make list`) nebo z URL `/matrika/detail/<ID>`.
 
 ### Jak to funguje
 
@@ -177,19 +179,31 @@ z URL `/matrika/detail/<ID>`.
   strukturovaný N/O/Z rozsah) — patří do `transcribe` režimu OCR, ne do
   strukturované extrakce.
 
-### Co je (a co není) ověřené
+### Co je ověřené
 
-Endpointy, IIIF chování a regex na jp2 cesty (`Deepzoom=([^"]+\.jp2)\.dzi`)
-jsou z živého měření na `obec_id=2787` (Sudoměřice, okres Hodonín — farnost
-Strážnice, 21 knih, ~4060 skenů). **Mapování sloupců výsledků hledání**
-(`search.go`) a **scraping popisných polí stránky detailu** (`detail.go`,
-label/value heuristika) jsou odvozené/best-effort — přesná struktura HTML
-nebyla ověřena z prostředí, kde se to psalo (přímý HTTP přístup na
-`actapublica.eu` je odsud blokovaný Cloudflare bot-ochranou). Obě místa
-degradují bezpečně (prázdná pole / `typ: "unknown"`, nikdy pád), a `bookRow.Cells`
-nese syrové buňky řádku pro rychlou opravu mapování po prvním `make list`.
-Než spustíš plné stažení, ověř výstup `make list OBEC=<id>` a
-`make download ID=<id> PAGES=2` proti očekávání.
+Celá cesta je otestovaná end-to-end proti živému webu (ne jen naslepo podle
+dokumentace): `make list OBEC=2787` vrací přesně 21 knih se správnými
+rozsahy/počty skenů (`celkem: 21` sedí), `make download ID=5226 PAGES=1`
+stáhne stranu 1 knihy 5809 v nativním **6681×5121** beze švů na hranicích
+dlaždic (vizuálně zkontrolováno — jde skutečně o Knihu narozených,
+Sudoměřice, str. 1), `meta.json` má `book_no=5809`, `scans=167`,
+`typ=narozeni`, `district=Hodonín` a 167 `scan_files` s rozměry; kniha 5249
+(jen rejstřík) dostane `typ=rejstrik`; opakované stažení stejné strany ji
+přeskočí (resume); `-derive halves` vyprodukuje `ocr/0001-L.jpg`/`-R.jpg`
+≤2576px na delší straně.
+
+**Pozor, doménu jsem měl v prvním návrhu špatně** — ne `actapublica.eu`
+(to je Cloudflare-chráněná/nesouvisející doména, kterou blokuje i běžný
+prohlížeč), ale **`www.mza.cz/actapublica/…`**. `search.go`/`detail.go`
+teď parsují reálné HTML (sloupce tabulky, `<div id="matrika-header">`,
+`table-item-label`/`table-item-value` řádky, `hledani_obec?obec_id=`
+odkazy na lokality) změřené přímo na `obec_id=2787` — ne odvozené naslepo.
+
+Co ověřené není: chování na jiných `obec_id`/farnostech s odlišnou strukturou
+knihy (např. jiný počet sloupců, chybějící pole) — parsování je psané
+obecně (label/value, ne pevné pozice), ale žádná jiná obec zatím
+vyzkoušená nebyla. Pokud `make list`/`make download` na jiné obci vypadá
+divně, zkontroluj HTML ručně a přizpůsob `search.go`/`detail.go`.
 
 **Plné stažení nedělat v efemérním kontejneru** — desítky GB a data jsou
 v `.gitignore`. Doporučený lokální běh:

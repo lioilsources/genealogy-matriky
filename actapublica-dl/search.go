@@ -11,32 +11,37 @@ import (
 
 // bookRow je jeden řádek výsledků hledání (jedna kniha matriky).
 //
-// Mapování buněk (BookNo/Provenance/Ranges/Localities/ScanCount) je ODVOZENÉ
-// z pořadí polí v návrhu, ne ověřené na živém HTML (síť je z tohoto prostředí
-// blokovaná Cloudflare — viz README). Cells obsahuje syrové buňky řádku v
-// pořadí z tabulky, takže mapování jde po prvním `make list` rychle opravit.
+// Sloupce tabulky (ověřeno na živém HTML, obec_id=2787): Číslo knihy |
+// Původce (+ typ původce) | Narození od-do (+ index) | Oddaní od-do (+ index)
+// | Zemřelí od-do (+ index) | Obce (tlačítko s popoverem) | Počet snímků |
+// odkaz "Zobrazit".
 type bookRow struct {
-	DetailID   string
-	BookNo     string
-	Provenance string
-	Ranges     string
-	Localities string
-	ScanCount  int
-	Cells      []string
+	DetailID       string
+	BookNo         string
+	Provenance     string
+	ProvenanceType string
+	Narozeni       string
+	Oddani         string
+	Zemreli        string
+	Localities     []string
+	ScanCount      int
 }
 
 type searchMeta struct {
-	Header string // hlavička stránky (obec, okres…), pokud se ji podaří najít
+	Header string // hlavička hledání ("Sudoměřice (...), obec: ..., okres: ...")
 	Total  int    // "celkem: N" z patičky; 0 = nenalezeno
 }
 
 var (
-	// <tr ... onclick="window.location='…/matrika/detail/12345'" ...> … </tr>
-	reSearchRow = regexp.MustCompile(`(?is)<tr\b[^>]*\bonclick="window\.location='([^']*?/matrika/detail/(\d+))'"[^>]*>(.*?)</tr>`)
-	reCell      = regexp.MustCompile(`(?is)<t[dh]\b[^>]*>(.*?)</t[dh]>`)
+	reTbody     = regexp.MustCompile(`(?is)<tbody>(.*?)</tbody>`)
+	reRow       = regexp.MustCompile(`(?is)<tr>(.*?)</tr>`)
+	reCell      = regexp.MustCompile(`(?is)<td\b[^>]*>(.*?)</td>`)
+	reRowDetail = regexp.MustCompile(`matrika/detail/(\d+)`)
 	reCelkem    = regexp.MustCompile(`(?i)celkem[:\s]+(\d+)`)
 	reTag       = regexp.MustCompile(`<[^>]+>`)
-	reH1        = regexp.MustCompile(`(?is)<h1[^>]*>(.*?)</h1>`)
+	reDummyTag  = regexp.MustCompile(`(?is)<input\b[^>]*\bid="dummy"[^>]*>`)
+	reValueAttr = regexp.MustCompile(`(?is)\bvalue="([^"]*)"`)
+	reStrong    = regexp.MustCompile(`(?is)<strong>(.*?)</strong>`)
 )
 
 func searchURL(obecID string, page int) string {
@@ -44,7 +49,8 @@ func searchURL(obecID string, page int) string {
 }
 
 // listBooks projde všechny stránky hledání pro obec_id a vrátí všechny
-// nalezené knihy (20 řádků/stránka, končí na první prázdné stránce).
+// nalezené knihy (20 řádků/stránka, končí na první prázdné stránce nebo po
+// dosažení "celkem").
 func listBooks(client *http.Client, obecID string) ([]bookRow, searchMeta, error) {
 	var all []bookRow
 	var meta searchMeta
@@ -73,37 +79,47 @@ func parseSearchMeta(htmlStr string) searchMeta {
 	if mm := reCelkem.FindStringSubmatch(htmlStr); mm != nil {
 		m.Total, _ = strconv.Atoi(mm[1])
 	}
-	if mm := reH1.FindStringSubmatch(htmlStr); mm != nil {
-		m.Header = cleanText(mm[1])
+	// hlavička hledání: <input ... id="dummy" value="Sudoměřice (...), obec: ..., okres: ..." disabled>
+	if tag := reDummyTag.FindString(htmlStr); tag != "" {
+		if mm := reValueAttr.FindStringSubmatch(tag); mm != nil {
+			m.Header = html.UnescapeString(mm[1])
+		}
 	}
 	return m
 }
 
 func parseSearchRows(htmlStr string) []bookRow {
+	tb := reTbody.FindStringSubmatch(htmlStr)
+	if tb == nil {
+		return nil
+	}
 	var rows []bookRow
-	for _, m := range reSearchRow.FindAllStringSubmatch(htmlStr, -1) {
-		detailID := m[2]
-		var cells []string
-		for _, cm := range reCell.FindAllStringSubmatch(m[3], -1) {
-			cells = append(cells, cleanText(cm[1]))
+	for _, rm := range reRow.FindAllStringSubmatch(tb[1], -1) {
+		rowHTML := rm[1]
+		dm := reRowDetail.FindStringSubmatch(rowHTML)
+		if dm == nil {
+			continue // hlavička / řádek bez odkazu na detail
 		}
-		row := bookRow{DetailID: detailID, Cells: cells}
-		if len(cells) > 0 {
-			row.BookNo = cells[0]
-		}
-		if len(cells) > 1 {
-			row.Provenance = cells[1]
-		}
-		if len(cells) > 2 {
-			row.Ranges = cells[2]
-		}
-		if len(cells) > 3 {
-			row.Localities = cells[3]
-		}
-		if n := len(cells); n > 0 {
-			if sc, err := strconv.Atoi(strings.TrimSpace(cells[n-1])); err == nil {
-				row.ScanCount = sc
+		cells := reCell.FindAllStringSubmatch(rowHTML, -1)
+		row := bookRow{DetailID: dm[1]}
+		get := func(i int) string {
+			if i < len(cells) {
+				return cells[i][1]
 			}
+			return ""
+		}
+		row.BookNo = cleanText(get(0))
+		row.Provenance, row.ProvenanceType = splitMainSub(get(1))
+		row.Narozeni, _ = splitMainSub(get(2))
+		row.Oddani, _ = splitMainSub(get(3))
+		row.Zemreli, _ = splitMainSub(get(4))
+		for _, sm := range reStrong.FindAllStringSubmatch(get(5), -1) {
+			if loc := cleanText(sm[1]); loc != "" {
+				row.Localities = append(row.Localities, loc)
+			}
+		}
+		if sc, err := strconv.Atoi(strings.TrimSpace(cleanText(get(6)))); err == nil {
+			row.ScanCount = sc
 		}
 		rows = append(rows, row)
 	}
@@ -121,11 +137,38 @@ func printSearchResults(obecID string, rows []bookRow, meta searchMeta) {
 	fmt.Println()
 	totalScans := 0
 	for _, r := range rows {
-		fmt.Printf("  [%s] %-10s %-20s %-15s %-20s skenů=%d\n",
-			r.DetailID, r.BookNo, r.Provenance, r.Ranges, r.Localities, r.ScanCount)
+		fmt.Printf("  [%s] %-8s %-28s N=%-14s O=%-14s Z=%-14s skenů=%d\n",
+			r.DetailID, r.BookNo, r.Provenance, orDash(r.Narozeni), orDash(r.Oddani), orDash(r.Zemreli), r.ScanCount)
 		totalScans += r.ScanCount
 	}
 	fmt.Printf("celkem skenů (dle výpisu): %d\n", totalScans)
+}
+
+func orDash(s string) string {
+	if s == "" {
+		return "-"
+	}
+	return s
+}
+
+// splitMainSub rozdělí buňku tvaru "HLAVNÍ<br><small><em>VEDLEJŠÍ</em></small>"
+// (typicky Původce/typ původce nebo rozsah/index rozsah) na hlavní a vedlejší
+// hodnotu. "-" (žádná hodnota) se vrací jako prázdný řetězec.
+func splitMainSub(cellHTML string) (main, sub string) {
+	parts := regexp.MustCompile(`(?is)<br\s*/?>`).Split(cellHTML, 2)
+	main = cleanText(parts[0])
+	if main == "-" {
+		main = ""
+	}
+	if len(parts) > 1 {
+		if sm := regexp.MustCompile(`(?is)<small><em>(.*?)</em>`).FindStringSubmatch(parts[1]); sm != nil {
+			sub = cleanText(sm[1])
+			if sub == "-" {
+				sub = ""
+			}
+		}
+	}
+	return main, sub
 }
 
 // cleanText strhne tagy, unescapuje HTML entity a srazí whitespace.
