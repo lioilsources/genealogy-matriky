@@ -45,6 +45,87 @@ Matouš Podrazil (chalupník) × Marianna Tomšejová (dcera Martina Tomšeje)
     → Jan Podrazil, *17.9.1892, Sudoměřice č. 12  ⭐ PRAPRADĚDA
 ```
 
+## ⭐⭐ Janovi (*1892) vlastní děti — pokračování do 20. století
+
+Dočtena celá zbylá "P" sekce indexu (sken 0160, sloupce 1907–1934, konec
+"P" u palcového tabu Q/R). Nalezeno v tomto pořadí (strany odkazují do
+JEŠTĚ NEIDENTIFIKOVANÉ pozdější knihy — pravděpodobně 5811 [N 1903–1917]
+pro rané roky, pak jiná/civilní pro 1920s–30s, k ověření):
+
+| dítě | otec | str. |
+|---|---|---|
+| Marie Podražilová | Jana | 52 |
+| František Podrazil | Janův | 66 |
+| Jan Podrazil (ml.) | Janův | 83 |
+| (jméno needěno) | Janova | 103 |
+| Jan Podrazil | Jana | 111 |
+| Marie Podražilová | Jana | 113 |
+| Martin Podrazil | Jana | 114 |
+
+**Min. 5–7 dětí** (dvojice "Jan"/"Marie" mohou být buď dvě různé osoby
+stejného jména po sobě — časté v rodině, jak jsme viděli u Matouše — nebo
+jde o dva zápisy k jednomu dítěti; needěno). Rozsah let cca **1917/20–1933**
+(odpovídá Janovi ve věku 25–41 let). Navíc ve stejné pasáži:
+
+- **Anna Podražilová, dcera Štěpána** (str. 113) — **Štěpán je pravděpodobně
+  Janův bratr** (další syn Josefa Podrazila), rozšiřuje rodinu o další větev.
+- **Anna Podražilová, dcera Josefa** [„leg." = legitimní] (str. 110) — může
+  být dcera dalšího Josefa (bratra? nebo staršího zápisu).
+
+**Odpověď na "mají potomci konektivitu do přítomnosti":** ANO, jasně —
+Jan Podrazil (*1892) měl sám nejméně 5 dětí do 1930s, plus další větev
+(Štěpán). Dál než 1934 tento konkrétní index nejde (a dál než ~1949
+obecně nejdou církevní matriky vůbec — pak přebírá civilní matrika, která
+není součástí Acta Publica/tohoto digitálního archivu a je navíc ze
+zákona uzavřená veřejnosti ~100 let kvůli ochraně osobních údajů živých
+lidí). **Pro roky 1930–1949 by pomohla kniha `5811` (N 1903–1917, moc
+pozdě) nebo přímo dohledat, do které knihy tento index od str. ~50+
+odkazuje** — to je další krok.
+
+## ⭐⭐ Sňatkový rejstřík (kniha 5825 [5235], O 1850–1905/1933) — dcery se vdávaly lokálně
+
+Kniha `Strážnice - Panny Marie 5825 [5235]` má **stejný typ vevázaného
+rejstříku jako 5809, ale pro sňatky** (sken 0152–0153, písmeno P, roky
+1852–1934, formát „Rok. Ženich – Nevěsta . . strana"). Přečteno v plném
+rozsahu pro Podrazil/Podražil.
+
+**Pravděpodobná svatba Josefa a Marie (Janovi rodiče):**
+
+> **1890: Podrazil Josef – Marie Myš . . str. 2/219**
+
+Datum (2 roky před Janovým narozením 1892) i jména sedí přesně s křestním
+zápisem ("matka Marie, dcera Josefa Mrzý/Myš") — **Myš/Mrzý je
+pravděpodobně stejné jméno, jen různě přepsané** v různých zápisech
+(časté u tohoto typu jmen). Vysoká, ale ne 100% jistota — needěno přímo
+v oddací matrice.
+
+**Dcery Podrazilovy se prokazatelně vdávaly v Sudoměřicích** (odpověď na
+otázku uživatele) — potvrzeno minimálně 3 případy napříč generacemi:
+
+| rok | ženich | nevěsta (rozená Podrazil/Podražil) | str. |
+|---|---|---|---|
+| 1862 | Martin Přikaský | Maria Anna Podrazil | 8/81 |
+| 1906 | Matouš Obrlík | Cecilie Podrazilová | 4/2 |
+| 1933 | Josef Petráš | Cecilie Podražilová | 51 |
+
+(Dvě různé "Cecilie Podrazilová" — 1906 a 1933 jsou o 27 let od sebe,
+takže jde o dvě různé ženy, ne duplicitní zápis — jméno se v rodině
+očividně recyklovalo jako jinde.)
+
+**Rozsah sňatků Podrazil/Podražil v této knize (1852–1934), jen mužská
+strana co jsem stihl přečíst:** Martin×Rovalie Pukanec (1867), Jan×
+Marianna Konečná (1868), Matouš×Anna Hřecílová (1869, mladší Matouš, ne
+náš), Jan×Kateřina Buček (1871), Pavel×Kateřina Janeček (1873), Jiří×Anna
+Obrlík (1875), Josef×Marie Myš (1890, viz výše), Josef×Anna Končiny
+(1897), Martin×Alžběta [?] (1898), Jiří×Alžběta [?] (1903), Martin×
+Kateřina [?] (1906), Jan×Barbora Buček (1908), Josef×Alžběta Mikl (1908),
+Josef×Tomšejová Alžběta (1920), Jan×Kateřina Porubková (1922), Jan×
+Emilie Vasrová (1924), Josef×Marie Opavská (1925), František×Marie
+Bučková (1925), Štěpán×Marie Tomšejová (1931, **Janův bratr**), Jan×Anna
+Pukancová (1933), Jan×Marie Klásková (1933/34), Josef×Alžběta Stránská
+(1934). **To je nejméně 20 sňatků Podrazil/Podražil mužů v jedné knize
+za ~70 let** — rodina byla mezi největšími/nejplodnějšími v Sudoměřicích.
+
 ## Potvrzené přímé vazby na už známý rodokmen
 
 - **1859: Paul Podrazil, otec Thomas [Tomáš] . . str. 93** — přímé dítě

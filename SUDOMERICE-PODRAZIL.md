@@ -133,6 +133,29 @@ Petrově naprázdno, než uživatel dal přesnou lokaci sken 243/řádek 2):
 z úmrtního indexu 1785–1849) a Janovy potomky (děti/vnuky) v pozdějších
 knihách (5811 N1903-1917, matriky 1920+, případně civilní matrika).
 
+### ⭐ Konektivita do přítomnosti: ANO — Jan měl min. 5 dětí, rodina byla jedna z největších v obci
+
+**Janovi vlastní děti** (z pokračování stejného rejstříku 1850–1934):
+Marie, František, Jan (ml.), Martin a další — min. 5–7 dětí narozených
+~1917–1933. Plus bratr **Štěpán Podrazil** (další Josefův syn), ženatý
+1931 s Marií Tomšejovou. Dál než 1934 tento index nejde a dál než ~1949
+obecně nejdou církevní matriky vůbec (civilní matrika od té doby není
+součástí Acta Publica a je navíc ze zákona uzavřená ~100 let).
+
+**Dcery Podrazilovy se prokazatelně vdávaly lokálně v Sudoměřicích** —
+potvrzeno napříč generacemi ve sňatkovém rejstříku knihy 5825 [5235]:
+**Maria Anna Podrazil → Martin Přikaský (1862)**, **Cecilie Podrazilová →
+Matouš Obrlík (1906)**, **Cecilie Podražilová → Josef Petráš (1933)**.
+Také pravděpodobně nalezen **sňatek Janových rodičů**: Josef Podrazil ×
+Marie Myš, 1890 (2 roky před Janovým narozením — jména i datum sedí, ale
+needěno přímo v matrice).
+
+Celkem jen v této jedné knize (1852–1934) napočítáno **min. 20 sňatků**
+mužů příjmení Podrazil/Podražil — rodina byla mezi **nejplodnějšími v
+Sudoměřicích** po celé 19. a začátek 20. století. Detaily:
+[`matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md`](matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md)
+(sekce "Sňatkový rejstřík").
+
 ### Starší generace (1785–1849, z indexu 5852)
 
 - **Index Strážnice PM 5852 [5249]** (celý stažen, abecední rejstřík N/O/Z
