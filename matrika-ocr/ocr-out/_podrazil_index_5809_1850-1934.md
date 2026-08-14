@@ -72,6 +72,24 @@ ne stoprocentně doložený — mohli být bratři, nebo Josef mohl být synem
 Matouše staršího. V obou případech je řetězec Josef→Matouš ml.→Josef ml.
 →Jan *1892 pevně doložený primárními zápisy.)
 
+### Pokus rozmotat Jan/Matouš st./Josef — hledáno, NENALEZENO
+
+Aby šlo rozhodnout, jestli je Josef (†1846) bratr Matouše staršího (oba
+synové Jana), nebo jeho syn, potřeboval by se najít **Josefův vlastní
+sňatek nebo úmrtí** (obojí by uvedlo jeho otce). Hledáno:
+
+- **Trauungsbuch 5807, roky 1815–1827** (skeny 120, 122, 123, 124, 125,
+  128) — chronologicky projito, **žádný sňatek Josefa Podrazila
+  s Elisabeth Pepperovou nenalezen**.
+- **Sterbregister 5807, rok 1831** (sken 230) — namátková kontrola,
+  **žádné úmrtí Josefa Podrazila** (jen dětské zápisy jiných rodin).
+
+**Nerozhodnuto.** Josefův sňatek buď předchází 1815 (možné, pokud byl
+starší a Matouš ml. byl pozdější dítě), nebo je v mezerách, co jsem
+nekontroloval (1806–1814, 1828–1830, 1832–1845), nebo — stejně jako
+jinde v této rodině — prostě není v matrice snadno k nalezení běžným
+chronologickým průchodem. Vztah zůstává **nejlepším odhadem, ne faktem**.
+
 ---
 
 ## ⭐⭐⭐ CÍL NALEZEN — Jan Podrazil *17.9.1892, prapraděda uživatele
