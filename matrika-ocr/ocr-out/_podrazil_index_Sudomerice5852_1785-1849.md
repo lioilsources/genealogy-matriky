@@ -54,12 +54,18 @@ odhad v sekci "Odhad počtu osob" napovídal, teď to má přímý důkaz.
   (indexuje se jen hlavní osoba zápisu — dítě/zemřelý/snoubenci —, ne
   kmotři a svědkové).
 - **Matouš (Matthäus) Podrazil** — **NOVĚ NALEZEN**, označen střídavě
-  „Halbwirth" (půlláník) a „Innwohner" (podruh/nájemník), dům **N.36** v
-  Sudoměřicích. Dvě děti zemřely v lednu/červnu 1815:
-  - **Anna Podrazil** — †28.1.1815, ½ roku, N.36 (sken 0204/folio 74
-    Sterbregister 5807 — **přesně sedí s indexem "1815, fol 74"**).
+  „Halbwirth" (půlláník) a „Innwohner" (podruh/nájemník), dům **N.36/37**
+  v Sudoměřicích. **Čtyři děti zemřely v útlém věku 1815–1820** — jedna
+  z nejtragičtějších dokumentovaných rodin v tomto pátrání:
+  - **Anna Podrazil** — †28.1.1815, ½ roku, N.36 (sken 0204/folio 74 — sedí
+    s indexem "1815, fol 74").
   - **Martin Podrazil** — †17.6.1815 (sken 0206/folio 79 — sedí s indexem
     "1815-19, fol 79").
+  - **Elisabeth Podrazil** — †10./12.4.1819, 2 roky, N.36 (sken 0211/folio
+    88-89 — index měl tohle jako "1819, fol 89", sedí).
+  - **Josef Podrazil** — †22./26.2.1820, **6 dní** starý, N.37 (sken 0213/
+    folio 92 — **index měl u tohoto zápisu rok "1832", skutečný rok je
+    1820** — viz níže, chyba ve čtení roku, ne folia).
   Je čtvrtý, dosud nedoložený dospělý Podrazil v Sudoměřicích — pravděpodobně
   bratr nebo bratranec Karla (mohli sdílet grunt, "Halbwirth"/"čtvrtník"
   jsou sousední hospodářské třídy).
@@ -69,17 +75,21 @@ odhad v sekci "Odhad počtu osob" napovídal, teď to má přímý důkaz.
   **Přímo potvrzuje, že Karel měl syna Franze**, další dítě vedle Tomáše a
   Elisabeth.
 
-**Kalibrace potvrzena na 2 nezávislých bodech** (fol 74 a fol 75, oba
-souhlasí s indexem přesně) — mapování folio(index)↔sken(5807) pro
-Sterbregister je teď vysoce důvěryhodné, ne jen odhad.
+**Kalibrace potvrzena na 4 nezávislých bodech** (fol 74, 75, 89, 92 —
+všechny sedí s indexem na folio, tři i na rok) — mapování folio(index)↔
+sken(5807) pro Sterbregister (vzorec sken≈165+fol/2) je teď vysoce
+důvěryhodné.
 
-**Nesrovnalost k poznámce:** zkouška folia 22 (index: "1792, Ignác
-Podrazil") ukázala na skenu 177 rok **1795**, ne 1792 — buď je rok v indexu
-přečtený špatně, nebo přesná chronologie kolem folia 22 není lineární
-(v jiných částech knihy roky přeskakují nerovnoměrně). Nejde o chybu
-mapování skenů (to je ověřené jinde), jen o nejistotu přesného roku u
-tohoto konkrétního zápisu — Ignáce jsem na skenu 177 nenašel, potřeba
-zkusit sken ~174–176 (fol ~16–20).
+**Oprava:** zápis, který jsem dřív četl jako "dvojčata Elisabeth a Albertine
+Podrazil, fol 104" — po přečtení skutečného zápisu (sken 0219/folio 104,
+12.3.1824, N.21) jde o **jinou rodinu** ("Elisabeth Albertine, dcera
+Leopolda [?], k.k. Zollwache" — celní stráž, ne Podrazil). **Vyřaď tento
+řádek z tabulky nálezů** — byl to omyl při prvním čtení indexu.
+
+**Systematická chyba: roky v indexu jsou místy nespolehlivé, i když folia
+sedí přesně.** Zatím zjištěno u dvou zápisů: "1792"→skutečně 1795 (fol 22,
+neověřeno kdo) a "1832"→skutečně 1820 (fol 92, Josef Podrazil). **Roky v
+tabulce níže proto ber jako orientační, folia jako spolehlivá.**
 
 **Proč index ukazuje 0 křtů a 0 sňatků, přestože oboje reálně existuje:**
 Index **selektivně/neúplně** zaznamenává vedlejší role (svědky, kmotry)
@@ -157,12 +167,12 @@ Podrazila NN") — ne nutně dospělý Podrazil** (viz klíčový nález výše)
 | 1815 | Franz Podrazil | 75 | ✓ |
 | 1815 | Anna Podrazilová | 76 | ✓ |
 | 1815–19 | Martin Podrazil | 79 | ✓ |
-| 1819 | Elisabeth Podrazil | 89 | ✓ |
-| 1832 | Josef Podrazil | 92 | ✓ |
-| 1832 | Johann a Katharine Podrazil (dvojčata) | ~92–93 | ⚠ |
-| 1834 | Elisabeth Podrazil | 95 | ✓ |
-| 1836 | Martin Podrazil | 102 | ✓ |
-| — | Elisabeth a Albertine Podrazil (dvojčata) | 104 | ✓ |
+| 1819 | Elisabeth, dcera Matouše Podrazila, 2 roky | 89 | ✓✓ ověřeno (skut. rok 1819 sedí) |
+| ~~1832~~ **1820** | Josef, syn Matouše Podrazila, 6 dní | 92 | ✓✓ ověřeno — **rok v indexu byl špatně (1832→1820)** |
+| 1832? | Johann a Katharine Podrazil (dvojčata) | ~92–93 | ⚠ NEPOTVRZENO — na skenu 213 (fol 92–93, skut. rok 1820) jsem tenhle zápis neviděl, možná jinde/jiný rok |
+| 1834 | Elisabeth Podrazil | 95 | ⚠ needá se, zkontroluj rok stejně jako u fol 92 |
+| 1836 | Martin Podrazil | 102 | ⚠ needá se, zkontroluj rok |
+| ~~—~~ | ~~Elisabeth a Albertine Podrazil (dvojčata)~~ | ~~104~~ | ❌ VYVRÁCENO — skutečný zápis (sken 219/fol104) je jiná rodina (Zollwache), ne Podrazil |
 | — | Elisabeth Podrazil | 105 | ⚠ (shluk 2–3 zápisů blízko sebe) |
 | — | Katharine Podrazil | 105 | ⚠ |
 | 1837 | Franz Podrazil | 106 | ✓ |
@@ -193,21 +203,25 @@ POZOR na záměnu).
 | 12.12.1810 | kmotr | Josef Podrazil + manželka Alžběta | Geburtsbuch 5807, fol 105 |
 | 5.11.1818 | svědek | Paul Podrazil | Trauungsbuch 5807, fol 30–31 |
 
-### Odhad počtu osob — AKTUALIZOVÁNO
+### Odhad počtu osob — AKTUALIZOVÁNO (a s nižší jistotou, než minule)
 
-**~30 zápisů úmrtí v indexu, minimálně tři (fol 3, 74, 75 — všechny ověřené
-přímo v primární matrice) jsou děti zapsané patronymicky, ne samostatní
-dospělí Podrazilové.** Pravděpodobně platí totéž pro víc zápisů v tabulce.
-**Realistický odhad rodinného jádra: 4 dospělí Podrazilové doložení jako
-otcové/manželé** (Pavel st. — Bauer; Josef — × Alžběta; Karel — čtvrtník, ×
-†Alžběta Bučková; Matouš — Halbwirth/Innwohner, dům N.36) **+ jejich
-manželky + desítky dětí, z nichž řada zemřela v útlém věku.** Vztah mezi
-těmi čtyřmi (bratři? bratranci? otec-syn?) zatím není doložený — jen že
-všichni žili v Sudoměřicích současně kolem 1810–1815. To je výrazně méně
-lidí k hledání v rodokmenu, než počet řádků v úmrtní tabulce napovídá —
-ale rodina samotná je **jistě potvrzena, usazená, hospodářsky různorodá**
-(od bezzemka/podruha po čtvrtníka) po minimálně 3 generace v letech
-1786–1849.
+**~30 zápisů úmrtí v indexu, minimálně tři (fol 3, 74, 75) jsou děti zapsané
+patronymicky, ne samostatní dospělí Podrazilové.** Pravděpodobně platí
+totéž pro víc zápisů v tabulce. **Realistický odhad rodinného jádra: 4
+dospělí Podrazilové doložení jako otcové/manželé** (Pavel st. — Bauer;
+Josef — × Alžběta; Karel — čtvrtník, × †Alžběta Bučková; Matouš —
+Halbwirth/Innwohner, dům N.36/37) **+ jejich manželky + desítky dětí, z
+nichž řada zemřela v útlém věku** (Matouš sám doloženě ztratil 4 děti
+1815–1820). Vztah mezi těmi čtyřmi (bratři? bratranci?) zatím není
+doložený.
+
+**Důležitá výhrada k číslu "~30":** ze 6 řádků tabulky, které jsem od
+minula přímo ověřil v primární matrice, **2 se ukázaly problematické**
+(fol 92: rok byl špatně — 1832 místo 1820; fol 104: úplně jiná rodina,
+ne Podrazil vůbec). To je chybovost cca 1/3 na ověřeném vzorku — **číslo
+~30 je teď nutně jen horní odhad, skutečný počet zápisů může být nižší.**
+Bez ověření zbylých ~24 řádků v primární matrice nejde tvrdit přesné
+číslo, jen řád desítek zápisů, hlavně dětských.
 
 ## Geburts-Buch (narození) INDEX, sken 0031–0032, písmeno P
 
@@ -242,11 +256,14 @@ přistěhovalci) mimo tuto matriku úplně.
    (zkontrolováno, nenašlo se).
 2. **Domyslet Ignácovo folio 22** — sken 177 ukázal rok 1795, ne 1792 jak
    čekáno; zkusit sken ~174–176 (fol ~16–20) pro rok 1792.
-3. **Přečíst zbylá jistá folia** (92/1832, 104/dvojčata, 181/1845, 194/1848,
-   196–197/1849) přímo v primární matrice — kalibrace teď funguje na 2
-   ověřených bodech (fol 74, 75), takže sken ≈ 165 + fol/2 by měl sedět.
-   U každého ověřit: dítě (patronymicky) vs. dospělý, kdo je otec/matka,
-   číslo domu — může odhalit vazbu mezi Karlem/Josefem/Matoušem/Pavlem.
+3. **Přečíst zbylá needěná folia** (95/1834, 102/1836, 106/1837, 110/1838,
+   123/1843, 126–127, 181/1845, 194/1848, 196–197/1849) přímo v primární
+   matrice — kalibrace teď ověřená na 4 bodech (fol 74/75/89/92), ale
+   **2 ze 6 dosud ověřených řádků byly problematické** (špatný rok nebo
+   úplně jiná rodina), takže tohle ověřování má reálnou hodnotu, ne jen
+   formalitu. U každého: dítě (patronymicky) vs. dospělý, kdo je otec/
+   matka, číslo domu — může odhalit vazbu mezi Karlem/Josefem/Matoušem/
+   Pavlem, a přesnější počet skutečných zápisů.
 4. **Najít Karlův, Josefův a Matoušův sňatek** — chronologický průchod
    Trauungsbuch pokryl 1785/90-92/96/99-01/04-05/08-09 bez nálezu; zbývají
    mezery 1786–89, 1793–95, 1797–98, 1802–03, 1806–07, 1810+ (skeny ~107,

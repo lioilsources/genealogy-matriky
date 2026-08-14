@@ -127,14 +127,19 @@ potřeba větvení podle `meta.archive` (`mza-actapublica` vs. výchozí).
     - **Elisabeth Podrazil** (*~1825) — provdala se 4.2.1843 za Franze
       Tomiczyho (fol 88 Trauungsbuch 5807).
     - **Franz Podrazil** — †22.2.1815 jako roční dítě, N.14.
-  - **Matouš (Matthäus) Podrazil** — Halbwirth/Innwohner, dům N.36. Dcera
-    **Anna** †28.1.1815 (½ roku) a syn **Martin** †17.6.1815 — oba nalezeni
-    přímo v matrice, přesně sedí s indexem (fol 74, 79).
+  - **Matouš (Matthäus) Podrazil** — Halbwirth/Innwohner, dům N.36/37.
+    **4 děti zemřely v útlém věku 1815–1820**: Anna (†28.1.1815, ½ r.),
+    Martin (†17.6.1815), Elisabeth (†duben 1819, 2 r.), Josef (†únor 1820,
+    6 dní) — všechny čtyři nalezené přímo v matrice.
   - **Paul Podrazil** (mladší?) — svatební svědek 1818.
 - Rukopis 1785–~1840 je německý kurent, dost obtížně čitelný (i pro Sonnet);
   pozdní zápisy (1845+, jiná ruka, částečně česky) jsou naopak velmi čitelné.
-  **Folio→kniha mapování pro knihu 5807 je ověřené na 2 nezávislých bodech**
-  (fol 74 a 75 obě sedí přesně s indexem) — vzorec v `_podrazil_index_...md`.
+  **Folio→kniha mapování pro knihu 5807 je ověřené na 4 nezávislých bodech**
+  (fol 74/75/89/92) — vzorec v `_podrazil_index_...md`.
+- **Pozor — roky v indexu 5852 jsou místy nespolehlivé, i když folia sedí.**
+  Na 6 dosud ověřených řádcích úmrtní tabulky byly 2 problematické (fol 92:
+  index měl rok 1832, skutečnost 1820; fol 104: úplně jiná rodina, ne
+  Podrazil). **Odhad ~30 úmrtí je proto jen horní odhad**, ne spolehlivé číslo.
 - **Hledání Karlova/Josefova/Matoušova sňatku zatím neúspěšné** — chronologický
   průchod Trauungsbuch pokryl roky 1785, 1790–92, 1796, 1799–1801, 1804–05,
   1808–09 bez nálezu; zbývají nepokryté mezery (1786–89, 1793–95, 1797–98,
