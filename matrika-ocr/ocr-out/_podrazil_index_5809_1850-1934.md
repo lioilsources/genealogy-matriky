@@ -89,15 +89,58 @@ rejstříku jako 5809, ale pro sňatky** (sken 0152–0153, písmeno P, roky
 1852–1934, formát „Rok. Ženich – Nevěsta . . strana"). Přečteno v plném
 rozsahu pro Podrazil/Podražil.
 
-**Pravděpodobná svatba Josefa a Marie (Janovi rodiče):**
+**Svatba Josefa a Marie (Janovi rodiče) — OVĚŘENO přímo v primární matrice:**
 
-> **1890: Podrazil Josef – Marie Myš . . str. 2/219**
+> **28. ledna 1890, folio 219, kniha 5825 [5235]: Josef Podrazil**, svobodný
+> syn **Matouše Podrazila**, chalupníka ze Sudoměřic, a jeho manželky
+> **Marianny, dcery †Martina Tomšeje**, půlčtvrtníka ze Sudoměřic (24 let)
+> × **Marie**, svobodná dcera **†Josefa Myšího**, půlčtvrtníka ze Sudoměřic,
+> a jeho manželky **Marianny, dcery Martina Janečka**, půlčtvrtníka ze
+> Sudoměřic (~17 let).
 
-Datum (2 roky před Janovým narozením 1892) i jména sedí přesně s křestním
-zápisem ("matka Marie, dcera Josefa Mrzý/Myš") — **Myš/Mrzý je
-pravděpodobně stejné jméno, jen různě přepsané** v různých zápisech
-(časté u tohoto typu jmen). Vysoká, ale ne 100% jistota — needěno přímo
-v oddací matrice.
+Přesně sedí s křestním zápisem Jana (1892) — jména rodičů i prarodičů se
+shodují do písmene. **Oba manželé byli ze Sudoměřic.**
+
+**Janova vlastní svatba — OVĚŘENO (kniha 5827 [12452], sešit V, list 7,
+zápis 6, 11. července 1922):**
+
+> **Jan Podrazil**, rolník v Sudoměřicích, svobodný syn **Josefa Podrazila**,
+> chalupníka v Sudoměřicích, a jeho manželky **Marianny, rozené Mišové** ze
+> Sudoměřic. **Narozen 17. září 1892 v Sudoměřicích** [přesná shoda s
+> křestním zápisem]. × **Kateřina Porubková**, svobodná dcera **Jiřího
+> Porubka**, chalupníka v Sudoměřicích, a jeho manželky **Anny, rozené
+> Okáníkové** ze Sudoměřic. Narozena 30. dubna 1899 **v Sudoměřicích**.
+
+**Obě rodiny — ženichova i nevěstina — byly ze Sudoměřic.** Příjmení
+"Porubka"/"Opavský" se vyskytují i v sousedním Petrově, ale konkrétně
+tahle nevěsta i ženich se narodili a bydleli v Sudoměřicích — nejde
+automaticky předpokládat petrovský původ jen podle příjmení.
+
+### Odkud pocházely ženy, které se vdaly za Podrazily — vzorek ověřený přímo v matrice
+
+| manžel | manželka | původ manželky |
+|---|---|---|
+| Matouš Podrazil | Marianna Tomšejová | Sudoměřice |
+| Karel Podrazil | Alžběta Bučková | Sudoměřice |
+| Tomáš Podrazil (2. sňatek) | Kateřina Mikešková | Sudoměřice |
+| Josef Podrazil | Marie Myšová | Sudoměřice |
+| Jan Podrazil (*1892) | Kateřina Porubková | Sudoměřice |
+| **Jiří Podrazil** | **Marianna Martinková** | **Zvolenov** (výjimka!) |
+
+**Převažující vzorec: Podrazilovi muži se ženili téměř výhradně s místními
+ženami ze Sudoměřic** — rodina byla silně endogamní vůči vlastní vesnici
+napříč generacemi (1786–1934). **Jedna jasná výjimka nalezena**: Jiří
+Podrazil (syn ??, ženatý 1875 s Annou Obrlíkovou dle staršího zápisu —
+POZOR, možná dvě různé sňatky/manželky Jiřího, k ověření) měl dceru Marii
+(*1887), jejíž matka Marianna pocházela **ze Zvolenova** — jedné ze
+sousedních vesnic téže farnosti. To naznačuje, že příležitostné sňatky
+mimo Sudoměřice se děly, ale byly spíš výjimkou než pravidlem.
+
+**Nekompletní vzorek** — needěno přímo: Jan×Konečná(1868), Jan×Buček
+Kateřina(1871), Pavel×Janeček Kateřina(1873), a všechny sňatky
+1897–1934 kromě Josefa(1890) a Jana(1892/1922) výše. Vzhledem k tomu, jak
+konzistentně vychází "ze Sudoměřic" u ověřených případů, je pravděpodobné,
+že i zbytek bude převážně lokální — ale bez ověření to není jisté.
 
 **Dcery Podrazilovy se prokazatelně vdávaly v Sudoměřicích** (odpověď na
 otázku uživatele) — potvrzeno minimálně 3 případy napříč generacemi:

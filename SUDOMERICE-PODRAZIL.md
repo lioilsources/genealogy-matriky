@@ -146,9 +146,24 @@ součástí Acta Publica a je navíc ze zákona uzavřená ~100 let).
 potvrzeno napříč generacemi ve sňatkovém rejstříku knihy 5825 [5235]:
 **Maria Anna Podrazil → Martin Přikaský (1862)**, **Cecilie Podrazilová →
 Matouš Obrlík (1906)**, **Cecilie Podražilová → Josef Petráš (1933)**.
-Také pravděpodobně nalezen **sňatek Janových rodičů**: Josef Podrazil ×
-Marie Myš, 1890 (2 roky před Janovým narozením — jména i datum sedí, ale
-needěno přímo v matrice).
+
+**Sňatky Josefa i Jana OVĚŘENY přímo v primární matrice:**
+- **28.1.1890, kniha 5825, folio 219:** Josef Podrazil (syn Matouše ×
+  Marianny Tomšejové) × **Marie, dcera Josefa Myšího a Marianny Janečkové**
+  — oba ze Sudoměřic.
+- **11.7.1922, kniha 5827, sešit V/list 7:** **Jan Podrazil** (rolník,
+  *17.9.1892 v Sudoměřicích, syn Josefa Podrazila a Marianny/Marie
+  Mišové) × **Kateřina Porubková** (dcera Jiřího Porubka a Anny
+  Okáníkové) — **oba ze Sudoměřic, potvrzeno přesným rodným datem/místem.**
+
+**Odkud pocházely ženy Podrazilů:** vzorek ověřených sňatků (Matouš×
+Tomšejová, Karel×Bučková, Tomáš×Mikešková, Josef×Myšová, Jan×Porubková)
+ukazuje **silně endogamní vzorec — téměř všechny manželky byly ze
+Sudoměřic**, ne z okolních vesnic. **Jedna jasná výjimka:** Jiří Podrazil
+měl manželku **Mariannu, rozenou Martinkovou ze Zvolenova** (sousední
+vesnice téže farnosti) — příležitostné sňatky mimo obec se děly, ale byly
+výjimkou. Vzorek není kompletní (~20 sňatků Podrazil/Podražil mužů v téhle
+knize, ověřeno jen 5) — detaily a metodika v `_podrazil_index_5809...md`.
 
 Celkem jen v této jedné knize (1852–1934) napočítáno **min. 20 sňatků**
 mužů příjmení Podrazil/Podražil — rodina byla mezi **nejplodnějšími v
