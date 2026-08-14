@@ -103,21 +103,34 @@ potřeba větvení podle `meta.archive` (`mza-actapublica` vs. výchozí).
 
 ## 5. Prameny
 
-Zatím žádné — stahování ani OCR této obce ještě neproběhlo. Až proběhne,
-sem patří (stejně jako v `RODOKMEN-VORECHOVSKY.md`) i **negativní nálezy**
-(prohledané knihy/rozsahy bez výskytu rodu), aby se OCR/hledání neopakovalo.
+- **Index Strážnice PM 5852 [5249]** (celý stažen, abecední rejstřík N/O/Z
+  1785–1849) — přečten Sonnetem (Claude Max, ne Qwen) v písmenu P. Nálezy +
+  metodika + co ještě NENÍ přečteno: viz
+  [`matrika-ocr/ocr-out/_podrazil_index_Sudomerice5852_1785-1849.md`](matrika-ocr/ocr-out/_podrazil_index_Sudomerice5852_1785-1849.md).
+  Shrnutí: **min. 10–15 úmrtí Podrazilů 1786–1849** (Sterbe-Buch, sken
+  0071–0072) s vysokou jistotou u ~6 zápisů (nejjistější: Pavel †1786 fol 3,
+  Ignác †1792 fol 22, Alžběta †1796/97 fol 27, Barbara †1845 fol 181, Alžběta
+  †1848 fol 194, Kateřina †1849 fol 196). Geburts-Buch a Trauungs-Buch P
+  sekce jen částečně prohlédnuty — křty/sňatky Podrazilů očekávané, ještě
+  nenalezené (viz "Další kroky" v tom dokumentu).
+- Rukopis 1785–~1840 je německý kurent, dost obtížně čitelný (i pro Sonnet) —
+  jistota zápisů je u starších let nižší, u pozdních (1845+, jiná ruka) vysoká.
+  Folio čísla z indexu **nejsou ještě ověřená proti skutečné matrice** (pracovní
+  hypotéza: kniha 5807 [5224]) — to je další krok, ne hotová věc.
 
 ## 6. Další kroky
 
 1. ~~`cd actapublica-dl && make build && make list OBEC=2787` — ověřit inventář~~
    — hotovo, inventář v sekci 2 je z živého běhu (21 knih, 4 160 skenů sedí).
-2. Stáhnout rejstříkovou knihu 5249 (81 skenů, `typ=rejstrik`, ověřeno) a
-   vevázané rejstříky v knihách 5809/5825/5840 (index-rozsahy, viz sekce 3) —
-   `make download ID=5249` + `-derive halves` u ostatních, cca 300 skenů,
-   rychlý první průchod.
-3. OCR rejstříků v `transcribe` režimu → seznam folií s výskytem Podrazilů
-   (a variant ze sekce 3).
-4. Podle folií cíleně stáhnout/OCR strukturované knihy (N/O/Z), pak farní
-   knihy 1629–1917 s filtrem na Sudoměřice/Strážnici.
-5. Průběžně doplňovat `genealogy/seed/name_variants.csv` a sekci 5
-   (prameny + negativní nálezy).
+2. ~~Stáhnout rejstříkovou knihu 5249~~ — hotovo, celá obec 2787 stažena
+   (viz commit historie), včetně 5249.
+3. ~~OCR rejstříku 5249 → seznam folií s Podrazily~~ — částečně hotovo,
+   viz `_podrazil_index_Sudomerice5852_1785-1849.md` (Sterbe-Buch hotovo,
+   Geburts/Trauungs jen částečně).
+4. Dočíst zbytek indexu (Geburts sken 0031, Trauungs sken 0050 celé) — pak
+   ověřit folio→kniha mapování a přečíst samotné zápisy v 5807 [5224] na
+   nalezených foliích (rodiče, čísla domů — mnohem bohatší než index).
+5. Podle toho cíleně stáhnout/OCR další strukturované knihy (N/O/Z), pak
+   farní knihy 1629–1917 s filtrem na Sudoměřice/Strážnici.
+6. Průběžně doplňovat `genealogy/seed/name_variants.csv` a Prameny výše
+   (i negativní nálezy, ať se OCR/hledání neopakuje).
