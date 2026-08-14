@@ -116,31 +116,37 @@ potřeba větvení podle `meta.archive` (`mza-actapublica` vs. výchozí).
   skutečnosti **novorozenec Pavel, syn Pavla Podrazila** — index zkracuje
   patronymické zápisy, takže tabulka ~30 úmrtí NENÍ 30 nezávislých
   dospělých, ale hlavně děti menšího počtu otců.
-- **Rodinné jádro — 4 dospělí Podrazilové doložení přímo v primární matrice**
+- **Rodinné jádro — 5 dospělí Podrazilové doložení přímo v primární matrice**
   (ne jen indexem), vztah mezi nimi zatím nedoložen:
   - **Pavel Podrazil starší** — sedlák (Bauer), doložen 1786.
   - **Josef Podrazil** × Alžběta — kmotři při křtu 1810.
-  - **Karel Podrazil** — čtvrtník, × **†Alžběta, dcera Martina Bučky**
-    (podsedníka). Děti:
+  - **Karel Podrazil** — čtvrtník/Halbwirth, dům N.14, × **†Alžběta, dcera
+    Martina Bučky** (podsedníka). Děti:
     - **Tomáš Podrazil** (*~1807) — chalupník, vdovec, ženil se podruhé
       5.11.1849 s Kateřinou Mikeškovou (fol 118 Trauungsbuch 5807).
     - **Elisabeth Podrazil** (*~1825) — provdala se 4.2.1843 za Franze
       Tomiczyho (fol 88 Trauungsbuch 5807).
-    - **Franz Podrazil** — †22.2.1815 jako roční dítě, N.14.
-  - **Matouš (Matthäus) Podrazil** — Halbwirth/Innwohner, dům N.36/37.
-    **4 děti zemřely v útlém věku 1815–1820**: Anna (†28.1.1815, ½ r.),
+    - **Franz Podrazil** — †22.2.1815 jako roční dítě.
+    - **Elisabeth Podrazil** (starší, stejné jméno) — †listopad 1820,
+      zemřela před narozením druhé Elisabeth výše.
+  - **Matouš (Matthäus) Podrazil** — Halbwirth/Häusler, dům N.36/37.
+    **5 dětí zemřelo v útlém věku 1815–1823**: Anna (†28.1.1815, ½ r.),
     Martin (†17.6.1815), Elisabeth (†duben 1819, 2 r.), Josef (†únor 1820,
-    6 dní) — všechny čtyři nalezené přímo v matrice.
-  - **Paul Podrazil** (mladší?) — svatební svědek 1818.
+    6 dní), Martin (druhý, †říjen 1823, 1 týden) — nejtragičtější
+    dokumentovaná rodina v tomto pátrání.
+  - **Paul Podrazil** (mladší) — dům N.16, svatební svědek 1818. 2 děti
+    (obě Franz, jméno použito znovu po prvním úmrtí) zemřely 1824 a 1826.
 - Rukopis 1785–~1840 je německý kurent, dost obtížně čitelný (i pro Sonnet);
   pozdní zápisy (1845+, jiná ruka, částečně česky) jsou naopak velmi čitelné.
-  **Folio→kniha mapování pro knihu 5807 je ověřené na 4 nezávislých bodech**
-  (fol 74/75/89/92) — vzorec v `_podrazil_index_...md`.
-- **Pozor — roky v indexu 5852 jsou místy nespolehlivé, i když folia sedí.**
-  Na 6 dosud ověřených řádcích úmrtní tabulky byly 2 problematické (fol 92:
-  index měl rok 1832, skutečnost 1820; fol 104: úplně jiná rodina, ne
-  Podrazil). **Odhad ~30 úmrtí je proto jen horní odhad**, ne spolehlivé číslo.
-- **Hledání Karlova/Josefova/Matoušova sňatku zatím neúspěšné** — chronologický
+  **Folio→kniha mapování pro knihu 5807 je ověřené na 8 nezávislých bodech**
+  (fol 74/75/89/92/95/102/106/110) — vzorec v `_podrazil_index_...md`.
+- **Pozor — roky v indexu 5852 jsou systematicky nespolehlivé, i když folia
+  sedí.** Na 10 dosud ověřených řádcích úmrtní tabulky mělo **6 špatný rok**
+  (vždy posunutý o 10-16 let dopředu) a **1 byl úplně jiná rodina** (fol 104,
+  ne Podrazil). **Folia jsou spolehlivá (9/10 potvrzeno), roky ne — odhad
+  "~30 úmrtí" je pravděpodobně blízko realitě co do počtu lidí, ale
+  konkrétní roky u needěných řádků nejsou důvěryhodné.**
+- **Hledání Karlova/Josefova/Matoušova/Paulova sňatku zatím neúspěšné** — chronologický
   průchod Trauungsbuch pokryl roky 1785, 1790–92, 1796, 1799–1801, 1804–05,
   1808–09 bez nálezu; zbývají nepokryté mezery (1786–89, 1793–95, 1797–98,
   1802–03, 1806–07, 1810+).
