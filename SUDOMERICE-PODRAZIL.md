@@ -116,7 +116,8 @@ potřeba větvení podle `meta.archive` (`mza-actapublica` vs. výchozí).
   skutečnosti **novorozenec Pavel, syn Pavla Podrazila** — index zkracuje
   patronymické zápisy, takže tabulka ~30 úmrtí NENÍ 30 nezávislých
   dospělých, ale hlavně děti menšího počtu otců.
-- **Rodinné jádro, doložené přímo v primární matrice** (ne jen indexem):
+- **Rodinné jádro — 4 dospělí Podrazilové doložení přímo v primární matrice**
+  (ne jen indexem), vztah mezi nimi zatím nedoložen:
   - **Pavel Podrazil starší** — sedlák (Bauer), doložen 1786.
   - **Josef Podrazil** × Alžběta — kmotři při křtu 1810.
   - **Karel Podrazil** — čtvrtník, × **†Alžběta, dcera Martina Bučky**
@@ -125,11 +126,19 @@ potřeba větvení podle `meta.archive` (`mza-actapublica` vs. výchozí).
       5.11.1849 s Kateřinou Mikeškovou (fol 118 Trauungsbuch 5807).
     - **Elisabeth Podrazil** (*~1825) — provdala se 4.2.1843 za Franze
       Tomiczyho (fol 88 Trauungsbuch 5807).
-  - **Paul Podrazil** — svatební svědek 1818.
+    - **Franz Podrazil** — †22.2.1815 jako roční dítě, N.14.
+  - **Matouš (Matthäus) Podrazil** — Halbwirth/Innwohner, dům N.36. Dcera
+    **Anna** †28.1.1815 (½ roku) a syn **Martin** †17.6.1815 — oba nalezeni
+    přímo v matrice, přesně sedí s indexem (fol 74, 79).
+  - **Paul Podrazil** (mladší?) — svatební svědek 1818.
 - Rukopis 1785–~1840 je německý kurent, dost obtížně čitelný (i pro Sonnet);
   pozdní zápisy (1845+, jiná ruka, částečně česky) jsou naopak velmi čitelné.
-  **Folio→kniha mapování pro knihu 5807 je ověřené a kalibrované** (vzorec
-  v `_podrazil_index_...md`), takže další folia z indexu jde dohledat rychle.
+  **Folio→kniha mapování pro knihu 5807 je ověřené na 2 nezávislých bodech**
+  (fol 74 a 75 obě sedí přesně s indexem) — vzorec v `_podrazil_index_...md`.
+- **Hledání Karlova/Josefova/Matoušova sňatku zatím neúspěšné** — chronologický
+  průchod Trauungsbuch pokryl roky 1785, 1790–92, 1796, 1799–1801, 1804–05,
+  1808–09 bez nálezu; zbývají nepokryté mezery (1786–89, 1793–95, 1797–98,
+  1802–03, 1806–07, 1810+).
 
 ## 6. Další kroky
 
