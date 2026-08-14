@@ -115,23 +115,32 @@ potřeba větvení podle `meta.archive` (`mza-actapublica` vs. výchozí).
 > **Marianny, dcery †Martina Tomšeje**, půlčtvrtníka. Matka **Marie, dcera
 > Josefa Mrzý**, půlčtvrtníka, a Marianny, dcery †Martina Janečka.
 
-Josefův otec Matouš Podrazil je téměř jistě **týž Matouš**, který v letech
-1815–1823 pohřbil 5 dětí (viz níže) — Josef je dítě, které přežilo.
 **Poprvé známe jméno Matoušovy manželky: Marianna Tomšejová.**
 
 ```
-Matouš Podrazil × Marianna Tomšejová
-  → Josef Podrazil × Marie (dcera Josefa Mrzý a Marianny Janečkové)
-    → Jan Podrazil, *17.9.1892, Sudoměřice č. 12  ⭐ prapraděda
+[Jan Podrazil, †před 1813]
+  → Matouš Podrazil st. (*~1789, sňatek 1813, dům č.36)
+    → [5 dětí zemřelo 1815–1823] + Matouš Podrazil ml.(?) × Marianna Tomšejová
+      → Josef Podrazil (*~1866) × Marie (dcera Josefa Mrzý a Marianny Janečkové)
+        → Jan Podrazil, *17.9.1892, Sudoměřice č. 12  ⭐ prapraděda
 ```
+
+⚠️ **Otevřená hádanka:** sňatek Matouše st. (1813, primární matrika
+ověřeno) má JINOU nevěstu než Marianna Tomšejová, a věkem (Matouš st.
+*1789 by měl Josefovi v roce 1866 přes 77 let) **nemůže být jeho otcem**.
+Musí jít o **druhého, mladšího Matouše** (syn/vnuk Matouše st.?) — jeho
+sňatek s Mariannou Tomšejovou zatím nenalezen (hledáno v rejstříku
+1850–1905 pod P i T bez úspěchu — buď je starší než 1850, nebo
+nezaznamenaný). Nebrat prozatím řetězec Matouš st. → Josef jako jistý,
+jen jako pracovní hypotézu.
 
 Detaily a metodika hledání (prošlo se přes rok 1891 v Sudoměřicích i
 Petrově naprázdno, než uživatel dal přesnou lokaci sken 243/řádek 2):
 [`matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md`](matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md).
 
-**Další krok:** najít Josefovo vlastní narození (spojí ho jistě s Matoušem
-z úmrtního indexu 1785–1849) a Janovy potomky (děti/vnuky) v pozdějších
-knihách (5811 N1903-1917, matriky 1920+, případně civilní matrika).
+**Další krok:** najít Matouše ml. × Tomšejová sňatek (možná v knize
+5813/5814, O 1786–1849) — to spojí Josefa jistě s předky, ne jen
+odhadem. Taky najít Josefovo vlastní narození.
 
 ### ⭐ Konektivita do přítomnosti: ANO — Jan měl min. 5 dětí, rodina byla jedna z největších v obci
 

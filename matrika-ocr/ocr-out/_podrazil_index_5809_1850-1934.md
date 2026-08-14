@@ -13,6 +13,53 @@ Přečteno zatím jen ~30 z odhadem 60–100+ řádků (sken 0159 celý, sken 01
 horní čtvrtina). **Toto NENÍ kompletní přepis** — je to průzkum rozsahu
 a pár jistých vazeb, než se rozhodne, jak hluboko pokračovat.
 
+## ⭐⭐⭐ O GENERACI DÁL DO MINULOSTI — Jan Podrazil (†před 1813), otec Matouše — ALE OTEVÍRÁ HÁDANKU
+
+**Kniha 5807 [5224], Trauungsbuch, folio 26–27, přelom 1812/1813 (přesné
+datum needěno — needěno mezi 10. a 19. lednem 1813, jiný kněz/sloupec než
+sousední zápisy):**
+
+> **Mathäus [Matouš] Podrazil, syn †Johanna [Jana] Podrazila**, Häusler
+> [chalupníka], dům **č. 36**, 24 let, svobodný, × **[Elisabeth?], dcera
+> Martina [?]**, 19 let.
+
+**Dům č. 36 sedí přesně** s domem, kde 1815–1823 umíraly děti "našeho"
+Matouše (viz úmrtní index 1785–1849) — a věk (24 v roce 1813 → *~1789)
+i časování (svatba 1813 → první dítě Anna narozená ~pol.1814 → †leden
+1815, přesně ~půl roku) **sedí bezvadně**. **Otec Matouše: Jan (Johann)
+Podrazil, zemřelý před rokem 1813** — o generaci dál do minulosti.
+
+### ⚠️ HÁDANKA: nevěsta v tomto zápisu NENÍ Marianna Tomšejová
+
+Křestní zápis Jana (1892) řekl: otec Josef, **syn Matouše Podrazila a
+Marianny, dcery Martina Tomšeje**. Ale tenhle 1813 sňatek ukazuje
+Matouše (*~1789) ženícího se s nevěstou, jejíž otec se jmenuje **Martin
+[??]**, ne Tomšej (jméno nejisté, ale příjmení není "Tomšej" ani opticky
+podobné).
+
+**Matematika věku nesedí na jednoho Matouše:** pokud se Josef (Janův
+otec) oženil 1890 ve věku 24 let, narodil se **~1866**. Matouš z tohoto
+zápisu (*1789) by mu bylo v roce 1866 **77 let** — biologicky
+nemožné zplodit dítě. **Musí jít o DVA různé Matouše Podrazily**:
+
+1. **Matouš st.** (*~1789, † neznámo, sňatek 1813, dům 36) — otec 5 dětí
+   co zemřely 1815–1823 (Anna, Martin×2, Elisabeth, Josef) + možná dalších
+   co přežily.
+2. **Matouš ml.** (*odhadem 1830–1845, syn nebo vnuk Matouše st.?) ×
+   **Marianna Tomšejová** — rodiče Josefa (*~1866), tedy praprapradědovi
+   Janovi.
+
+**Sňatek Matouše ml. × Marianny Tomšejové jsem hledal a NENAŠEL** — ani
+v sekci "P" (Podrazil), ani v sekci "T" (Tomšej) rejstříku 1850–1905
+(kniha 5825, sken 153–154). Nejbližší nalezené: "1869 Podrazil Matouš —
+Anna Hřecílová" (jiná nevěsta, jiný Matouš/špatné jméno?) a "1854 Tomšej
+Josef — Anna Podrazilová" (opačný směr — Tomšej muž bere Podrazil ženu,
+nesouvisí). **Sňatek buď předchází rok 1850** (mimo pokrytí tohoto
+indexu — nutno hledat v 5813/5814, O 1786–1849), **nebo není v indexu
+zaznamenaný** (stejná neúplnost jako jinde v této rodině).
+
+---
+
 ## ⭐⭐⭐ CÍL NALEZEN — Jan Podrazil *17.9.1892, prapraděda uživatele
 
 **Kniha `Strážnice - Panny Marie 5810 [5227]` (N 1861–1902), sken 0243,
