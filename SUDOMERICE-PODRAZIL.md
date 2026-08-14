@@ -104,15 +104,20 @@ potřeba větvení podle `meta.archive` (`mza-actapublica` vs. výchozí).
 ## 5. Prameny
 
 - **Index Strážnice PM 5852 [5249]** (celý stažen, abecední rejstřík N/O/Z
-  1785–1849) — přečten Sonnetem (Claude Max, ne Qwen) v písmenu P. Nálezy +
-  metodika + co ještě NENÍ přečteno: viz
+  1785–1849) — přečten Sonnetem (Claude Max, ne Qwen), písmeno P **kompletně
+  ve všech třech řadách** (narození/oddaní/zemřelí). Nálezy + metodika:
   [`matrika-ocr/ocr-out/_podrazil_index_Sudomerice5852_1785-1849.md`](matrika-ocr/ocr-out/_podrazil_index_Sudomerice5852_1785-1849.md).
-  Shrnutí: **min. 10–15 úmrtí Podrazilů 1786–1849** (Sterbe-Buch, sken
-  0071–0072) s vysokou jistotou u ~6 zápisů (nejjistější: Pavel †1786 fol 3,
-  Ignác †1792 fol 22, Alžběta †1796/97 fol 27, Barbara †1845 fol 181, Alžběta
-  †1848 fol 194, Kateřina †1849 fol 196). Geburts-Buch a Trauungs-Buch P
-  sekce jen částečně prohlédnuty — křty/sňatky Podrazilů očekávané, ještě
-  nenalezené (viz "Další kroky" v tom dokumentu).
+  **Odhad počtu osob: ~30 zápisů úmrtí 1786–1849** (po očištění duplicit
+  ze čtení cca 28–30) — vzhledem k opakujícím se křestním jménům (Josef,
+  Elisabeth, Franz, Martin) jde spíš o **jádro cca 5–10 dospělých +
+  desítky dětských/kojeneckých úmrtí**, typické pro dobu, ne 30 nezávislých
+  dospělých větví.
+  **Nesrovnalost k prověření: v Geburts-Buch (narození) ani Trauungs-Buch
+  (oddaní) není za stejné období 1785–1848 ani jeden Podrazil** — obě řady
+  jsou kompletně přečtené, ne jen částečně. To může znamenat chybu ve čtení,
+  jiný zápis příjmení u křtů/sňatků, nebo že se rodina do Sudoměřic
+  přistěhovala už jako dospělá. Nejde brát počet úmrtí jako definitivní,
+  dokud se to neověří v primární matrice (viz Další kroky).
 - Rukopis 1785–~1840 je německý kurent, dost obtížně čitelný (i pro Sonnet) —
   jistota zápisů je u starších let nižší, u pozdních (1845+, jiná ruka) vysoká.
   Folio čísla z indexu **nejsou ještě ověřená proti skutečné matrice** (pracovní
@@ -124,9 +129,10 @@ potřeba větvení podle `meta.archive` (`mza-actapublica` vs. výchozí).
    — hotovo, inventář v sekci 2 je z živého běhu (21 knih, 4 160 skenů sedí).
 2. ~~Stáhnout rejstříkovou knihu 5249~~ — hotovo, celá obec 2787 stažena
    (viz commit historie), včetně 5249.
-3. ~~OCR rejstříku 5249 → seznam folií s Podrazily~~ — částečně hotovo,
-   viz `_podrazil_index_Sudomerice5852_1785-1849.md` (Sterbe-Buch hotovo,
-   Geburts/Trauungs jen částečně).
+3. ~~OCR rejstříku 5249 → seznam folií s Podrazily~~ — hotovo, všechny 3
+   řady (N/O/Z) písmeno P kompletně přečtené, viz
+   `_podrazil_index_Sudomerice5852_1785-1849.md`. ~30 úmrtí, 0 křtů/sňatků
+   (nesrovnalost k ověření).
 4. Dočíst zbytek indexu (Geburts sken 0031, Trauungs sken 0050 celé) — pak
    ověřit folio→kniha mapování a přečíst samotné zápisy v 5807 [5224] na
    nalezených foliích (rodiče, čísla domů — mnohem bohatší než index).
