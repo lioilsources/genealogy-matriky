@@ -115,32 +115,36 @@ potřeba větvení podle `meta.archive` (`mza-actapublica` vs. výchozí).
 > **Marianny, dcery †Martina Tomšeje**, půlčtvrtníka. Matka **Marie, dcera
 > Josefa Mrzý**, půlčtvrtníka, a Marianny, dcery †Martina Janečka.
 
-**Poprvé známe jméno Matoušovy manželky: Marianna Tomšejová.**
+**Hádanka o dvou Matoušech vyřešena** — nalezeny primární sňatky obou:
 
 ```
-[Jan Podrazil, †před 1813]
-  → Matouš Podrazil st. (*~1789, sňatek 1813, dům č.36)
-    → [5 dětí zemřelo 1815–1823] + Matouš Podrazil ml.(?) × Marianna Tomšejová
-      → Josef Podrazil (*~1866) × Marie (dcera Josefa Mrzý a Marianny Janečkové)
-        → Jan Podrazil, *17.9.1892, Sudoměřice č. 12  ⭐ prapraděda
+Jan (Johann) Podrazil (†před 1813)
+  │
+  ├── Matouš Podrazil starší (*~1789, sňatek 1813, dům č.36)
+  │     └── 5 dětí zemřelo 1815–1823 (Anna, Martin×2, Elisabeth, Josef)
+  │
+  └── Josef Podrazil (†před 1846) × Elisabeth Pepperová
+        └── Matouš Podrazil mladší (*~1826, sňatek 1846) × Marianna Tomšejová
+              └── Josef Podrazil (*~1866) × Marie Myšová (sňatek 1890)
+                    └── Jan Podrazil (*17.9.1892) × Kateřina Porubková (1922)
+                          └── min. 5 dětí (*1917–1933): Marie, František,
+                              Jan ml., Martin, další  ⭐ prapraděda a jeho rodina
 ```
 
-⚠️ **Otevřená hádanka:** sňatek Matouše st. (1813, primární matrika
-ověřeno) má JINOU nevěstu než Marianna Tomšejová, a věkem (Matouš st.
-*1789 by měl Josefovi v roce 1866 přes 77 let) **nemůže být jeho otcem**.
-Musí jít o **druhého, mladšího Matouše** (syn/vnuk Matouše st.?) — jeho
-sňatek s Mariannou Tomšejovou zatím nenalezen (hledáno v rejstříku
-1850–1905 pod P i T bez úspěchu — buď je starší než 1850, nebo
-nezaznamenaný). Nebrat prozatím řetězec Matouš st. → Josef jako jistý,
-jen jako pracovní hypotézu.
+**Matouš starší** (sňatek 1813, primární matrika ověřeno) má JINOU nevěstu
+než Marianna Tomšejová — proto NENÍ přímým otcem Josefa. Skutečný manžel
+Marianny Tomšejové je **Matouš mladší** (*~1826, o 37 let mladší, sňatek
+1846, kniha 5807 folio 102–103, dům č. 13) — jeho otec je **další,
+dosud nedoložený Josef Podrazil** (†před 1846) × **Elisabeth Pepperová**.
+Vztah Jan → Matouš st. / (mladší) Josef není zcela jistý (bratři? otec-syn?),
+ale řetězec od (mladšího) Josefa dolů k Janovi *1892 je pevně doložený
+primárními zápisy — **6 generací, 1786(odhad Janova narození) až 1933**.
 
-Detaily a metodika hledání (prošlo se přes rok 1891 v Sudoměřicích i
-Petrově naprázdno, než uživatel dal přesnou lokaci sken 243/řádek 2):
+Detaily a metodika hledání:
 [`matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md`](matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md).
 
-**Další krok:** najít Matouše ml. × Tomšejová sňatek (možná v knize
-5813/5814, O 1786–1849) — to spojí Josefa jistě s předky, ne jen
-odhadem. Taky najít Josefovo vlastní narození.
+**Další krok:** najít Josefovo (*~1866) vlastní narození a ujasnit vztah
+Jan Podrazil (†1813) ↔ Matouš st. ↔ Josef (†1846) — bratři, nebo otec/syn?
 
 ### ⭐ Konektivita do přítomnosti: ANO — Jan měl min. 5 dětí, rodina byla jedna z největších v obci
 
