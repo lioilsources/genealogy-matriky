@@ -1,10 +1,11 @@
 # Rod Podrazil (Sudoměřice u Skalice, okres Hodonín) — badatelský přehled
 
 > Souhrn identifikace pramenů pro rod **Podrazil** a rekurzivně všechny
-> přivdané linie. Obsahuje inventář knih, badatelskou strategii a **první
-> ověřené rodinné jádro** (3 generace, viz sekce 5) z ručního čtení indexu
-> a namátkové kontroly v primární matrice — plné strukturované OCR ještě
-> neproběhlo. Obdoba [`RODOKMEN-VORECHOVSKY.md`](RODOKMEN-VORECHOVSKY.md),
+> přivdané linie. **Prapraděda uživatele Jan Podrazil (*17.9.1892,
+> Sudoměřice č. 12) nalezen a zasazen do rodokmenu — 4 generace zpět
+> k Matoušovi Podrazilovi × Marianně Tomšejové**, viz sekce 5. Plné
+> strukturované OCR ještě neproběhlo, tohle je z ručního čtení indexů
+> a primárních zápisů. Obdoba [`RODOKMEN-VORECHOVSKY.md`](RODOKMEN-VORECHOVSKY.md),
 > jen v dřívější fázi. Zdroj skenů:
 > [www.mza.cz/actapublica](https://www.mza.cz/actapublica/matrika)
 > (MZA Brno), viewer `/actapublica/matrika/detail/{ID}`.
@@ -104,6 +105,35 @@ potřeba větvení podle `meta.archive` (`mza-actapublica` vs. výchozí).
 ---
 
 ## 5. Prameny
+
+### ⭐ Prapraděda nalezen: Jan Podrazil, *17.9.1892
+
+**Kniha 5810 [5227] (N 1861–1902), sken 0243, obec Sudoměřice, září 1892:**
+
+> **Jan Podrazil**, *17.9.1892 (pokřtěn 18.9.), Sudoměřice č. 12. Otec
+> **Josef Podrazil**, chalupník, **syn Matouše Podrazila** (chalupníka) a
+> **Marianny, dcery †Martina Tomšeje**, půlčtvrtníka. Matka **Marie, dcera
+> Josefa Mrzý**, půlčtvrtníka, a Marianny, dcery †Martina Janečka.
+
+Josefův otec Matouš Podrazil je téměř jistě **týž Matouš**, který v letech
+1815–1823 pohřbil 5 dětí (viz níže) — Josef je dítě, které přežilo.
+**Poprvé známe jméno Matoušovy manželky: Marianna Tomšejová.**
+
+```
+Matouš Podrazil × Marianna Tomšejová
+  → Josef Podrazil × Marie (dcera Josefa Mrzý a Marianny Janečkové)
+    → Jan Podrazil, *17.9.1892, Sudoměřice č. 12  ⭐ prapraděda
+```
+
+Detaily a metodika hledání (prošlo se přes rok 1891 v Sudoměřicích i
+Petrově naprázdno, než uživatel dal přesnou lokaci sken 243/řádek 2):
+[`matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md`](matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md).
+
+**Další krok:** najít Josefovo vlastní narození (spojí ho jistě s Matoušem
+z úmrtního indexu 1785–1849) a Janovy potomky (děti/vnuky) v pozdějších
+knihách (5811 N1903-1917, matriky 1920+, případně civilní matrika).
+
+### Starší generace (1785–1849, z indexu 5852)
 
 - **Index Strážnice PM 5852 [5249]** (celý stažen, abecední rejstřík N/O/Z
   1785–1849) — přečten Sonnetem (Claude Max, ne Qwen), písmeno P kompletně

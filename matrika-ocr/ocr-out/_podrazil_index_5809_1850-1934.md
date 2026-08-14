@@ -13,6 +13,38 @@ Přečteno zatím jen ~30 z odhadem 60–100+ řádků (sken 0159 celý, sken 01
 horní čtvrtina). **Toto NENÍ kompletní přepis** — je to průzkum rozsahu
 a pár jistých vazeb, než se rozhodne, jak hluboko pokračovat.
 
+## ⭐⭐⭐ CÍL NALEZEN — Jan Podrazil *17.9.1892, prapraděda uživatele
+
+**Kniha `Strážnice - Panny Marie 5810 [5227]` (N 1861–1902), sken 0243,
+řádek/položka 32 (obec Sudoměřice, rok 1892, měsíc září):**
+
+> **Jan**, narozen 17., pokřtěn 18. září 1892, Sudoměřice č. 12.
+> **Otec: Josef Podrazil**, chalupník ve Sudoměřicích, **syn Matouše
+> Podrazila**, chalupníka ze Sudoměřic, a jeho manželky **Marianny, dcery
+> †Martina Tomšeje**, půlčtvrtníka ze Sudoměřic.
+> **Matka: Marie, dcera Josefa Mrzý**, půlčtvrtníka ze Sudoměřic, a jeho
+> manželky Marianny, dcery †Martina Janečka, půlčtvrtníka ze Sudoměřic.
+
+**Josefův otec Matouš Podrazil je (velmi pravděpodobně) TÝŽ Matouš
+Podrazil**, jehož 5 dětí zemřelo v útlém věku 1815–1823 (viz
+`_podrazil_index_Sudomerice5852_1785-1849.md`) — Josef je tedy dítě,
+které **přežilo**, patrně narozené později (odhadem 1850s–60s, mezi
+zápisy v tomto indexu na str. 8/26/46/127 pro Apolenu/Annu/Alžbětu/
+Katharinu — Josef mezi nimi zatím nenalezen, ale jde o stejnou rodinu).
+**Poprvé známe jméno Matoušovy manželky: Marianna, rozená Tomšejová**
+(dcera Martina Tomšeje, půlčtvrtníka ze Sudoměřic).
+
+### Rodokmen (potvrzeno primárními zápisy, 4 generace)
+
+```
+Matouš Podrazil (chalupník) × Marianna Tomšejová (dcera Martina Tomšeje)
+  → [min. 5 dětí zemřelo 1815–1823: Anna, Martin×2, Elisabeth, Josef]
+  → [děti co přežily, doloženo v indexu 1850–1934: Apolena *1851, Anna *1853,
+     Alžběta *1855, Katharina *1860 — a nejspíš i:]
+  → Josef Podrazil (chalupník) × Marie, dcera Josefa Mrzý a Marianny Janečkové
+    → Jan Podrazil, *17.9.1892, Sudoměřice č. 12  ⭐ PRAPRADĚDA
+```
+
 ## Potvrzené přímé vazby na už známý rodokmen
 
 - **1859: Paul Podrazil, otec Thomas [Tomáš] . . str. 93** — přímé dítě
