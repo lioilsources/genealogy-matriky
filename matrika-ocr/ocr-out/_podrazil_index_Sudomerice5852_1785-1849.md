@@ -12,6 +12,45 @@ ať se nemusí OCR celá kniha 5807 [5224] (266 skenů). Čteno přímo Sonnetem
 **Stav: všechny 3 abecední řady (N/O/Z), písmeno P, kompletně přečteny** (druhý,
 důkladnější průchod — první průchod prohlédl jen část a podhodnotil počet).
 
+## ⚠️⚠️ PROČ V INDEXU CHYBÍ SŇATKY — VYŘEŠENO (index je nespolehlivý, ne že sňatky neexistují)
+
+Při ověřování folio→kniha mapování (viz Další kroky) jsem v primární matrice
+**5807 [5224]**, Trauungsbuch (oddací kniha), **narazil na skutečný sňatek
+Podrazilovic dcery**, který v indexu 5852 vůbec není:
+
+> **4. února 1843, folio 88, N.C.33 Sudoměřice:** ženich **Franz Tomiczy**
+> (Josefův syn, 23 let), nevěsta **Elisabeth, dcera †Karla Podrazila**,
+> hospodáře v Sudoměřicích, a matky rozené (dcery) **Martina Slatky**,
+> chalupníka v Lobelau (Lobodicích?) — nevěsta 18 let.
+
+Tenhle zápis dokazuje: **index 5852 sňatky systematicky vynechává** (nebo
+aspoň velkou část) — nejde jen o mou chybu ve čtení kurentu. Sloupec "Lit. P."
+v Trauungs-Buch indexu měl na celé období 1786–1848 jen ~15 řádků, což je
+na vesnickou farnost podezřele málo (v primární matrice jsem jen v letech
+1817–1818 a 1823–1824 narazil na desítky sňatků celkově, byť ne všechny
+Podrazilovic). **Závěr: indexu na sňatky se nedá věřit jako úplnému seznamu.**
+
+Bonus nález ze stejného pátrání: **Paul Podrazil** je uveden jako **svědek**
+(Beistand) na svatbě 5. listopadu 1818 (sken 0121, folio 30–31, N.17,
+ženich Martin [?], nevěsta Anna dcera Martina [?]) — potvrzuje, že rodina
+byla v Sudoměřicích 1818 aktivní a společensky zapojená (svědek = obvykle
+příbuzný nebo blízký soused).
+
+**Karl Podrazil** (hospodář v Sudoměřicích, † před 1843, manželka rozená
+Slatková z Lobodic/Lobelau) je **nové jméno**, které v mém čtení úmrtního
+indexu není jednoznačně identifikováno — možná odpovídá jednomu z méně
+jistých zápisů (fol ~65 "Podrazil [jméno nejisté]", 1811?), ale needá se
+to zatím ztotožnit s jistotou. Jeho vlastní sňatek (nutně před ~1825, kdy
+se narodila Elisabeth) jsem hledal namátkově (skeny 113/117/121/125/128,
+roky 1802/1809-10/1817-18/1823-24) a **nenašel** — buď je jinde v rozmezí
+1802-1824, nebo ho farnost nezaznamenala (přistěhoval se ženatý?).
+
+**Doporučení:** nespoléhat na index 5852 pro sňatky vůbec. Místo toho buď
+(a) projít Trauungsbuch v 5807 průběžně/chronologicky (asi skeny ~106–160,
+roky 1785–1849), nebo (b) použít křestní záznamy dětí (které mají oba
+rodiče jmenovitě) jako nepřímý zdroj sňatkových dvojic — pravděpodobně
+rychlejší, protože už máme desítky úmrtních záznamů dětí s odkazy na fol.
+
 ## Struktura indexu (mapování)
 
 Kniha je **3 samostatné abecední řady za sebou**, každá s vlastním číslováním folií
@@ -105,19 +144,25 @@ Přítomná P-příjmení: Přibyl(ská), Podmiczke/Podmiezike (JINÁ rodina —
 POZOR na záměnu s Podrazil), Pipin/Peppin, Ptačík, Powinka a další — žádné
 z nich není Podrazil.
 
-## Trauungs-Buch (oddaní), sken 0050, písmeno P — KOMPLETNĚ PROHLÉDNUTO
+## Trauungs-Buch (oddaní), sken 0050, písmeno P — KOMPLETNĚ PŘEČTENO, ALE INDEX SAMOTNÝ JE NESPOLEHLIVÝ
 
-**Žádný Podrazil nenalezen** v celém rozsahu (fol 1–113, roky 1786–1848, oba
-sloupce). Přítomná P-příjmení: Přibyl(ská), Vogel, Anšic/Antonín, Ošmera a
-další — žádné z nich není Podrazil.
+**Žádný Podrazil nenalezen** v celém rozsahu indexu (fol 1–113, roky
+1786–1848, oba sloupce) — to čtení je správné a úplné. **ALE** ověřeno přímo
+v primární matrice (viz sekce "PROČ V INDEXU CHYBÍ SŇATKY" výše), že
+**sňatek Podrazilovic v knize 5807 skutečně existuje** (Elisabeth Podrazil,
+4.2.1843) a **v indexu prostě není zapsaný**. Jinými slovy: nejde o mezeru
+v mém čtení, ale o mezeru v samotném indexu — ten pro sňatky očividně není
+vyčerpávající. Přítomná P-příjmení v indexu: Přibyl(ská), Vogel,
+Anšic/Antonín, Ošmera a další.
 
-## ⭐⭐ ZÁVĚR — DŮLEŽITÉ, VYŽADUJE OVĚŘENÍ
+## ⭐⭐ ZÁVĚR — VYŘEŠENO (viz sekce nahoře), ale otvírá nové otázky
 
-Rod **Podrazil má v tomto indexu ~30 úmrtí (1786–1849), ale ŽÁDNÝ křest ani
-sňatek** ve stejném časovém rozsahu a farnosti. To je nápadná nesrovnalost —
-u rodiny s tolika úmrtími (včetně mnoha dětských) by se čekalo i odpovídající
-množství křtů/sňatků ve STEJNÉ farnosti. Tři možná vysvětlení, žádné zatím
-neověřené:
+Rod **Podrazil má v úmrtním indexu ~30 záznamů (1786–1849), v křestním 0 a
+v oddacím indexu taky 0** — ale teď víme proč u sňatků: **index oddaných je
+neúplný**, potvrzeno nálezem skutečného sňatku (Elisabeth Podrazil, 1843)
+přímo v matrice, který v indexu chybí. **Otevřená otázka zůstává jen u
+křtů** — tam podobný přímý důkaz (zatím) nemám. Původní tři vysvětlení pro
+chybějící křty jsou pořád neověřená:
 
 1. **Chyba/mezera ve čtení** — i přes důkladný druhý průchod nelze kurent
    1786–1840 číst se stoprocentní jistotou; možná jsem přehlédl variantu psaní
