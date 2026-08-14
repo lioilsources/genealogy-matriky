@@ -1,10 +1,12 @@
 # Rod Podrazil (Sudoměřice u Skalice, okres Hodonín) — badatelský přehled
 
 > Souhrn identifikace pramenů pro rod **Podrazil** a rekurzivně všechny
-> přivdané linie. Zatím **bez genealogických dat** — obsahuje inventář knih,
-> badatelskou strategii a roadmap; samotné stahování/OCR ještě neproběhlo.
-> Obdoba [`RODOKMEN-VORECHOVSKY.md`](RODOKMEN-VORECHOVSKY.md), jen v dřívější
-> fázi. Zdroj skenů: [www.mza.cz/actapublica](https://www.mza.cz/actapublica/matrika)
+> přivdané linie. Obsahuje inventář knih, badatelskou strategii a **první
+> ověřené rodinné jádro** (3 generace, viz sekce 5) z ručního čtení indexu
+> a namátkové kontroly v primární matrice — plné strukturované OCR ještě
+> neproběhlo. Obdoba [`RODOKMEN-VORECHOVSKY.md`](RODOKMEN-VORECHOVSKY.md),
+> jen v dřívější fázi. Zdroj skenů:
+> [www.mza.cz/actapublica](https://www.mza.cz/actapublica/matrika)
 > (MZA Brno), viewer `/actapublica/matrika/detail/{ID}`.
 > Stav: 2026-08. Nástroj: [`actapublica-dl/`](actapublica-dl/) —
 > inventář níže ověřen živým `make list OBEC=2787`.
@@ -104,39 +106,48 @@ potřeba větvení podle `meta.archive` (`mza-actapublica` vs. výchozí).
 ## 5. Prameny
 
 - **Index Strážnice PM 5852 [5249]** (celý stažen, abecední rejstřík N/O/Z
-  1785–1849) — přečten Sonnetem (Claude Max, ne Qwen), písmeno P **kompletně
-  ve všech třech řadách** (narození/oddaní/zemřelí). Nálezy + metodika:
+  1785–1849) — přečten Sonnetem (Claude Max, ne Qwen), písmeno P kompletně
+  ve všech třech řadách. Nálezy + metodika:
   [`matrika-ocr/ocr-out/_podrazil_index_Sudomerice5852_1785-1849.md`](matrika-ocr/ocr-out/_podrazil_index_Sudomerice5852_1785-1849.md).
-  **Odhad počtu osob: ~30 zápisů úmrtí 1786–1849** (po očištění duplicit
-  ze čtení cca 28–30) — vzhledem k opakujícím se křestním jménům (Josef,
-  Elisabeth, Franz, Martin) jde spíš o **jádro cca 5–10 dospělých +
-  desítky dětských/kojeneckých úmrtí**, typické pro dobu, ne 30 nezávislých
-  dospělých větví.
-  **Nesrovnalost k prověření: v Geburts-Buch (narození) ani Trauungs-Buch
-  (oddaní) není za stejné období 1785–1848 ani jeden Podrazil** — obě řady
-  jsou kompletně přečtené, ne jen částečně. To může znamenat chybu ve čtení,
-  jiný zápis příjmení u křtů/sňatků, nebo že se rodina do Sudoměřic
-  přistěhovala už jako dospělá. Nejde brát počet úmrtí jako definitivní,
-  dokud se to neověří v primární matrice (viz Další kroky).
-- Rukopis 1785–~1840 je německý kurent, dost obtížně čitelný (i pro Sonnet) —
-  jistota zápisů je u starších let nižší, u pozdních (1845+, jiná ruka) vysoká.
-  Folio čísla z indexu **nejsou ještě ověřená proti skutečné matrice** (pracovní
-  hypotéza: kniha 5807 [5224]) — to je další krok, ne hotová věc.
+- **Index je prokazatelně neúplný** — křížovou kontrolou v primární matrice
+  **5807 [5224]** se našly 2 skutečné sňatky Podrazilů, které v indexu
+  vůbec nejsou (1843, 1849), a role kmotra/svědka index nezachycuje vůbec.
+  Klíčový nález: úmrtí "Pavel Podrazil 1786, fol 3" v indexu je ve
+  skutečnosti **novorozenec Pavel, syn Pavla Podrazila** — index zkracuje
+  patronymické zápisy, takže tabulka ~30 úmrtí NENÍ 30 nezávislých
+  dospělých, ale hlavně děti menšího počtu otců.
+- **Rodinné jádro, doložené přímo v primární matrice** (ne jen indexem):
+  - **Pavel Podrazil starší** — sedlák (Bauer), doložen 1786.
+  - **Josef Podrazil** × Alžběta — kmotři při křtu 1810.
+  - **Karel Podrazil** — čtvrtník, × **†Alžběta, dcera Martina Bučky**
+    (podsedníka). Děti:
+    - **Tomáš Podrazil** (*~1807) — chalupník, vdovec, ženil se podruhé
+      5.11.1849 s Kateřinou Mikeškovou (fol 118 Trauungsbuch 5807).
+    - **Elisabeth Podrazil** (*~1825) — provdala se 4.2.1843 za Franze
+      Tomiczyho (fol 88 Trauungsbuch 5807).
+  - **Paul Podrazil** — svatební svědek 1818.
+- Rukopis 1785–~1840 je německý kurent, dost obtížně čitelný (i pro Sonnet);
+  pozdní zápisy (1845+, jiná ruka, částečně česky) jsou naopak velmi čitelné.
+  **Folio→kniha mapování pro knihu 5807 je ověřené a kalibrované** (vzorec
+  v `_podrazil_index_...md`), takže další folia z indexu jde dohledat rychle.
 
 ## 6. Další kroky
 
 1. ~~`cd actapublica-dl && make build && make list OBEC=2787` — ověřit inventář~~
-   — hotovo, inventář v sekci 2 je z živého běhu (21 knih, 4 160 skenů sedí).
-2. ~~Stáhnout rejstříkovou knihu 5249~~ — hotovo, celá obec 2787 stažena
-   (viz commit historie), včetně 5249.
+   — hotovo (21 knih, 4 160 skenů sedí).
+2. ~~Stáhnout rejstříkovou knihu 5249~~ — hotovo, celá obec 2787 stažena.
 3. ~~OCR rejstříku 5249 → seznam folií s Podrazily~~ — hotovo, všechny 3
-   řady (N/O/Z) písmeno P kompletně přečtené, viz
-   `_podrazil_index_Sudomerice5852_1785-1849.md`. ~30 úmrtí, 0 křtů/sňatků
-   (nesrovnalost k ověření).
-4. Dočíst zbytek indexu (Geburts sken 0031, Trauungs sken 0050 celé) — pak
-   ověřit folio→kniha mapování a přečíst samotné zápisy v 5807 [5224] na
-   nalezených foliích (rodiče, čísla domů — mnohem bohatší než index).
-5. Podle toho cíleně stáhnout/OCR další strukturované knihy (N/O/Z), pak
+   řady písmeno P kompletně přečtené.
+4. ~~Ověřit folio→kniha mapování a přečíst pár zápisů v primární matrice~~ —
+   hotovo, mapování kalibrované, 2 sňatky + kmotr/svědek role nalezené,
+   klíčový úmrtní zápis (fol 3/1786) přečten a reinterpretován.
+5. **Najít Tomášovo narození (~1806/07)** a **Karlův/Josefův sňatek**
+   (asi 1795–1810, mimo pokrytí indexu) v Geburtsbuch/Trauungsbuch 5807 —
+   viz "Další kroky" v `_podrazil_index_...md` pro konkrétní skeny.
+6. Přečíst zbylá jistá folia z úmrtní tabulky přímo v matrice (kalibrace
+   mapování to teď umožňuje rychle) — u každého ověřit dítě/dospělý,
+   rodiče, číslo domu.
+7. Podle toho cíleně stáhnout/OCR další strukturované knihy (N/O/Z), pak
    farní knihy 1629–1917 s filtrem na Sudoměřice/Strážnici.
-6. Průběžně doplňovat `genealogy/seed/name_variants.csv` a Prameny výše
+8. Průběžně doplňovat `genealogy/seed/name_variants.csv` a Prameny výše
    (i negativní nálezy, ať se OCR/hledání neopakuje).
