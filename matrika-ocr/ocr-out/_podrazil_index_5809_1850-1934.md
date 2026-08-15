@@ -78,17 +78,27 @@ Aby šlo rozhodnout, jestli je Josef (†1846) bratr Matouše staršího (oba
 synové Jana), nebo jeho syn, potřeboval by se najít **Josefův vlastní
 sňatek nebo úmrtí** (obojí by uvedlo jeho otce). Hledáno:
 
-- **Trauungsbuch 5807, roky 1815–1827** (skeny 120, 122, 123, 124, 125,
-  128) — chronologicky projito, **žádný sňatek Josefa Podrazila
-  s Elisabeth Pepperovou nenalezen**.
+- **Trauungsbuch 5807, roky 1806–1807, 1815–1830** (skeny 115, 120, 122,
+  123, 124, 125, 128, 129, 131) — chronologicky projito, **žádný sňatek
+  Josefa Podrazila s Elisabeth Pepperovou nenalezen**.
 - **Sterbregister 5807, rok 1831** (sken 230) — namátková kontrola,
   **žádné úmrtí Josefa Podrazila** (jen dětské zápisy jiných rodin).
+- **Vedlejší nález:** sken 131, 2.2.1830, dům č. 74: **Martin Podrazil**
+  se žení (svobodný) — ale zápis **neuvádí jeho rodiče** (neobvyklé,
+  možná zkrácený zápis toho konkrétního písaře). Nejde určit, jestli je
+  to další syn Josefa (bratr Matouše ml. a Martina zemřelého 1815/1823),
+  nebo úplně jiná osoba. Dům č. 74 nesedí s žádným dosud známým domem
+  rodiny (14, 16, 36/37).
 
-**Nerozhodnuto.** Josefův sňatek buď předchází 1815 (možné, pokud byl
-starší a Matouš ml. byl pozdější dítě), nebo je v mezerách, co jsem
-nekontroloval (1806–1814, 1828–1830, 1832–1845), nebo — stejně jako
-jinde v této rodině — prostě není v matrice snadno k nalezení běžným
-chronologickým průchodem. Vztah zůstává **nejlepším odhadem, ne faktem**.
+**Nerozhodnuto ani po rozšířeném hledání (1806–1830, ~9 kontrolovaných
+úseků).** Josefův sňatek buď předchází 1806 (možné, pokud byl starší),
+nebo je ve zbylých mezerách (1832–1845), nebo — stejně jako jinde v této
+rodině — prostě není v matrice snadno k nalezení běžným chronologickým
+průchodem. **Vztah Jan→Matouš st./Josef zůstává nejlepším odhadem, ne
+faktem.** Další hledání v tomhle směru má už nízkou návratnost (hodně
+prohledaných stran na jednotku šance) — pokud bude zájem pokračovat,
+zbylé mezery (1832–1845) jsou poslední rozumně malá neprohledaná oblast
+v tomhle konkrétním svazku.
 
 ---
 
