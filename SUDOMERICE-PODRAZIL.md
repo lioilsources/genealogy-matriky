@@ -143,8 +143,10 @@ primárními zápisy — **6 generací, 1786(odhad Janova narození) až 1933**.
 Detaily a metodika hledání:
 [`matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md`](matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md).
 
-**Další krok:** najít Josefovo (*~1866) vlastní narození a ujasnit vztah
-Jan Podrazil (†1813) ↔ Matouš st. ↔ Josef (†1846) — bratři, nebo otec/syn?
+**Vztah Jan Podrazil (†1813) ↔ Matouš st. ↔ Josef (†1846) — vyčerpávající
+pátrání v knize 5807 (roky 1806–1845, ~18 úseků) nenašlo Josefův sňatek
+ani úmrtí.** Zůstává nejlepším odhadem, ne faktem — další stopa by musela
+přijít odjinud (zbytek indexu 1850–1934, nebo jiná kniha).
 
 ### ⭐ Konektivita do přítomnosti: ANO — Jan měl min. 5 dětí, rodina byla jedna z největších v obci
 
@@ -232,23 +234,53 @@ Sudoměřicích** po celé 19. a začátek 20. století. Detaily:
   1808–09 bez nálezu; zbývají nepokryté mezery (1786–89, 1793–95, 1797–98,
   1802–03, 1806–07, 1810+).
 
-## 6. Další kroky
+## 6. Stav bádání — co je hotovo, co zbývá
 
-1. ~~`cd actapublica-dl && make build && make list OBEC=2787` — ověřit inventář~~
-   — hotovo (21 knih, 4 160 skenů sedí).
-2. ~~Stáhnout rejstříkovou knihu 5249~~ — hotovo, celá obec 2787 stažena.
-3. ~~OCR rejstříku 5249 → seznam folií s Podrazily~~ — hotovo, všechny 3
-   řady písmeno P kompletně přečtené.
-4. ~~Ověřit folio→kniha mapování a přečíst pár zápisů v primární matrice~~ —
-   hotovo, mapování kalibrované, 2 sňatky + kmotr/svědek role nalezené,
-   klíčový úmrtní zápis (fol 3/1786) přečten a reinterpretován.
-5. **Najít Tomášovo narození (~1806/07)** a **Karlův/Josefův sňatek**
-   (asi 1795–1810, mimo pokrytí indexu) v Geburtsbuch/Trauungsbuch 5807 —
-   viz "Další kroky" v `_podrazil_index_...md` pro konkrétní skeny.
-6. Přečíst zbylá jistá folia z úmrtní tabulky přímo v matrice (kalibrace
-   mapování to teď umožňuje rychle) — u každého ověřit dítě/dospělý,
-   rodiče, číslo domu.
-7. Podle toho cíleně stáhnout/OCR další strukturované knihy (N/O/Z), pak
-   farní knihy 1629–1917 s filtrem na Sudoměřice/Strážnici.
-8. Průběžně doplňovat `genealogy/seed/name_variants.csv` a Prameny výše
-   (i negativní nálezy, ať se OCR/hledání neopakuje).
+### ✅ Hotovo
+
+1. **Stahovač + plné stažení** — `actapublica-dl` postavený a ověřený proti
+   živému webu, celá obec Sudoměřice (2787) stažená: 21 knih, 4 160 skenů,
+   ~16 GB. `make list OBEC=2787` sedí přesně na inventář v sekci 2.
+2. **Index 1785–1849 (kniha 5852)** — písmeno P přečtené kompletně ve
+   všech 3 řadách (N/O/Z). Zjištěno a zdokumentováno, že **index je
+   nespolehlivý** (chybí sňatky, špatné roky, 1 falešný nález) — folia
+   samotná jsou ale spolehlivá.
+3. **Prapraděda nalezen a ověřen:** **Jan Podrazil, *17.9.1892, Sudoměřice
+   č. 12** — přímo v primární matrice (kniha 5810, sken 243), včetně jeho
+   sňatku 1922 s Kateřinou Porubkovou (kniha 5827).
+4. **Rodokmen 6 generací zpět** (1786–1892), s primárními zápisy pro
+   klíčové uzly: Josef×Marie Myšová (1890), Matouš ml.×Marianna Tomšejová
+   (1846), Matouš st. sňatek (1813, jiná větev). Jen **vztah Jan Podrazil
+   †1813 ↔ Matouš st. ↔ Josef †1846 zůstává nejistý** — hledáno
+   vyčerpávajícím způsobem v knize 5807 (1806–1845), nenalezeno.
+5. **Konektivita do přítomnosti potvrzena** — Jan měl min. 5–7 dětí
+   (1917–1933); dál nejdou církevní matriky vůbec (~1949 hranice,
+   civilní matrika mimo dosah).
+6. **Dcery vdávající se lokálně potvrzeny** (3 příklady napříč generacemi)
+   a **původ manželek** zmapován (silně endogamní, 1 výjimka ze Zvolenova).
+7. **Objeven druhý masivní index** (1850–1934, vevázaný v knize 5809) —
+   zatím jen částečně přečtený, ale potvrzeno, že rodina má desítky dalších
+   záznamů (min. 20 sňatků mužů Podrazil/Podražil jen v jedné knize).
+
+### 🔲 Zbývá (seřazeno podle toho, co by dalo nejvíc)
+
+1. **Dočíst zbytek indexu 1850–1934** (kniha 5809, sken 159–167) — přečteno
+   jen ~40 %. Obsahuje pravděpodobně desítky dalších narození/vazeb,
+   včetně možná stopy k vyřešení hádanky Jan/Matouš st./Josef.
+2. **Najít Josefovo (*~1866) vlastní narození** — spojilo by ho jistě
+   s Matoušem mladším přímým záznamem, ne jen odvozením ze svatby.
+3. **Ověřit zbylé sňatky ze sňatkového rejstříku** (kniha 5825) — ověřeno
+   jen 5 z ~20 nalezených řádků (1868, 1871, 1873, 1875, 1897, 1898, 1903,
+   1906, 1908, 1911+ zatím jen v indexu, ne v primární matrice).
+4. **Karlův sňatek s Alžbětou Bučkovou** a **Tomášovo narození (~1806/07)**
+   — zmíněné odjinud (přes děti/vnuky), ale samotné zápisy nenalezené.
+5. **Janovi potomci dál** — jeho děti (Marie, František, Jan ml., Martin…)
+   měly samy děti/vnuky? Rejstřík 1850–1934 by na to mohl mít odpověď
+   (viz bod 1).
+6. Podle toho, co se najde, případně cíleně stáhnout/OCR další
+   strukturované knihy (N/O/Z) nebo farní knihy 1629–1917 s filtrem na
+   Sudoměřice/Strážnici — ale tohle je teď nižší priorita, protože ruční
+   čtení indexů se ukázalo mnohem rychlejší.
+7. Průběžně doplňovat `genealogy/seed/name_variants.csv` (Podrazil/
+   Podražil/Podrázil/Podrasil) až budou data v pipeline, a udržovat tuhle
+   sekci aktuální (i negativní nálezy, ať se hledání neopakuje).
