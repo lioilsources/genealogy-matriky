@@ -78,9 +78,10 @@ Aby šlo rozhodnout, jestli je Josef (†1846) bratr Matouše staršího (oba
 synové Jana), nebo jeho syn, potřeboval by se najít **Josefův vlastní
 sňatek nebo úmrtí** (obojí by uvedlo jeho otce). Hledáno:
 
-- **Trauungsbuch 5807, roky 1806–1807, 1815–1830** (skeny 115, 120, 122,
-  123, 124, 125, 128, 129, 131) — chronologicky projito, **žádný sňatek
-  Josefa Podrazila s Elisabeth Pepperovou nenalezen**.
+- **Trauungsbuch 5807, roky 1806–1807, 1815–1845 (téměř celý rozsah
+  knihy)** — skeny 115, 120, 122, 123, 124, 125, 128, 129, 131, 134, 138,
+  142, 146, 148, 150, 151, 153, 156 — chronologicky projito, **žádný
+  sňatek Josefa Podrazila s Elisabeth Pepperovou nenalezen**.
 - **Sterbregister 5807, rok 1831** (sken 230) — namátková kontrola,
   **žádné úmrtí Josefa Podrazila** (jen dětské zápisy jiných rodin).
 - **Vedlejší nález:** sken 131, 2.2.1830, dům č. 74: **Martin Podrazil**
@@ -90,15 +91,16 @@ sňatek nebo úmrtí** (obojí by uvedlo jeho otce). Hledáno:
   nebo úplně jiná osoba. Dům č. 74 nesedí s žádným dosud známým domem
   rodiny (14, 16, 36/37).
 
-**Nerozhodnuto ani po rozšířeném hledání (1806–1830, ~9 kontrolovaných
-úseků).** Josefův sňatek buď předchází 1806 (možné, pokud byl starší),
-nebo je ve zbylých mezerách (1832–1845), nebo — stejně jako jinde v této
-rodině — prostě není v matrice snadno k nalezení běžným chronologickým
-průchodem. **Vztah Jan→Matouš st./Josef zůstává nejlepším odhadem, ne
-faktem.** Další hledání v tomhle směru má už nízkou návratnost (hodně
-prohledaných stran na jednotku šance) — pokud bude zájem pokračovat,
-zbylé mezery (1832–1845) jsou poslední rozumně malá neprohledaná oblast
-v tomhle konkrétním svazku.
+**Nerozhodnuto ani po vyčerpávajícím hledání (1806–1845, prakticky celý
+rozsah knihy 5807, ~18 kontrolovaných úseků).** Josefův sňatek buď
+předchází 1806 (možné, pokud byl výrazně starší než Matouš st.), nebo
+je — stejně jako jinde v této rodině — prostě zapsaný způsobem, který
+běžný chronologický průchod nezachytí (jiná farnost, pozdní/mimořádný
+zápis, škrtnutý/opravený řádek přehlédnutý při rychlém čtení). **Vztah
+Jan→Matouš st./Josef zůstává nejlepším odhadem, ne faktem** — u téhle
+konkrétní otázky navrhuji považovat další hledání v knize 5807 za
+vyčerpané a nechat otevřené, dokud se neobjeví jiná stopa (např. při
+čtení zbytku indexu 1850–1934, kde by mohl být zpětný odkaz).
 
 ---
 
