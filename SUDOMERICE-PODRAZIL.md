@@ -148,14 +148,25 @@ pátrání v knize 5807 (roky 1806–1845, ~18 úseků) nenašlo Josefův sňate
 ani úmrtí.** Zůstává nejlepším odhadem, ne faktem — další stopa by musela
 přijít odjinud (zbytek indexu 1850–1934, nebo jiná kniha).
 
-### ⭐ Konektivita do přítomnosti: ANO — Jan měl min. 5 dětí, rodina byla jedna z největších v obci
+### ⭐ Konektivita do přítomnosti: ANO — Jan měl min. 2–3 děti, rodina byla jedna z největších v obci
 
-**Janovi vlastní děti** (z pokračování stejného rejstříku 1850–1934):
-Marie, František, Jan (ml.), Martin a další — min. 5–7 dětí narozených
-~1917–1933. Plus bratr **Štěpán Podrazil** (další Josefův syn), ženatý
-1931 s Marií Tomšejovou. Dál než 1934 tento index nejde a dál než ~1949
-obecně nejdou církevní matriky vůbec (civilní matrika od té doby není
-součástí Acta Publica a je navíc ze zákona uzavřená ~100 let).
+**Janovy vlastní děti** (opraveno po druhém, pečlivějším čtení rejstříku —
+první čtení popletlo směr "dítě–otec" u několika řádků): jistě/pravděpodobně
+**František (~1926), Jan ml. (~1929), Jan (~1934)** — řádky se jmény
+otce "Jan" datované PŘED jeho sňatkem 1922 patří jinému, staršímu
+Janu Podrazilovi, ne jemu. Plus bratr **Štěpán Podrazil** (další Josefův
+syn), ženatý 1931 s Marií Tomšejovou, měl vlastní dceru Alžbětu (~1932).
+Dál než 1934 tento index nejde a dál než ~1949 obecně nejdou církevní
+matriky vůbec (civilní matrika od té doby není součástí Acta Publica a
+je navíc ze zákona uzavřená ~100 let).
+
+**Rodina jako celek byla mnohem rozvětvenější, než se zdálo zprvu** —
+kompletní přepis skenu 159 (1850–1878) ukázal nejméně **šest souběžných
+otců-Podrazilů** (Jan/Tomášův, Matouš mladší, Tomáš, Jiří, Martin, Pavel),
+a sken 160 (1879–1934) desítky dalších záznamů s otci Petr, František,
+Josef, Štěpán a další — přesné rozplétání všech větví by vyžadovalo
+ověření v primárních knihách, ne jen v indexu. Detaily:
+[`matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md`](matrika-ocr/ocr-out/_podrazil_index_5809_1850-1934.md).
 
 **Dcery Podrazilovy se prokazatelně vdávaly lokálně v Sudoměřicích** —
 potvrzeno napříč generacemi ve sňatkovém rejstříku knihy 5825 [5235]:

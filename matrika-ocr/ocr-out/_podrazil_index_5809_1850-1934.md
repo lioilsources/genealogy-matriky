@@ -136,42 +136,55 @@ Matouš Podrazil (chalupník) × Marianna Tomšejová (dcera Martina Tomšeje)
     → Jan Podrazil, *17.9.1892, Sudoměřice č. 12  ⭐ PRAPRADĚDA
 ```
 
-## ⭐⭐ Janovi (*1892) vlastní děti — pokračování do 20. století
+## ⭐⭐ Janovi (*1892) vlastní děti — OPRAVENO po druhém, pečlivějším čtení
 
-Dočtena celá zbylá "P" sekce indexu (sken 0160, sloupce 1907–1934, konec
-"P" u palcového tabu Q/R). Nalezeno v tomto pořadí (strany odkazují do
-JEŠTĚ NEIDENTIFIKOVANÉ pozdější knihy — pravděpodobně 5811 [N 1903–1917]
-pro rané roky, pak jiná/civilní pro 1920s–30s, k ověření):
+**Důležitá oprava proti první verzi této sekce:** formát rejstříku je
+`[jméno DÍTĚTE] – [jméno OTCE, přivlastňovací tvar]`. Při prvním čtení
+jsem u několika řádků tenhle směr popletl — např. „Podrazil Jan – Martina"
+znamená **dítě Jan, otec Martin**, ne naopak. To mění, které řádky
+skutečně patří Janovi (*1892) jako otci.
 
-| dítě | otec | str. |
-|---|---|---|
-| Marie Podražilová | Jana | 52 |
-| František Podrazil | Janův | 66 |
-| Jan Podrazil (ml.) | Janův | 83 |
-| (jméno needěno) | Janova | 103 |
-| Jan Podrazil | Jana | 111 |
-| Marie Podražilová | Jana | 113 |
-| Martin Podrazil | Jana | 114 |
+Po přeřazení jsou jistě/pravděpodobně Janovy vlastní děti jen ty řádky,
+kde je „Jana"/„Janův"/„Janova" ve sloupci OTCE **a zároveň rok sedí
+s jeho sňatkem 1922** (dřívější "Jan"-otec záznamy patří jinému, staršímu
+Janu Podrazilovi — pravděpodobně "Jan Tomášův" z roku 1850, který mohl mít
+děti ještě v 1870s–80s, ne 1907+):
 
-**Min. 5–7 dětí** (dvojice "Jan"/"Marie" mohou být buď dvě různé osoby
-stejného jména po sobě — časté v rodině, jak jsme viděli u Matouše — nebo
-jde o dva zápisy k jednomu dítěti; needěno). Rozsah let cca **1917/20–1933**
-(odpovídá Janovi ve věku 25–41 let). Navíc ve stejné pasáži:
+| rok (odhad) | dítě | otec | str. |
+|---|---|---|---|
+| ~1926 | František Podrazil | **Jan**ův | 66 |
+| ~1929 | Jan Podražil | **Jan**ův | 82 |
+| ~1934 | Jan Podrazil | **Jan**a | 111/113 (needěno přesně) |
 
-- **Anna Podražilová, dcera Štěpána** (str. 113) — **Štěpán je pravděpodobně
-  Janův bratr** (další syn Josefa Podrazila), rozšiřuje rodinu o další větev.
-- **Anna Podražilová, dcera Josefa** [„leg." = legitimní] (str. 110) — může
-  být dcera dalšího Josefa (bratra? nebo staršího zápisu).
+**Realisticky tedy 2–3 potvrzené děti Jana (*1892) v tomhle indexu**, ne
+5–7 jak jsem tvrdil po prvním, rychlejším čtení. Zbylé "Jan"-otec záznamy
+ze skenu 160 (str. 42, 44, 86–87, 109, cca 1907–1917) **jsou dřív, než se
+Jan v roce 1922 oženil — nemůžou být jeho děti**, patří jinému Janu
+Podrazilovi (nejspíš vnukovi "Jana Tomášova" z 1850, dosud
+neidentifikovanému jménem).
 
-**Odpověď na "mají potomci konektivitu do přítomnosti":** ANO, jasně —
-Jan Podrazil (*1892) měl sám nejméně 5 dětí do 1930s, plus další větev
-(Štěpán). Dál než 1934 tento konkrétní index nejde (a dál než ~1949
-obecně nejdou církevní matriky vůbec — pak přebírá civilní matrika, která
-není součástí Acta Publica/tohoto digitálního archivu a je navíc ze
-zákona uzavřená veřejnosti ~100 let kvůli ochraně osobních údajů živých
-lidí). **Pro roky 1930–1949 by pomohla kniha `5811` (N 1903–1917, moc
-pozdě) nebo přímo dohledat, do které knihy tento index od str. ~50+
-odkazuje** — to je další krok.
+I tak platí: rodina zjevně pokračovala minimálně do poloviny 30. let s
+více souběžnými větvemi. Ve stejné pasáži navíc:
+
+- **Alžběta Podražilová, dcera Štěpána** (str. 100, ~1932) — Štěpán je
+  pravděpodobně Janův bratr (další syn Josefa Podrazila, ženatý 1931 s
+  Marií Tomšejovou — viz sňatkový rejstřík níže).
+
+**Odpověď na "mají potomci konektivitu do přítomnosti":** ANO — Jan
+Podrazil (*1892) měl doloženy minimálně 2–3 děti do poloviny 30. let,
+plus bratr Štěpán měl vlastní větev. Dál než ~1934 (tento index) a ~1949
+(církevní matriky obecně) prameny nejdou — civilní matrika není
+součástí Acta Publica a je ze zákona uzavřená ~100 let.
+
+### Zbytek "P" sekce (1879–1934) — rozsah potvrzen, ne kompletně přiřazen
+
+Sken 0160 má ještě **desítky dalších Podrazil/Podražil záznamů** (zhruba
+40–50), se jmény otců Pavel, Jiří, Jan (min. 2 různí), František, Josef,
+Martin, Petr, Štěpán — konkrétní čísla stran/roků zaznamenaná v hrubém
+přepisu při čtení, ale **bez jistého přiřazení ke konkrétním již známým
+osobám** (kromě těch výše). Rodina měla očividně mnoho souběžně žijících
+větví 1880–1934. Přesné rozplétání by vyžadovalo ověření v primárních
+knihách (5810, 5811, a pozdější), ne jen v indexu.
 
 ## ⭐⭐ Sňatkový rejstřík (kniha 5825 [5235], O 1850–1905/1933) — dcery se vdávaly lokálně
 
@@ -259,6 +272,53 @@ Bučková (1925), Štěpán×Marie Tomšejová (1931, **Janův bratr**), Jan×An
 Pukancová (1933), Jan×Marie Klásková (1933/34), Josef×Alžběta Stránská
 (1934). **To je nejméně 20 sňatků Podrazil/Podražil mužů v jedné knize
 za ~70 let** — rodina byla mezi největšími/nejplodnějšími v Sudoměřicích.
+
+## ⭐⭐⭐ Kompletní přepis sken 0159 (1850–1878) — mnohem bohatší, než první průchod ukázal
+
+Druhé, důkladnější čtení celé strany 0159 (obě řady, "P" sekce) — čitelnost
+je na tuhle knihu vysoká, jde přečíst přímo bez extra zoomu. Formát:
+`rok: dítě, otec (přivlast. tvar) . . strana`.
+
+| rok | dítě | otec | str. |
+|---|---|---|---|
+| 1850 | Karel | Jan (**Tomášův** — syn Tomáše!) | 5 |
+| 1851 | Apolena | Matouš | 8 |
+| 1852 | Kateřina | Tomáš | 13 |
+| 1852 | Jan | Jiří | 18 |
+| 1853 | Marianna (M.Anna) | Tomáš | 24 |
+| 1853 | Anna | Matouš | 26 |
+| 1855 | Alžběta | Matouš→**opraveno na Tomáš** | 46 |
+| 1859 | Paul | Tomáš | 93 |
+| 1860 | Katharina | Matouš | 127 |
+| 1864 | Johann | Tomáš | 12 (Tom. II) |
+| 1865 | Josef | Matouš | 46 |
+| 1866 | Rosaria | Tomáš | 55 |
+| 1867 | Katharina (přeškrtnuto) | Josef | 59 |
+| 1867 | Martin | Martin | 63 |
+| 1868 | Josef | Martin | 69 |
+| 1871 | Anna | Jan | 85 |
+| 1871 | Jan | Martin | 86 |
+| 1872 | Josef | Jan a Kateřina (dvojčata?) | 92 |
+| 1873 | Martin | Jan a Katarina | 100 |
+| 1874 | Alžběta | Martin a Rosalie | 104 |
+| 1874 | Marianna | Pavel | 107 |
+| 1875 | Jan | Jan | 109 |
+| 1876 | Josef | Jiří | 114 |
+| 1877 | Alžběta | Jan | 121 |
+| 1877 | Jiří | Pavel | 122 |
+| 1877 | Alžběta | Jan | 123 |
+
+**Zásadní posun oproti první, rychlé transkripci:** tohle NENÍ jen "5 dětí
+Tomáše + 4 děti Matouše". Aktivních otců-Podrazilů 1850–1878 je nejmíň
+**šest**: **Jan** (=„Jan Tomášův" z 1850, syn Tomáše — má vlastní děti
+1871–1877), **Matouš** (mladší, ×Marianna Tomšejová — Apolena/Anna/Alžběta→
+oprava/Katharina/Josef, 1851–1865), **Tomáš** (Kateřina/Marianna/Paul/
+Johann/Rosaria, 1852–1866), **Jiří** (syn Karla — Jan 1852, Josef 1876,
+otec Jiřího dítěte Jiří 1877 je zajímavá shoda jmen, needěno jistě), **Martin**
+(1867+, dosud neidentifikovaný — možná další syn Josefa/Matouše ml.,
+souvisí možná s "Martin Podrazil" bez rodičů ze sňatku 1830?), **Pavel**
+(1874+, dosud neidentifikovaný). Rodina se v polovině 19. století rozvětvila
+mnohem víc, než ukazoval první odhad.
 
 ## Potvrzené přímé vazby na už známý rodokmen
 
