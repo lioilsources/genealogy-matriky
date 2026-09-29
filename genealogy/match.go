@@ -23,6 +23,7 @@ func cmdMatch(args []string) error {
 	auto := fs.Float64("auto", 0.90, "práh automatického spojení")
 	flagT := fs.Float64("flag", 0.72, "práh spojení s příznakem nízké jistoty")
 	suggest := fs.Float64("suggest", 0.50, "práh návrhu (jen do match_candidates)")
+	dumpPairs := fs.String("dump-pairs", "", "jen vypiš všechny páry z blockingu s features do JSONL (DB se nemění)")
 	fs.Parse(args)
 
 	db, err := openDB(*dbPath)
@@ -30,6 +31,9 @@ func cmdMatch(args []string) error {
 		return err
 	}
 	defer db.Close()
+	if *dumpPairs != "" {
+		return runDumpPairs(db, *dumpPairs)
+	}
 	return runMatch(db, matchParams{Auto: *auto, Flag: *flagT, Suggest: *suggest})
 }
 
@@ -100,40 +104,10 @@ func runMatch(db *sql.DB, p matchParams) error {
 		features map[string]float64
 	}
 	var cands []scored
-	blocks := map[string][]*mMention{}
-	for i := range ms {
-		m := &ms[i]
-		if m.SurnameNorm == "" || m.GivenNorm == "" {
-			continue
-		}
-		for _, key := range blockKeys(m) {
-			blocks[key] = append(blocks[key], m)
-		}
-	}
-	seen := map[[2]int64]bool{}
-	var blockKeysSorted []string
-	for k := range blocks {
-		blockKeysSorted = append(blockKeysSorted, k)
-	}
-	sort.Strings(blockKeysSorted)
-	for _, key := range blockKeysSorted {
-		grp := blocks[key]
-		for i := 0; i < len(grp); i++ {
-			for j := i + 1; j < len(grp); j++ {
-				a, b := grp[i], grp[j]
-				if a.ID > b.ID {
-					a, b = b, a
-				}
-				k := [2]int64{a.ID, b.ID}
-				if seen[k] {
-					continue
-				}
-				seen[k] = true
-				score, feats := scorePair(a, b)
-				if score >= p.Suggest {
-					cands = append(cands, scored{a.ID, b.ID, score, feats})
-				}
-			}
+	for _, pr := range candidatePairs(ms) {
+		score, feats := scorePair(pr[0], pr[1])
+		if score >= p.Suggest {
+			cands = append(cands, scored{pr[0].ID, pr[1].ID, score, feats})
 		}
 	}
 	sort.Slice(cands, func(i, j int) bool {
@@ -440,6 +414,47 @@ func loadMentions(db *sql.DB) ([]mMention, error) {
 	return ms, nil
 }
 
+// candidatePairs projde bloky a vrátí unikátní páry zmínek (a.ID < b.ID)
+// v deterministickém pořadí. Sdílí ho match i dump-pairs, aby ML viděl
+// přesně tytéž páry jako matcher.
+func candidatePairs(ms []mMention) [][2]*mMention {
+	blocks := map[string][]*mMention{}
+	for i := range ms {
+		m := &ms[i]
+		if m.SurnameNorm == "" || m.GivenNorm == "" {
+			continue
+		}
+		for _, key := range blockKeys(m) {
+			blocks[key] = append(blocks[key], m)
+		}
+	}
+	var keys []string
+	for k := range blocks {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	seen := map[[2]int64]bool{}
+	var out [][2]*mMention
+	for _, key := range keys {
+		grp := blocks[key]
+		for i := 0; i < len(grp); i++ {
+			for j := i + 1; j < len(grp); j++ {
+				a, b := grp[i], grp[j]
+				if a.ID > b.ID {
+					a, b = b, a
+				}
+				k := [2]int64{a.ID, b.ID}
+				if seen[k] {
+					continue
+				}
+				seen[k] = true
+				out = append(out, [2]*mMention{a, b})
+			}
+		}
+	}
+	return out
+}
+
 // blockKeys vrátí blokovací klíče zmínky: prefix příjmení + pohlaví + dekádové
 // buckety věrohodného rozsahu narození (s přesahem ±1 bucket).
 func blockKeys(m *mMention) []string {
@@ -461,37 +476,15 @@ func blockKeys(m *mMention) []string {
 
 // scorePair spočítá skóre dvojice zmínek (0..1) a příznaky pro debug.
 func scorePair(a, b *mMention) (float64, map[string]float64) {
-	// tvrdé zákazy
-	if a.RecordID == b.RecordID {
-		return 0, nil
-	}
-	if a.Sex != "" && b.Sex != "" && a.Sex != b.Sex {
-		return 0, nil
-	}
-	if isPrimaryOnce(a.Role) && isPrimaryOnce(b.Role) && a.Role == b.Role {
-		return 0, nil // dvakrát narozený / dvakrát zemřelý
-	}
-	// mrtvý nemůže figurovat na pozdější události
-	if a.Role == "zemrely" && b.EventYear > a.EventYear && a.EventYear > 0 {
-		return 0, nil
-	}
-	if b.Role == "zemrely" && a.EventYear > b.EventYear && b.EventYear > 0 {
-		return 0, nil
-	}
-	// roky narození se musí protínat
-	if a.YearMax < b.YearMin || b.YearMax < a.YearMin {
+	if hardVeto(a, b) != "" {
 		return 0, nil
 	}
 
 	feats := map[string]float64{}
 	given := nameSim(a.GivenNorm, b.GivenNorm)
-	surname := nameSim(a.SurnameNorm, b.SurnameNorm)
-	// žena: příjmení po manželovi vs. rodné — zkus i maiden
-	if a.Sex == "f" || b.Sex == "f" {
-		if s := nameSim(orStr(a.MaidenNorm, a.SurnameNorm), orStr(b.MaidenNorm, b.SurnameNorm)); s > surname {
-			surname = s
-			feats["maiden_used"] = 1
-		}
+	surname, maidenUsed := surnameSim(a, b)
+	if maidenUsed {
+		feats["maiden_used"] = 1
 	}
 	feats["given"] = given
 	feats["surname"] = surname
@@ -539,6 +532,37 @@ func scorePair(a, b *mMention) (float64, map[string]float64) {
 		score = 0
 	}
 	return score, feats
+}
+
+// hardVeto vrátí důvod, proč pár nemůže být tatáž osoba ("" = žádný zákaz).
+func hardVeto(a, b *mMention) string {
+	switch {
+	case a.RecordID == b.RecordID:
+		return "same_record"
+	case a.Sex != "" && b.Sex != "" && a.Sex != b.Sex:
+		return "sex"
+	case isPrimaryOnce(a.Role) && isPrimaryOnce(b.Role) && a.Role == b.Role:
+		return "primary_twice" // dvakrát narozený / dvakrát zemřelý
+	// mrtvý nemůže figurovat na pozdější události
+	case a.Role == "zemrely" && b.EventYear > a.EventYear && a.EventYear > 0,
+		b.Role == "zemrely" && a.EventYear > b.EventYear && b.EventYear > 0:
+		return "dead_before_event"
+	// roky narození se musí protínat
+	case a.YearMax < b.YearMin || b.YearMax < a.YearMin:
+		return "years_disjoint"
+	}
+	return ""
+}
+
+// surnameSim: podobnost příjmení; u žen zkusí i rodné (po manželovi vs. roz.).
+func surnameSim(a, b *mMention) (sim float64, maidenUsed bool) {
+	sim = nameSim(a.SurnameNorm, b.SurnameNorm)
+	if a.Sex == "f" || b.Sex == "f" {
+		if s := nameSim(orStr(a.MaidenNorm, a.SurnameNorm), orStr(b.MaidenNorm, b.SurnameNorm)); s > sim {
+			return s, true
+		}
+	}
+	return sim, false
 }
 
 // parentSim porovná jména rodičů obou zmínek: oba rodiče sedí → 0.15, jeden → 0.08.

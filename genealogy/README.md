@@ -75,6 +75,10 @@ Zásady:
 4. Vazby: křest → rodič→dítě (+ prarodiče), oddavky → manželé + rodiče,
    úmrtí → koncové datum. Confidence hrany = min confidence osob.
 
+`match --dump-pairs ml/data/pairs.jsonl` (`make dump-pairs`) DB nemění — jen
+vypíše všechny páry z blockingu se surovými features a skóre ručního scoreru
+pro ML (viz `ml/ML_PLAN.md`).
+
 ## API (`serve`)
 
 ```

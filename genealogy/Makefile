@@ -5,7 +5,7 @@ BOOKS   ?= ..
 ADDR    ?= :8090
 WEB     ?= ../web/dist
 
-.PHONY: build ingest extract match serve test all
+.PHONY: build ingest extract match serve test all dump-pairs
 
 build:
 	go build -o $(BIN) .
@@ -27,3 +27,7 @@ serve: build
 
 # celý pipeline nad novými OCR výstupy
 all: ingest extract match
+
+# páry z blockingu + features pro ML (ml/ML_PLAN.md, lekce 1)
+dump-pairs: build
+	./$(BIN) match --db $(DB) --dump-pairs ml/data/pairs.jsonl

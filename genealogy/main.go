@@ -11,6 +11,7 @@ Použití:
   genealogy ingest  --db data/genealogy.db [--books-root ..] soubor.jsonl [...]
   genealogy extract --db data/genealogy.db [--book ID]
   genealogy match   --db data/genealogy.db [--auto 0.90] [--flag 0.72] [--suggest 0.50]
+                    [--dump-pairs ml/data/pairs.jsonl]
   genealogy serve   --db data/genealogy.db [--addr :8090] [--web web/dist]
   genealogy export  --db data/genealogy.db [--out ../web/public/data]
 

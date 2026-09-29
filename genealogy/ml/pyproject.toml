@@ -1,0 +1,20 @@
+[project]
+name = "genealogy-ml"
+version = "0.1.0"
+description = "Učení ML na entity resolution v matrikách (viz ML_PLAN.md)"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas",
+    "scikit-learn",
+    "lightgbm",
+    "matplotlib",
+]
+
+[project.optional-dependencies]
+# lekce 10 (SHAP) a 11 (export modelu) — až budou potřeba
+explain = ["shap"]
+export = ["onnx", "onnxmltools", "skl2onnx"]
+notebook = ["jupyter"]
+
+[tool.setuptools]
+py-modules = []
