@@ -28,7 +28,7 @@ Rychlý přehled cílů: `make help`. Co je co: `README.md`. Konvence přepisu:
 **Jednou nastav proměnné** (nebo je předávej na příkazové řádce):
 ```bash
 # v Makefile uprav SPARK (ssh cíl), DEST, URL — nebo:
-make push SPARK=ol1n@192.168.1.42 DEST='~/matriky-ft'
+make push SPARK=<user>@$SPARK_HOST DEST='~/matriky-ft'
 ```
 
 ---

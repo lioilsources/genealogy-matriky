@@ -82,7 +82,7 @@ ručně — OCR ručně psané češtiny (kurent) není 100%.
 | `--start` / `--end` | 1 / 0 | rozsah stran (1-based, včetně) |
 | `--limit` | 0 | max N stran (test) |
 | `--keep-raw` | true | ukládat surovou odpověď modelu |
-| `--base-url` | `http://192.168.88.66:8080` | OCR gateway (LAN, bez CF timeoutu) |
+| `--base-url` | `http://<spark-host>:8080` | OCR gateway (LAN, bez CF timeoutu) |
 | `--model` | `ocr` | název modelu (pre-flight ověří, že je Qwen) |
 | `--delay` / `--timeout` / `--retries` | 1500ms / 180s / 3 | tempo a odolnost |
 | `--max-side` | 0 | volitelný downscale delší strany (0 = vypnuto) |
