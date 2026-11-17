@@ -34,3 +34,23 @@ meta.json
 /matrika-ocr/finetune/dataset/
 /matrika-ocr/finetune/.venv/
 __pycache__/
+# devconv:start
+.env
+.env.*
+!.env.example
+*.p8
+*.p12
+*.jks
+key.properties
+.claude/settings.local.json
+CLAUDE.local.md
+bin/
+*.test
+*.out
+node_modules/
+dist/
+.astro/
+.svelte-kit/
+.venv/
+*.pyc
+# devconv:end
